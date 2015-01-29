@@ -6,8 +6,8 @@ description: > # this means to ignore newlines until "baseurl:"
 twitter_username: happycollision
 github_username:  happycollision
 
-baseurl: "/jekyll.happycollision.com" # the subpath of your site, e.g. /blog/
-url: "http://happycollision.github.io" # the base hostname & protocol for your site
+baseurl: "" # the subpath of your site, e.g. /blog/
+url: "http://happycollision.com" # the base hostname & protocol for your site
 
 # Build settings
 markdown: redcarpet

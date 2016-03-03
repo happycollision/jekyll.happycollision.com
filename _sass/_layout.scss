@@ -234,3 +234,15 @@
         }
     }
 }
+
+.email-maker-link {
+  color: #F3A44F;
+  background-color: #A1060D;
+  padding: 0.5em 1em;
+  margin-left: 1em;
+  
+  &:hover {
+    color: #A1060D;
+    background-color: #F3A44F;
+  }
+}

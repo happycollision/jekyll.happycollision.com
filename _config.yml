@@ -9,11 +9,6 @@ github_username:  happycollision
 baseurl: "" # the subpath of your site, e.g. /blog/
 url: "http://happycollision.com" # the base hostname & protocol for your site
 
-# Build settings
-markdown: redcarpet
-redcarpet:
-  extensions: ['smart']
-
 permalink: pretty
 
 exclude:

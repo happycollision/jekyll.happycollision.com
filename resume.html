@@ -24,12 +24,7 @@ permalink: /resume/
 
     a {
       color: rgb(194, 13, 22);
-      text-decoration: none;
       text-shadow: 0.02em 0.02em 0 rgba(0, 0, 0, 0.5);
-    }
-
-    a:hover {
-      text-decoration: underline;
     }
 
     h1,
@@ -318,6 +313,12 @@ permalink: /resume/
       content: ')';
     }
 
+    @media all and (max-width: 800px) {
+      .skills {
+        flex-direction: column;
+      }
+    }
+
     @media all and (max-width: 559px) {
       .contact {
         flex-wrap: wrap;
@@ -327,10 +328,6 @@ permalink: /resume/
       .contact :first-child {
         order: 0;
         text-align: center;
-      }
-
-      .skills {
-        flex-direction: column;
       }
 
       .skills>*,
@@ -435,7 +432,7 @@ permalink: /resume/
     <section class="contact">
       <h1 class="name">Don Denton</h1>
       <address>
-        2200 Oak Street, Bettendorf, IA 52722<br>
+        209 Bass Rd, Chattanooga TN, 37421<br>
         Cell: <a href="tel:+1-785-554-2046">785-554-2046</a><br>
         Email: <a href="mailto:don@happycollision.com">don@happycollision.com</a>
       </address>
@@ -445,15 +442,14 @@ permalink: /resume/
       <!-- <h2 class="section-title">Professional Statement</h2> -->
     </section>
     <section class="skills">
-      <!-- <h2 class="section-title">Skills</h2> -->
       <p>
-        I am an affable, self-motivated individual who loves to learn about new topics in the field of programming and
-        computer science. I advocate clean, considered code that others can understand and reason about. The next topic
-        I would like to explore is accessibility and best practices for it in the browser.
+        I am an affable, self-motivated individual who advocates clean, considered code that others can understand and reason about. The next topic
+        I would like to explore is accessibility in the browser. Tech-wise, I am very interested in Elixir/Phoenix/Live View.
       </p>
+      <!-- <h2 class="section-title">Skills</h2> -->
       <div class="pluralsight">
         <p>
-          <a href="https://app.pluralsight.com/profile/don-denton">My Pluralsight Skill IQ</a> scores are as follows:
+          <a href="https://app.pluralsight.com/profile/don-denton">My 2018 Pluralsight Skill IQ scores</a>
         </p>
         <div class="flex">
           <table>
@@ -537,6 +533,17 @@ permalink: /resume/
       <h2 class="section-title">Professional Experience</h2>
 
       <div class="job freelance">
+        <h3 class="job-title">HealthPrize LLC, Front End Engineer <span class="timespan">2019&ndash;present</span></h3>
+
+        <p class="job-description">
+          Initially part of a two-person front end team, I now am technically a lead developer. On a two person team, that means our day-to-day relationship has stayed the same but I have additional responsibilities to the rest of the company as well.
+        </p>
+        <p class="job-description">
+          The same co-worker and I pushed for a transition from Agile to Shape Up, which began in 2019 with some trials and then completed in 2020. Is process evolution is ever <em>complete</em>, though? Since the transition, we two have designed several new or improved features which are currently in production.
+        </p>
+      </div><!-- job -->
+
+      <div class="job freelance">
         <h3 class="job-title">Freelance website design/development <span class="timespan">2006&ndash;present</span></h3>
 
         <p class="job-description">
@@ -572,10 +579,11 @@ permalink: /resume/
           </ul>
         </div>
       </div><!-- job -->
+
       <div class="job">
-        <h3 class="job-title">Flixpress LLC, full stack developer <span class="timespan">2013&ndash;present</span></h3>
-        <p class="job-description">I maintain some backend code at Flixpress, but mostly work on new front-end
-          projects, often as the solo front end dev.</p>
+        <h3 class="job-title">Flixpress LLC, full stack developer <span class="timespan">2013&ndash;2019</span></h3>
+        <p class="job-description">I maintained some backend code, but mostly worked on new front-end
+          projects, often as the solo front end developer.</p>
 
         <div class="projects">
           <h4 class="projects-section-title">Selected Projects</h4>

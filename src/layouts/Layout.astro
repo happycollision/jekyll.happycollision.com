@@ -3,7 +3,10 @@ import * as site from "$data/site"
 export interface Props {
 	title: string;
 }
-const rootPages = await Astro.glob<{title: string}>("../pages/*.md")
+const rootMdPages = await Astro.glob<{title: string}>("../pages/*.md")
+const rootMdxPages = await Astro.glob<{title: string}>("../pages/*.mdx")
+const rootPages = [...rootMdPages,...rootMdxPages].sort((a,b) => a.file.localeCompare(b.file))
+
 
 const pages = (rootPages.map(x => ({ url: x.url, title: x.frontmatter.title})))
 

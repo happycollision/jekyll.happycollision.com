@@ -1,7 +1,7 @@
 ---
 title: "Why I am letting go of my trademark"
 date: 2021-11-21
-layout: $layouts/Layout.astro
+layout: $layouts/Page.astro
 ---
 
 For years now, I have maintained [a trademark for the name Happy Collision ®][my-trademark]. This was done not out of an actual need or [out of vanity][vanity-registration], but out of fear that this name would somehow be stolen out from underneath me. At this point, it sure does not seem like a good use of my money, time, and attention. (I sure wish I had realized that back then that I wouldn't need the registration: paying the fees to the government and the lawyer I hired was no small thing.)

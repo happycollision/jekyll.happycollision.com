@@ -1,7 +1,7 @@
 ---
 title: "Heartbleed: your passwords are public now"
 date: 2014-04-09
-layout: $layouts/Layout.astro
+layout: $layouts/Page.astro
 ---
 
 I am not going to waste your time here. If you want to know *exactly* what Heartbleed is, there are [plenty of sites][1] that will give you that. This will all be in layman's terms and will be far from precise, but will be accurate enough for normal people.

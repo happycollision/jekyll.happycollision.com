@@ -1,7 +1,7 @@
 ---
 title: Vagrantfile that creates and populates MySQL database
 date: 2014-01-17
-layout: post
+layout: $layouts/Layout.astro
 ---
 
 A few months ago, I started poking around a [Discourse][1] install. I was a bit hesitant to start learning a whole new language (Ruby) on the chance that I could find a good use for Discourse in my work. I found a one, but it will be a while before I'll actually implement it.

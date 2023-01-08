@@ -2,10 +2,10 @@
 
 # via https://gist.github.com/SangsooNam/06de16f154d0e9a08b436a7252e80f34
 
-directory=_site
+directory=deploy.ignore
 branch=gh-pages
 build_command() {
-  jekyll build
+  npm run deploy:prep
 }
 
 echo -e "\033[0;32mDeleting old content...\033[0m"

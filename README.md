@@ -1,3 +1,7 @@
+# Happy Collision
+
+To deploy, run `npm run deploy`. It will build and push changes to the gh-pages branch.
+
 # Welcome to [Astro](https://astro.build)
 
 [![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/withastro/astro/tree/latest/examples/basics)

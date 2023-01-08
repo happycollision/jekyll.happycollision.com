@@ -1,0 +1,44 @@
+---
+import Layout from '$layouts/Layout.astro';
+import {fmtDate} from "$lib/dates"
+
+const postsData = await Astro.glob<{title:string, date:string}>("./20[0-9][0-9]/**/*.md")
+
+const posts = (postsData.map(x => ({ url: x.url, title: x.frontmatter.title, date: x.frontmatter.date})))
+
+
+
+---
+
+<Layout title="Happy Collision">
+	<div class="home">
+		<p>In truth, I am not a blogger. I help people create things. But below are some things I wrote. If you are interested in starting a project together, hit me up via my contact information at the bottom of the page.</p>
+	
+		<h1 class="page-heading">Posts</h1>
+	
+		<ul class="post-list">
+			{posts.reverse().map(({date,url,title}) => (
+
+				<li>
+					<span class="post-meta">
+						{fmtDate(date)}
+					</span>
+	
+					<h2>
+						<a class="post-link" href={url}>
+							{title}
+						</a>
+					</h2>
+				</li>
+			))}
+		</ul>
+	
+		<p class="rss-subscribe">subscribe 
+			<a href="/feed.xml">via RSS</a>
+		</p>
+	
+	</div>
+	</Layout>
+
+<style>
+</style>

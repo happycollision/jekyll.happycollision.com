@@ -1,0 +1,811 @@
+---
+title: Resumé
+layout: $layouts/Bare.astro
+---
+<style>
+  html {
+    box-sizing: border-box;
+  }
+
+  html * {
+    box-sizing: inherit;
+  }
+
+  body {
+    background: #ccc;
+    margin: 0;
+    padding: 0;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    line-height: 1.3;
+  }
+
+  a {
+    color: rgb(194, 13, 22);
+    text-shadow: 0.02em 0.02em 0 rgba(0, 0, 0, 0.5);
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 1.5em;
+    margin: 0.85em 0 0.5em;
+  }
+
+  h1 {
+    font-size: 2em;
+  }
+
+  h2 {
+    font-size: 1.75em;
+  }
+
+  table {
+    border-collapse: collapse;
+    line-height: 1.3;
+  }
+
+  td,
+  th {
+    padding: 0;
+  }
+
+  p:first-of-type {
+    margin-top: 0;
+  }
+
+  ul {
+    padding-left: 1.2em;
+  }
+
+  li * {
+    text-indent: 0;
+  }
+
+  li {
+    padding-left: 1em;
+    text-indent: -1em;
+  }
+
+  li p {
+    margin-top: 0;
+    padding-left: 0;
+    margin-bottom: 0.5em;
+  }
+
+  .resume {
+    margin: 1em auto;
+    max-width: 60em;
+    background: #fff;
+    padding: 2em 3em;
+    box-shadow: 0 0 12px rgba(0, 0, 0, 0.3);
+  }
+
+  .section-title,
+  .example-title {
+    font-weight: normal;
+    color: rgba(218, 149, 0, 0.815);
+    border-bottom: 1px solid rgba(218, 149, 0, 0.733);
+    text-shadow: 0.02em 0.02em 0 rgba(0, 0, 0, 0.5);
+  }
+
+  .timespan {
+    color: #777;
+    font-weight: normal;
+    display: inline-block;
+    margin-left: 2em;
+  }
+
+  .job-description {
+    color: #888;
+  }
+
+
+  /* Special overrides for sections */
+
+
+  .contact {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin: -2em -3em;
+    margin-bottom: 1em;
+    padding: 0.5em 3em;
+    background: rgba(255, 177, 10, 0.678);
+  }
+
+  .contact :first-child {
+    color: #A1060D;
+    flex-grow: 1;
+    text-align: left;
+    font-size: 4.5em;
+    line-height: 1;
+    padding: 0;
+    margin: 0;
+  }
+
+  .contact a {
+    color: #A1060D;
+    text-shadow: none;
+  }
+
+  .character-traits {
+    margin-top: 1em;
+  }
+
+  .skills {
+    display: flex;
+    justify-content: space-around;
+  }
+
+  .skills>* {
+    padding: 0 1em;
+  }
+
+  .skills table {
+    max-width: 20em;
+  }
+
+  .skills>.section-title {
+    flex-basis: 100%;
+    flex-shrink: 0;
+    padding: 0;
+  }
+
+  .skills p {
+    padding: 0;
+  }
+
+  .skills table {
+    margin: 0 0.5em;
+  }
+
+  .skills tr:nth-of-type(2n+2) {
+    border-top: 1px solid rgba(0, 0, 0, 0.3);
+  }
+
+  .skills td,
+  .skills th {
+    text-align: center;
+    padding: 0 0.25em;
+  }
+
+  .skills td:first-child,
+  .skills th:first-child {
+    text-align: left;
+  }
+
+  .freelance ul {
+    columns: 20em 2;
+    list-style-type: none;
+    padding: 0;
+  }
+
+  .job {
+    margin-top: 2em;
+  }
+
+  .job:first-of-type {
+    margin-top: 0;
+  }
+
+  .job-title {
+    margin-top: 0;
+  }
+
+  .projects-section-title {
+    font-weight: normal;
+    text-indent: 1rem;
+  }
+
+  .project-title {
+    text-align: center;
+    text-transform: uppercase;
+    font-size: 1.25rem;
+    color: rgba(218, 149, 0, 0.815);
+    text-shadow: 0.02em 0.02em 0 rgba(0, 0, 0, 0.5);
+  }
+
+  .project {
+    padding-left: 1em;
+  }
+
+  .description {
+    flex-basis: 50%;
+    flex-shrink: 1;
+    flex-grow: 1;
+  }
+
+  .responsibilities {
+    margin-left: 1em;
+    flex-basis: 50%;
+  }
+
+  .responsibilities h6,
+  .responsibilities h4 {
+    margin-top: 0;
+    font-size: 1rem;
+    margin-bottom: 1rem;
+  }
+
+  .flex {
+    display: flex;
+    justify-content: space-evenly;
+  }
+
+  .flex>* {
+    margin-top: 0;
+    margin-right: 1em;
+  }
+
+  .flex>*:last-child {
+    margin-right: auto;
+  }
+
+  .examples {
+    margin-top: -1em;
+  }
+
+  .example {
+    flex-basis: 50%;
+  }
+
+  .open-source li {
+    list-style: none;
+  }
+
+  .open-source>ul ul li,
+  .open-source li p {
+    padding-left: 0;
+  }
+
+  .open-source>ul>li {
+    margin: 1em 0 0;
+  }
+
+  .open-source ul ul {
+    padding-left: 1em;
+  }
+
+  .open-source li:first-child {
+    flex-basis: 100%;
+    flex-shrink: 0;
+  }
+
+  .open-source>ul>li:nth-of-type(2) {
+    flex-basis: 65%;
+    /* order: 3; */
+  }
+
+  .docs li {
+    display: inline-block;
+    margin-right: 2.5em;
+  }
+
+
+
+  .my-projects li {
+    list-style: none;
+  }
+
+  .my-projects .item-links::before {
+    content: '(';
+  }
+
+  .my-projects .item-links a::after {
+    content: '|';
+    display: inline-block;
+    margin: 0 0 0 0.5ex;
+    color: initial;
+  }
+
+  .my-projects .item-links a:last-child::after {
+    display: none;
+  }
+
+  .my-projects .item-links::after {
+    content: ')';
+  }
+
+  @media all and (max-width: 800px) {
+    .skills {
+      flex-direction: column;
+    }
+  }
+
+  @media all and (max-width: 559px) {
+    .contact {
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .contact :first-child {
+      order: 0;
+      text-align: center;
+    }
+
+    .skills>*,
+    .skills .section-title {
+      flex-basis: 0;
+    }
+
+    .additional-skills {
+      margin-top: 2em;
+    }
+
+    .project {
+      padding: 0;
+    }
+
+    .flex {
+      display: initial;
+    }
+  }
+
+  @media all and (max-width: 60em) {
+    .resume {
+      padding: 1em;
+      margin: 0;
+    }
+
+    .contact {
+      margin: -1em;
+      margin-bottom: 1em;
+    }
+  }
+
+  @media print {
+
+    body,
+    html {
+      padding: 0;
+      margin: 0;
+      font-size: 13px;
+    }
+
+    table {
+      font-size: 13px;
+    }
+
+    .resume {
+      width: 100%;
+      max-width: 100%;
+      padding: 0;
+      margin: 0;
+      box-shadow: none;
+    }
+
+    .contact {
+      padding: 0;
+      margin: 0;
+    }
+
+    .contact :first-child {
+      margin: 0;
+      padding: 0;
+      text-align: left;
+      order: 0;
+    }
+
+    section {
+      clear: both;
+    }
+
+    .open-source a {
+      display: inline;
+    }
+
+    .projects {
+      padding-left: 1em;
+    }
+
+    .project {
+      page-break-inside: avoid;
+    }
+
+    .project-title {
+      font-size: 1rem;
+    }
+
+    ul,
+    ol {
+      margin-top: 0;
+      padding-top: 0;
+    }
+
+    .responsibilities h6 {
+      margin-bottom: 0;
+    }
+
+  }
+</style>
+
+<div class="resume">
+  <section class="contact">
+    <h1 class="name">Don Denton</h1>
+    <address>
+      209 Bass Rd, Chattanooga TN, 37421<br>
+      Cell: <a href="tel:+1-785-554-2046">785-554-2046</a><br>
+      Email: <a href="mailto:don@happycollision.com">don@happycollision.com</a>
+    </address>
+  </section>
+
+  <section class="character-traits">
+    <!-- <h2 class="section-title">Professional Statement</h2> -->
+  </section>
+  <section class="skills">
+    <p>
+      I am an affable, self-motivated individual who advocates clean, considered code that others can understand and reason about. The next topic
+      I would like to explore is accessibility in the browser. Tech-wise, I am very interested in Elixir/Phoenix/Live View.
+    </p>
+    <!-- <h2 class="section-title">Skills</h2> -->
+    <div class="pluralsight">
+      <p>
+        <a href="https://app.pluralsight.com/profile/don-denton">My 2018 Pluralsight Skill IQ scores</a>
+      </p>
+      <div class="flex">
+        <table>
+          <tr>
+            <th>Skill</th>
+            <th>Score</th>
+            <th>Percentile</th>
+          </tr>
+          <tr>
+            <td>Typescript</td>
+            <td>268</td>
+            <td>98th</td>
+          </tr>
+          <tr>
+            <td>Javascript</td>
+            <td>245</td>
+            <td>94th</td>
+          </tr>
+          <tr>
+            <td>Angular</td>
+            <td>258</td>
+            <td>97th</td>
+          </tr>
+          <tr>
+            <td>React</td>
+            <td>196</td>
+            <td>78th</td>
+          </tr>
+        </table>
+        <table>
+          <tr>
+            <th>Skill</th>
+            <th>Score</th>
+            <th>Percentile</th>
+          </tr>
+          <tr>
+            <td>HTML 5</td>
+            <td>210</td>
+            <td>84th</td>
+          </tr>
+          <tr>
+            <td>CSS</td>
+            <td>243</td>
+            <td>94th</td>
+          </tr>
+          <tr>
+            <td>Git</td>
+            <td>202</td>
+            <td>81st</td>
+          </tr>
+          <tr>
+            <td>GitHub</td>
+            <td>203</td>
+            <td>81st</td>
+          </tr>
+        </table>
+      </div>
+    </div>
+    <!-- <div class="additional-skills">
+    <p>
+      I also have experience with the following:
+    </p>
+    <ol>
+      <li>Node & Npm/Yarn</li>
+      <li>EmberJS</li>
+      <li>Ruby</li>
+      <li>Ruby on Rails</li>
+      <li>Shell Scripting</li>
+      <li>ASP.NET</li>
+      <li>C#</li>
+      <li>WordPress</li>
+      <li>PHP</li>
+    </ol>
+  </div> -->
+  </section>
+
+  <section class="employment">
+    <h2 class="section-title">Professional Experience</h2>
+    <div class="job freelance">
+      <h3 class="job-title">HealthPrize LLC, Front End Engineer <span class="timespan">2019&ndash;present</span></h3>
+      <p class="job-description">
+        Initially part of a two-person front end team, I now am technically a lead developer. On a two person team, that means our day-to-day relationship has stayed the same but I have additional responsibilities to the rest of the company as well.
+      </p>
+      <p class="job-description">
+        The same co-worker and I pushed for a transition from Agile to Shape Up, which began in 2019 with some trials and then completed in 2020. Is process evolution is ever <em>complete</em>, though? Since the transition, we two have designed several new or improved features which are currently in production.
+      </p>
+    </div><!-- job -->
+    <div class="job freelance">
+      <h3 class="job-title">Freelance website design/development <span class="timespan">2006&ndash;present</span></h3>
+      <p class="job-description">
+        This was my side job after college graduation. I was my first client, and started with nearly zero knowledge.
+        Today, I maintain a couple sites, using very simple GitHub Pages workflows.
+        Though I have had less need for freelance work since starting with Flixpress, I still actively maintain a
+        website for <a href="https://postplayhouse.com">Post Playhouse</a> and <a href="http://dondentonactor.com">myself,
+          as an actor</a>.
+      </p>
+      <div class="responsibilities">
+        <h4>Skills/Responsibilities</h4>
+        <ul>
+          <li>
+            <strong>Self-teaching.</strong> Because I did not study any form of computer science in school, I had to
+            seek knowledge on my own. That continues to this day, and I am always learning about new technologies and
+            practices.
+          </li>
+          <li>
+            <strong>Comfort amidst confusion.</strong> Learning a new skill or topic without a mentor is difficult,
+            and being comfortable with not understanding a topic as you take your first steps is critical.
+          </li>
+          <li>
+            <strong>Goal-setting and time management.</strong> With no superior to set the schedule, this is a must.
+          </li>
+          <li>
+            <strong>Confidence.</strong> My first largest project came around 2010. It was an internal tool for a
+            company called Rainbow Computer Technology, Inc to track downtime and maintenance details for their
+            clients&rsquo; printers. After several years of low-stakes website development, this was the first time
+            that a client had real money on the line if the product failed. I had to have confidence in my skills to
+            move forward with that project.
+          </li>
+        </ul>
+      </div>
+    </div><!-- job -->
+    <div class="job">
+      <h3 class="job-title">Flixpress LLC, full stack developer <span class="timespan">2013&ndash;2019</span></h3>
+      <p class="job-description">I maintained some backend code, but mostly worked on new front-end
+        projects, often as the solo front end developer.</p>
+      <div class="projects">
+        <h4 class="projects-section-title">Selected Projects</h4>
+        <div class="project">
+          <h5 class="project-title">Transition to version control</h5>
+          <div class="flex">
+            <p class="description">
+              When I began working at Flixpress, the company was not using any version control for their code. Files
+              typically lived on a network drive and were edited from there directly. The system worked well for them
+              in the beginning, but of course it became untenable as the codebase grew. I took it upon myself to help
+              the company transition to Git. Today, all major new and ongoing projects at Flixpress now live inside
+              repositories on each developer&rsquo;s machine with its origin stored on GitHub. It is rare for anyone
+              to run into a Git-related problem anymore, though when they do, I am always happy to help.
+            </p>
+            <div class="responsibilities">
+              <h6>Responsibilities</h6>
+              <ul>
+                <li>Teach my colleagues how to use the basics of Git</li>
+                <li>Troubleshoot any problems that arose during the transition</li>
+                <li>Create repositories for all the legacy code I had access to</li>
+                <li>Periodically maintain all repos while my colleagues continued to work Git into their routine</li>
+                <li>Create a Git-based deployment workflow for our main product: Flixpress.com</li>
+                <li>Answer continuing questions about Git from colleagues</li>
+              </ul>
+            </div>
+          </div>
+        </div><!-- project -->
+        <div class="project">
+          <h5 class="project-title">IVjs &mdash; Interactive Experience Library</h5>
+          <div class="flex">
+            <p class="description">
+              In early 2018, Flixpress was hired to create a Javascript library to replace the functionality of a <a
+                href="https://ivxml.wordpress.com/what-is-interactive-xml/">legacy ActionScript codebase</a> that
+              read XML documents to create interactive video experiences in Flash. Ultimately we decided to move
+              forward with a rewrite in Typescript resulting in a Javascript library with a DSL which would allow
+              novice Javascript developers to create video experiences in the browser. The decision to use Typescript
+              meant that the code for the project was mostly going to fall to me, while documentation would mostly be
+              my boss&rsquo;s responsibility.
+            </p>
+            <div class="responsibilities">
+              <h6>Responsibilities</h6>
+              <ul>
+                <li>
+                  Teach the fundamentals of Typescript to a colleague
+                </li>
+                <li>
+                  Advocate test coverage
+                </li>
+                <li>
+                  Teach the basics of testing to a colleague
+                </li>
+                <li>
+                  Communication with a non-technical client about how we planned to meet their needs
+                </li>
+                <li>
+                  Architecture of the entire library
+                </li>
+                <li>
+                  Implementation of 95% of the library
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div><!-- project -->
+        <div class="project">
+          <h5 class="project-title">Micronews.tv &mdash; An Angular Application</h5>
+          <div class="flex">
+            <p class="description">
+              Flixpress took on a new project near the beginning of 2018 called <a href="https://micronews.tv">Micronews</a>.
+              The goal was to automate an entire news broadcast recording from a browser connected
+              camera-with-teleprompter setup. The client should be able to create all the copy, CG elements, upload
+              over-the-shoulder media, and choose different camera angles from one application. That same application
+              would then prompt and record the anchor. This project is ongoing as of December 2018.
+            </p>
+            <div class="responsibilities">
+              <h6>Responsibilities</h6>
+              <ul>
+                <li>
+                  Work closely with the back end developer to come up with an API structure for the application
+                </li>
+                <li>
+                  Design the UX for the client application
+                </li>
+                <li>
+                  Engineer the client-side portion of the application using the Angular framework
+                </li>
+                <li>
+                  Implement new features as requested
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div><!-- project -->
+        <div class="project">
+          <h5 class="project-title">Template Browser &mdash; UI and Performance Improvements</h5>
+          <div class="description flex">
+            <p>
+              The template browser at Flixpress.com used to call the server on every user interaction and re-request
+              a list of every template available on the site. This was the default behavior of a DNN plugin that was
+              used to navigate through the list. I suggested a re-implementation of the browser that only made one
+              server request (other, DNN related page requests notwithstanding), and was highly responsive.
+            </p>
+            <p>
+              I re-implemented the <a href="https://web.archive.org/web/20150607183319/http://www.flixpress.com:80/AutomatedTemplates">old
+                browser</a> with a <a href="https://github.com/flixpressllc/ReactTemplateBrowser">new design</a> and,
+              because I opted to use a client-side library (React), the responsiveness is far superior to the old
+              implementation. The widget no longer makes any additional server requests (aside from downloading
+              images) after the first request to a single text file that houses all the information for
+              Flixpress&rsquo;s available templates.
+            </p>
+          </div>
+        </div><!-- project -->
+      </div><!-- projects -->
+    </div>
+  </section>
+
+  <section class="examples flex">
+    <div class="example open-source">
+      <h2 class="example-title">Open Source Contributions</h2>
+      <ul>
+        <li>
+          <a href="https://github.com/search?q=author%3Ahappycollision+-org%3Ahappycollision+-org%3Aflixpressllc+-org%3Apostplayhouse+is%3Apr+is%3Amerged&type=Issues">All
+            Merged Pull Requests</a>
+          <p>
+            I have categorized many of them below
+          </p>
+        </li>
+        <li>
+          Code Contributions
+          <ul>
+            <li>
+              <a href="https://github.com/samselikoff/ember-cli-mirage/pull/1315">Ember Cli Mirage (Javascript)</a>
+              Aligning expected behavior with actual behavior
+            </li>
+            <li>
+              <a href="https://github.com/typed-ember/ember-cli-typescript/pull/237">Ember Cli Typescript
+                (Javascript)</a>
+              Improving default setup on installation
+            </li>
+            <li>
+              <a href="https://github.com/glimmerjs/glimmer.js/pull/133">GlimmerJs (Typescript)</a>
+              Add a regression test
+            </li>
+            <li>
+              <a href="https://github.com/search?q=org%3Ajsonapi-suite+is%3Apr+author%3Ahappycollision">JsonApi Suite
+                (Ruby)</a>
+              Various bug fixes and improvements
+            </li>
+            <li>
+              <a href="https://github.com/mmistakes/hpstr-jekyll-theme/issues?utf8=%E2%9C%93&q=author%3Ahappycollision">hpstr-jekyll-theme
+                (Liquid Markup)</a>
+              Feature additions
+            </li>
+            <li>
+              <a href="https://github.com/discourse/discourse/pull/1308">Discourse (HTML)</a>
+              My first PR
+            </li>
+          </ul>
+        </li>
+        <li>
+          Documentation Contributions
+          <ul class="docs">
+            <li>
+              <a href="https://github.com/machty/ember-concurrency">Ember Concurrency</a>
+            </li>
+            <li>
+              <a href="https://github.com/emberjs/data">Ember Data</a>
+            </li>
+            <li>
+              <a href="https://github.com/minutebase/ember-can/pull/84">Ember Can</a>
+            </li>
+            <li>
+              <a href="https://github.com/angular/angular/pull/18157">Angular</a>
+            </li>
+            <li>
+              <a href="https://github.com/facebook/jest/pull/2937">Jest</a>
+            </li>
+            <li>
+              <a href="https://github.com/jekyll/jekyll/pull/5587">Jekyll</a>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+    <div class="example my-projects">
+      <h2 class="example-title">My Projects</h2>
+      <ul>
+        <li>
+          <span class="item-title">Think System Memorizer</span>
+          <span class="item-links">
+            <a href="https://happycollision.github.io/think-system-memorizer/">Website</a>
+            <a href="https://github.com/happycollision/think-system-memorizer">Code</a>
+          </span>
+          <p>
+            A PWA that to help my wife and me memorize lines. I may polish it up and create a service for actors.
+          </p>
+        </li>
+        <li>
+          <span class="item-title">Production Calendar Renderer</span>
+          <span class="item-links">
+            <a href="https://happycollision.github.io/post-playhouse-calendar-renderer/#/?editing=true">Website</a>
+            <a href="https://github.com/happycollision/post-playhouse-calendar-renderer">Code</a>
+          </span>
+          <p>
+            Custom tool for <a href="https://postplayhouse.com">Post Playhouse</a> which takes show dates and renders
+            out a calendar ready to be captured and printed in a full color brochure.
+          </p>
+        </li>
+        <li>
+          <span class="item-title">ASP inside HTML Syntax for Atom</span>
+          <span class="item-links">
+            <a href="https://atom.io/packages/language-asp-html">Package Page</a>
+          </span>
+          <p>
+            Open Source, MIT.
+          </p>
+        </li>
+        <li>
+          <span class="item-title">Respondr</span>
+          <span class="item-links">
+            <a href="https://github.com/happycollision/respondr">Code</a>
+            <a href="http://happycollision.github.io/CarolRose-Website/headshots/">Demo</a>
+          </span>
+          <p>
+            Open Source, MIT. jQuery plugin replace formatted strings in your HTML with a responsive <code>&lt;picture&gt;</code>.
+          </p>
+        </li>
+        <li>
+          <span class="item-title">Happy Helpers</span>
+          <span class="item-links">
+            <a href="https://github.com/happycollision/happy-helpers">Code</a>
+          </span>
+          <p>
+            Open Source, MIT. A small, dependency free Javascript helper library that I created for myself.
+          </p>
+        </li>
+      </ul>
+    </div>
+  </section>
+</div><!-- resume -->

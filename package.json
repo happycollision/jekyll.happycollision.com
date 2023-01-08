@@ -1,0 +1,24 @@
+{
+  "name": "happycollision-dot-com",
+  "type": "module",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "astro build",
+    "deploy:prep": "npm run build && rsync -rt dist/* deploy.ignore && touch deploy.ignore/.nojekyll",
+    "deploy": "./deploy-gh-pages.sh",
+    "preview": "astro preview",
+    "astro": "astro"
+  },
+  "dependencies": {
+    "@astrojs/mdx": "^0.14.0",
+    "@astrojs/rss": "^2.0.0",
+    "astro": "^1.9.0",
+    "sanitize-html": "^2.8.1"
+  },
+  "devDependencies": {
+    "@types/sanitize-html": "^2.8.0"
+  }
+}

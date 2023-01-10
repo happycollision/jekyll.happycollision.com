@@ -1,11 +1,11 @@
 ---
-title: "App Variants: Feature branch builds (and more) for your statically generated SPA"
+title: "Client Side App Variants"
+subtitle: "Feature branch builds (and more) for your statically generated SPA"
 date: 2023-01-05
 layout: $layouts/Page.astro
 ---
 
-> _This article was written for the [Trilliant Health Medium
-> account](https://medium.com/@Trilliant-Health), published in both locations._
+![A monitor showing slight divergence from the one true timeline in the TV series Loki.](./img/variant-timeline.jpeg)
 
 The split between front-end and back-end has been a double-edged sword ever
 since the first developer chiseled JSX onto the wall of the tribal networking
@@ -18,7 +18,6 @@ full stack developers.
 
 For better and worse, this is the timeline we are in, and escape is futile.
 
-![A monitor showing slight divergence from the one true timeline in the TV series Loki.](./img/variant-timeline.jpeg)
 
 One casualty of the front-end/back-end divide is the dedicated feature branch
 build, the place where your work-in-progress code can be deployed care-free as
@@ -142,6 +141,8 @@ There are some downsides to this approach.
   approach.
 - The different variants of your app may start battling each other for
   multiversal dominance.
+
+### Benefits
 
 If you find yourself in a situation where you can accept the tradeoffs above,
 there are plenty of situations in which loading _any_ variant of your app via
@@ -387,8 +388,6 @@ our SPAs at Trilliant Health.
   </body>
 </html>
 ```
-
-The comments in the code should mostly speak for themselves.
 
 You'll note that we decided to inform the user of the missing variant in case it
 is unavailable, instead of just reloading on their behalf. Depending on the
@@ -711,10 +710,15 @@ like this is very freeing. (You know what else is freeing? _Not_ doing automatic
 deployments when your PRs get merged to main. 😱 But that is a heretical rant
 for another time.)
 
-Everything in the code above is just a single implementation of the idea of app
-variants. And "app variants" is just a name I slapped on "moving your app
-dependency references out of `index.html` so they can be loaded later." Have you
-ever seen anyone else use this technique before? I'd love to know.
+## App Variants in a Nutshell
+
+Everything in the code above is just a single implementation of the idea of "app
+variants". And "app variants" is just a name I slapped onto a simple idea: By
+moving the dependencies needed to boot your app into a file external to the
+`index.html`, you can have multiple dependency definitions for multiple apps,
+and you can write a bit of JavaScript to decide which app to load altogether.
+
+Have you ever seen anyone else use this technique before? I'd love to know.
 
 In any case, if these ideas are useful to you, please run with them! Let me know
 what works for you and what you needed to change.

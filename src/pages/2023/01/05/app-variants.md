@@ -5,7 +5,7 @@ date: 2023-01-05
 layout: $layouts/Page.astro
 ---
 
-![A monitor showing slight divergence from the one true timeline in the TV series Loki.](./img/variant-timeline.jpeg)
+![A monitor showing slight divergence from the one true timeline in the TV series Loki.](/app-variants/img/variant-timeline.jpeg)
 
 The split between front-end and back-end has been a double-edged sword ever
 since the first developer chiseled JSX onto the wall of the tribal networking
@@ -17,7 +17,6 @@ separate teams of front-end developers and back-end developers as opposed to
 full stack developers.
 
 For better and worse, this is the timeline we are in, and escape is futile.
-
 
 One casualty of the front-end/back-end divide is the dedicated feature branch
 build, the place where your work-in-progress code can be deployed care-free as
@@ -87,7 +86,7 @@ as well, but by then your app is already running.
 Every change to your application requires a brand-new build of `index.html` to
 reference multiple new CSS and JS files.
 
-|![Sequence diagram of a typical SPA page load https://play.d2lang.com/?script=rJKxTvMwEMd3P8W9wJeq3-gBiTJRdagwbEjI2EewlNjmzi1UKO-OHBOnIIEyMMW6-90v-edcf58EyunF7Sk6oztQ-0vYBW2db0HhywG9QQnvAkAljLAuZ4AxpwT-RB6s0y3pfuw9UnhlJAmbcigDSMdcU-PznIN_F7W7OmNzvaqct_jWPKe--z5akb0mRtDegnVswhHp3luM6C16c4K7mx0LgEFMWf7_ZRYTvDkQoU9A2cOJV4Qcg2fk6UVV16Q5dJMkXCk1fd_sL1CdKNST65B_l22XuLaLVNe9bnGBrXCzcPhxSZsQEugYO2d0vn9fNrLOaNmNGMRHAAAA__8%3D&sketch=0&theme=104](./img/typical.png)|
+|![Sequence diagram of a typical SPA page load https://play.d2lang.com/?script=rJKxTvMwEMd3P8W9wJeq3-gBiTJRdagwbEjI2EewlNjmzi1UKO-OHBOnIIEyMMW6-90v-edcf58EyunF7Sk6oztQ-0vYBW2db0HhywG9QQnvAkAljLAuZ4AxpwT-RB6s0y3pfuw9UnhlJAmbcigDSMdcU-PznIN_F7W7OmNzvaqct_jWPKe--z5akb0mRtDegnVswhHp3luM6C16c4K7mx0LgEFMWf7_ZRYTvDkQoU9A2cOJV4Qcg2fk6UVV16Q5dJMkXCk1fd_sL1CdKNST65B_l22XuLaLVNe9bnGBrXCzcPhxSZsQEugYO2d0vn9fNrLOaNmNGMRHAAAA__8%3D&sketch=0&theme=104](/app-variants/img/typical.png)|
 |:--:|
 |(Diagrams created at https://play.d2lang.com)|
 
@@ -116,7 +115,7 @@ arbitrary variant JSON file we request by name via a query parameter. Once that
 JSON file is loaded, we can use it to gather our actual application
 dependencies.
 
-|![Sequence diagram of modified "variant" SPA architecture page load https://play.d2lang.com/?script=rJPBTsMwDIbvfQo_wOg0jj0gMU5UE0xEcJqETGNGUOcEJx0gtHdHadZuYwz1wKlR8vnLH1vt21eAxNdnDygGOYCaX8LMoja8BEVvDXFFBXxlACqQg0laA7TvLMBvkUdtcCm4as-exL57kgKmaZEKSNZxT7XffQ7OLvrT8R4b93uVYU0f-UtY1S2BWpMGsQ1rCGJcF-tA2hfPUTyNQBqGNbKpa4RSjQBZL1gbX9l423rbgVLd3sD93ezY14U8Qf6Sekvmr95yS21-PvwwY4wEXaIFa3LEmrj6jNf4LNZ3kzj_z0lUlqtGhDiARI8PfizknWVP_qi3edh1Iw8FXCnV5dv5E9RXJOrZ1OT_lpVDXOUg1fUKlzTAlrid8PSQptYGQOdqU2H8ew4mMolomk22yb4DAAD__w%3D%3D&sketch=0&theme=104](./img/variant.png)|
+|![Sequence diagram of modified "variant" SPA architecture page load https://play.d2lang.com/?script=rJPBTsMwDIbvfQo_wOg0jj0gMU5UE0xEcJqETGNGUOcEJx0gtHdHadZuYwz1wKlR8vnLH1vt21eAxNdnDygGOYCaX8LMoja8BEVvDXFFBXxlACqQg0laA7TvLMBvkUdtcCm4as-exL57kgKmaZEKSNZxT7XffQ7OLvrT8R4b93uVYU0f-UtY1S2BWpMGsQ1rCGJcF-tA2hfPUTyNQBqGNbKpa4RSjQBZL1gbX9l423rbgVLd3sD93ezY14U8Qf6Sekvmr95yS21-PvwwY4wEXaIFa3LEmrj6jNf4LNZ3kzj_z0lUlqtGhDiARI8PfizknWVP_qi3edh1Iw8FXCnV5dv5E9RXJOrZ1OT_lpVDXOUg1fUKlzTAlrid8PSQptYGQOdqU2H8ew4mMolomk22yb4DAAD__w%3D%3D&sketch=0&theme=104](/app-variants/img/variant.png)|
 |:--:|
 |The only change from the "typical SPA loading sequence" is the added round trip in step 1.|
 
@@ -395,7 +394,7 @@ kinds of differences between variants, just loading the default variant might be
 too subtle for the user to realize something didn't work. So, we display a very
 simple message.
 
-![](missing.png)
+![The UI when a variant JSON file cannot be found](/app-variants/img/missing.png)
 
 The structure above expects the server to house all the variant information in
 the `/variants/` directory. That directory might look like this:
@@ -444,7 +443,7 @@ const dir = path.resolve(__dirname)
  * am setting up, which is somewhat similar to what we use at Trilliant
  * Health. As I said, though, this part is completely up to you. You can
  * expose anything you want to your app via some kind of variant
- * configuration, coupled with-in the case of Webpack-the
+ * configuration, coupled with--in the case of Webpack--the
  * `WebpackDefinePlugin`.
  */
 function getVariantConfig(variantName: string) {
@@ -686,7 +685,7 @@ up the `mock` variant using `main.486ca[...].js`.
 
 ## Diverging even farther
 
-![A monitor showing a highly divergent timeline from the TV series Loki](./img/farther.jpeg)
+![A monitor showing a highly divergent timeline from the TV series Loki](/app-variants/img/farther.jpeg)
 
 I mentioned a few times above that the code here is similar to what we use at
 Trilliant Health. There are tons of little features we've layered on top of our
@@ -701,7 +700,7 @@ by explanatory text. We've added descriptions to the internal variants and UI
 elements in the actual app that can read and understand which variants are
 available to give users a way to switch as needed.
 
-|![A screenshot of a small section of Trilliant Health's custom UI for describing app variants, including a cartoonish icon of Loki's head](./img/our-ui.png)|
+|![A screenshot of a small section of Trilliant Health's custom UI for describing app variants, including a cartoonish icon of Loki's head](/app-variants/img/our-ui.png)|
 |:--:|
 |Had I just finished watching Marvel's Loki series when I created this system? Maybe. Does our internal UI lean into that origin? Maybe. Icon available at [Slackmojis.com](https://slackmojis.com).|
 

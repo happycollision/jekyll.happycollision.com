@@ -1,7 +1,9 @@
 ---
 title: Resumé
 layout: $layouts/Bare.astro
+mainNav: true
 ---
+
 <style>
   html {
     box-sizing: border-box;

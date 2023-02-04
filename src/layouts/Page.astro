@@ -1,16 +1,16 @@
 ---
-import Layout from './Layout.astro';
-import { fmtDate } from '$lib/dates';
+import Layout from "./Layout.astro";
+import { fmtDate } from "$lib/dates";
 
 export interface Props {
-	frontmatter: {title: string, subtitle?:string, date?: string}
+	frontmatter: {title: string, subtitle?:string, date?: string, compact?: boolean}
 }
 
-const { title, subtitle, date } = Astro.props.frontmatter;
+const { title, subtitle, date, compact } = Astro.props.frontmatter;
 ---
-<Layout title={title}>
+
+<Layout title={title} compact={compact}>
   <div class="post">
-    
     <header class="post-header">
       <h1 class="post-title">
         {title}
@@ -18,12 +18,10 @@ const { title, subtitle, date } = Astro.props.frontmatter;
       
       </h1>
       {date && <p class="post-meta">{fmtDate(date)}</p>}
-
     </header>
-    
+
     <article class="post-content">
       <slot />
     </article>
-    
   </div>
 </Layout>

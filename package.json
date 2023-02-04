@@ -13,10 +13,10 @@
     "astro": "astro"
   },
   "dependencies": {
-    "@astrojs/mdx": "^0.14.0",
-    "@astrojs/rss": "^2.0.0",
-    "astro": "^1.9.0",
-    "sanitize-html": "^2.8.1"
+    "@astrojs/mdx": "^0.16.0",
+    "@astrojs/rss": "^2.1.0",
+    "astro": "^2.0.6",
+    "sanitize-html": "^2.9.0"
   },
   "devDependencies": {
     "@types/sanitize-html": "^2.8.0"

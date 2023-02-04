@@ -1,0 +1,778 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <link rel="stylesheet" href="/main.css">
+    <meta name="generator" content="Astro v2.0.6">
+    <title>Client Side App Variants</title>
+    
+  <link rel="stylesheet" href="/_astro/the-shoemakers-children-go-barefoot.098a2a2b.css" /></head>
+  <body>
+    <header class="site-header">
+      <a href="/">
+              <img src="/i/happy-collision.png" alt="" style="display:block;margin:auto">
+            </a><div class="consultation">
+              Providing website and application consulting and design services
+              since 2008. 
+              <a href="mailto:don@happycollision.com">
+                Contact Happy Collision
+              </a> 
+              for help with your latest idea.
+            </div>
+
+      <div class="wrapper">
+        <a class="site-title" href="/">
+          Happy Collision
+        </a>
+
+        <nav class="site-nav">
+          <a href="#" class="menu-icon">
+            <svg viewBox="0 0 18 15">
+              <path fill="#424242" d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.031C17.335,0,18,0.665,18,1.484L18,1.484z"></path>
+              <path fill="#424242" d="M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0c0-0.82,0.665-1.484,1.484-1.484 h15.031C17.335,6.031,18,6.696,18,7.516L18,7.516z"></path>
+              <path fill="#424242" d="M18,13.516C18,14.335,17.335,15,16.516,15H1.484C0.665,15,0,14.335,0,13.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.031C17.335,12.031,18,12.696,18,13.516L18,13.516z"></path>
+            </svg>
+          </a>
+
+          <div class="trigger">
+            <a class="page-link" href="/presentations">
+                  Presentations
+                </a><a class="page-link" href="/resume">
+                  Resumé
+                </a>
+            <!-- {% endif %} -->
+            <!-- {% endfor %} -->
+            <a class="email-maker-link" href="//email.happycollision.com">Looking for the Email Maker?</a>
+          </div>
+        </nav>
+      </div>
+    </header>
+
+    <div class="page-content">
+      <div class="wrapper">
+        <div class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        Client Side App Variants
+        <div class="post-subtitle">Feature branch builds (and more) for your statically generated SPA</div>
+      </h1>
+      <p class="post-meta">Jan 5, 2023</p>
+    </header>
+
+    <article class="post-content">
+      <p><img src="/app-variants/img/variant-timeline.jpeg" alt="A monitor showing slight divergence from the one true timeline in the TV series Loki."></p>
+<p>The split between front-end and back-end has been a double-edged sword ever
+since the first developer chiseled JSX onto the wall of the tribal networking
+cave. What had the curiosity of this ancient heretic wrought? Along with the
+numerous advantages of client-rendered websites came numerous new challenges.
+Web developers started specializing to overcome these new challenges and explore
+this new way of building for the web. Today, common practice is to develop using
+separate teams of front-end developers and back-end developers as opposed to
+full stack developers.</p>
+<p>For better and worse, this is the timeline we are in, and escape is futile.</p>
+<p>One casualty of the front-end/back-end divide is the dedicated feature branch
+build, the place where your work-in-progress code can be deployed care-free as
+you build so that you and your teammates can see a fully integrated version of
+your changes. Today, with teams, repositories, and deployments split along
+technological lines, it can be difficult and time-consuming to find a way to
+make feature branch builds work. And what if you serve your static front-end
+assets via a simple, static file server?</p>
+<p>At the possible expense of becoming another front-end heretic, I’ll tell you
+that you can trade <em>one more round trip to the server</em> for completely isolated
+front-end builds that are dynamically loaded without the need for special
+back-end logic.</p>
+<h2 id="variants">Variants</h2>
+<p>Trying to achieve isolated feature branch builds solely through static,
+front-end code led me to something even more versatile. This slight
+architectural change allows you to deploy multiple builds of your application to
+a single
+<a href="https://developer.mozilla.org/en-US/docs/Learn/Common_questions/What_is_a_URL#authority">authority (sub-domain + domain + port)</a>,
+with each build separated and loaded dynamically via a simple query parameter in
+the URL.</p>
+<p>The system allows you to dynamically load:</p>
+<ul>
+<li><strong>Feature branch builds:</strong> Our original goal. Deploy work-in-progress builds
+of your app as you develop a new feature.</li>
+<li><strong>Snapshots of previous versions of your application:</strong> Perhaps you are
+working on rapidly changing data structures, and you’ll need to support the
+legacy versions of those structures for a time.</li>
+<li><strong>Builds for different environments:</strong> Do some of your users need to connect
+to a different API?</li>
+<li><strong>Builds for different personas:</strong> Maybe the marketing people at your company
+need to grab images of your new feature without any of the typical affordances
+rendered on screen.</li>
+<li><strong>Builds for different tasks:</strong> Debugging in production can be easier when you
+are using the non-minified build and you’ve attached all your custom
+introspection UI tools.</li>
+</ul>
+<p>All of these and more can coexist together on your file server, perfectly
+separated and preserved. Since this system is more than just “versions” or
+“feature branches,” we’ve settled on a new name: Variants.</p>
+<h2 id="the-architectural-shift">The architectural shift</h2>
+<p>This entire article assumes you are working with a statically generated,
+SPA-like application. If you have more control over the server hosting your
+static front end assets, perhaps another solution is possible, though this one
+might still be better suited to your needs.</p>
+<p>Additionally, if your deployment pipeline does not allow you to retain previous
+build artifacts in production, you won’t be able to use this approach.</p>
+<h3 id="typical-static-application-loading">Typical static application loading</h3>
+<p>In a typical SPA-like website, your app is totally coupled to the <code>index.html</code>
+file served at the root (and all other routes) of your site. It is responsible
+for pulling in all the CSS and JS assets needed for the initial render of your
+application. Your browser asks for the HTML file at some location on your site,
+and the same exact file is always loaded, containing links to the same exact
+assets every time. Once the site renders, perhaps your application recognizes
+other assets that are required for your particular location and downloads those
+as well, but by then your app is already running.</p>
+<p>Every change to your application requires a brand-new build of <code>index.html</code> to
+reference multiple new CSS and JS files.</p>
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th align="center"><img src="/app-variants/img/typical.png" alt="Sequence diagram of a typical SPA page load https://play.d2lang.com/?script=rJKxTvMwEMd3P8W9wJeq3-gBiTJRdagwbEjI2EewlNjmzi1UKO-OHBOnIIEyMMW6-90v-edcf58EyunF7Sk6oztQ-0vYBW2db0HhywG9QQnvAkAljLAuZ4AxpwT-RB6s0y3pfuw9UnhlJAmbcigDSMdcU-PznIN_F7W7OmNzvaqct_jWPKe--z5akb0mRtDegnVswhHp3luM6C16c4K7mx0LgEFMWf7_ZRYTvDkQoU9A2cOJV4Qcg2fk6UVV16Q5dJMkXCk1fd_sL1CdKNST65B_l22XuLaLVNe9bnGBrXCzcPhxSZsQEugYO2d0vn9fNrLOaNmNGMRHAAAA__8%3D&#x26;sketch=0&#x26;theme=104"></th></tr></thead><tbody><tr><td align="center">(Diagrams created at <a href="https://play.d2lang.com">https://play.d2lang.com</a>)</td></tr></tbody></table>
+<h3 id="variant-loading">Variant loading</h3>
+<p>But what if the <code>index.html</code> file didn’t contain references to any of the assets
+needed to run your application? What if it loaded your application assets
+dynamically, based on the variant of the application you request?</p>
+<pre is:raw="" class="astro-code" style="background-color: #0d1117; overflow-x: auto;"><code><span class="line"><span style="color: #8B949E"># Loads the default variant</span></span>
+<span class="line"><span style="color: #A5D6FF">https://example.com</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #8B949E"># Loads the `my_new_feature` variant</span></span>
+<span class="line"><span style="color: #A5D6FF">https://example.com?variant=my_new_feature</span></span></code></pre>
+<p>Instead of baking our application’s static dependencies into the <code>index.html</code>
+file, we can encapsulate the knowledge of those assets into a single JSON file
+and give that file an arbitrary (variant) name. Since we are now pushing the
+knowledge of our assets into a file that must be loaded separately from the
+index file, we have the opportunity to run a tiny bit of JavaScript in the
+browser <em>before loading any application assets</em>. That tiny bit of JavaScript can
+either load the default variant JSON of our application, or it can load any
+arbitrary variant JSON file we request by name via a query parameter. Once that
+JSON file is loaded, we can use it to gather our actual application
+dependencies.</p>
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th align="center"><img src="/app-variants/img/variant.png" alt="Sequence diagram of modified &#x22;variant&#x22; SPA architecture page load https://play.d2lang.com/?script=rJPBTsMwDIbvfQo_wOg0jj0gMU5UE0xEcJqETGNGUOcEJx0gtHdHadZuYwz1wKlR8vnLH1vt21eAxNdnDygGOYCaX8LMoja8BEVvDXFFBXxlACqQg0laA7TvLMBvkUdtcCm4as-exL57kgKmaZEKSNZxT7XffQ7OLvrT8R4b93uVYU0f-UtY1S2BWpMGsQ1rCGJcF-tA2hfPUTyNQBqGNbKpa4RSjQBZL1gbX9l423rbgVLd3sD93ezY14U8Qf6Sekvmr95yS21-PvwwY4wEXaIFa3LEmrj6jNf4LNZ3kzj_z0lUlqtGhDiARI8PfizknWVP_qi3edh1Iw8FXCnV5dv5E9RXJOrZ1OT_lpVDXOUg1fUKlzTAlrid8PSQptYGQOdqU2H8ew4mMolomk22yb4DAAD__w%3D%3D&#x26;sketch=0&#x26;theme=104"></th></tr></thead><tbody><tr><td align="center">The only change from the “typical SPA loading sequence” is the added round trip in step 1.</td></tr></tbody></table>
+<p>If your files are all properly fingerprinted —the name of the file contains a
+hash that forces it to be unique based on its exact contents —then you can keep
+all your old assets on your server and let your variant JSON files load
+whichever assets are required. Since every single build of your app can live
+side by side with each other, you can load whichever variant you want if you
+know the name of a JSON file that points to the proper dependencies.</p>
+<h3 id="trade-offs">Trade-offs</h3>
+<p>There are some downsides to this approach.</p>
+<ul>
+<li>Your users will be waiting for one more round trip to the file server before
+your app begins to boot.</li>
+<li>There is a fair amount of customization you’ll add to your Webpack config. (I
+won’t be showing how to achieve this same result with other build tools,
+though it can be done.)</li>
+<li>Typical turn-key static site hosts (Netlify, etc.) will prune your old build
+files each time you deploy, and that is completely antithetical to this
+approach.</li>
+<li>The different variants of your app may start battling each other for
+multiversal dominance.</li>
+</ul>
+<h3 id="benefits">Benefits</h3>
+<p>If you find yourself in a situation where you can accept the tradeoffs above,
+there are plenty of situations in which loading <em>any</em> variant of your app via
+the same exact <code>index.html</code> at the same location can be immensely useful. Using
+variant deployment, you can</p>
+<ul>
+<li>Make a feature available to a select few people for testing;</li>
+<li>Revert to a previous build quickly if you discover a bug;</li>
+<li>Solve CORS problems exactly one time: not for production <em>and</em> feature
+branches;</li>
+<li>Load debugging tools directly into your bundle or load the non-production
+build against the production environment to track down a problem;</li>
+<li>Make snapshots of your application available in perpetuity for compatibility
+reasons;</li>
+<li>Serve a <em>completely different</em> application for each variant.</li>
+</ul>
+<h2 id="our-variant-system-at-trilliant-health">Our variant system at Trilliant Health</h2>
+<p>There are any number of ways you can build your application to use variants, but
+I’ll walk you through some of the concrete decisions we’ve made so you can get
+an idea of how you might want to do this yourself. Before we dig into some real
+code, let’s consider a few other ideas to layer on top of our current
+understanding of the variant system.</p>
+<h3 id="problems-with-query-parameters">Problems with query parameters</h3>
+<p>You’ll note that I’ve described variant loading as being driven by a query
+parameter called <code>variant</code>. But storing this kind of information in a query
+parameter has some drawbacks.</p>
+<ul>
+<li>It kind of stinks that the whole application must be aware of this
+constantly-present query parameter. Any individual pages that need to
+manipulate the query parameters would need some defensive code to avoid
+dropping this parameter.</li>
+<li>And what if one of our internal users shares a URL from their browser that
+happens to contain a variant name that is not supposed to be used widely?</li>
+</ul>
+<p>We should probably remove the query parameter from the page as soon as the app
+is loaded, since the only time we need the variant name is when we fetch our
+initial assets.</p>
+<p>But then, what if the user refreshes their browser? Well, the variant name is
+gone, and they’ll load the default variant of the app. Plus, the web
+applications we build at Trilliant Health use Auth0 for authentication and so
+must redirect to and from Auth0. On the way back, we’d have to include the
+<code>variant</code> query parameter again, anyway.</p>
+<p>We could solve these problems with Local Storage. Once the index page loads and
+knows what variant to fetch, we can store the name of the variant in Local
+Storage. On subsequent reloads, we can check for that Local Storage value and
+use it if no <code>variant</code> exists in the query parameters. That solves our two
+problems above and also keeps things working for Auth0, but it creates two more
+problems:</p>
+<ul>
+<li>Users would not be able to load multiple variants of the app at once in
+multiple tabs unless they were very careful not to refresh the page.</li>
+<li>We’d have no good way to get our users back on the default variant when they
+are done with the variant they were using. They might get unwittingly stuck on
+a variant that isn’t getting updates.</li>
+</ul>
+<p>Placing this kind of burden on our users is a no-go. Our apps should just work
+without the need for them know the intimate details of how our variant system
+behaves. So Local Storage is out. But Local Storage has a sibling called Session
+Storage with the same API that basically solves all the problems above. Session
+Storage behaves exactly like Local Storage except it is handled on a per-tab
+basis. When your tab is closed, all the Session Storage <em>for that tab</em> is
+cleared.</p>
+<p>So, on page load, we store the variant in Session Storage, drop the query
+parameter, load the app, and let the entire application remain blissfully
+unaware of the entire variant system.</p>
+<h3 id="variant-level-config">Variant-level config</h3>
+<p>In order to take full advantage of the variant system — with builds that are
+always current but have useful variations in behavior —we will probably want to
+store some configuration information inside the variants themselves. For
+example, the actual URL for your API server should probably be configured
+instead of discovered at runtime.</p>
+<p>Since our Webpack config will already need to be generally aware of variants, we
+also house some other values inside a variant config that we can replace using
+the <code>WebpackDefinePlugin</code>. So in our applications, calls to our API server
+resemble this:</p>
+<pre is:raw="" class="astro-code" style="background-color: #0d1117; overflow-x: auto;"><code><span class="line"><span style="color: #D2A8FF">fetch</span><span style="color: #C9D1D9">(</span><span style="color: #A5D6FF">`${</span><span style="color: #79C0FF">API_BASE_URL</span><span style="color: #A5D6FF">}/some-endpoint`</span><span style="color: #C9D1D9">)</span></span></code></pre>
+<p>And we let Webpack do the work of replacing <code>API_BASE_URL</code> with
+<code>"https://api.example.com"</code> or <code>"https://dev-api.example.com"</code> or whatever other
+URL makes sense for the given variant. We don’t need to maintain some kind of
+runtime cross-reference for which variants talk to which server. It all goes
+into the variant config itself and is resolved at build time.</p>
+<h2 id="give-me-the-code">“Give me the code”</h2>
+<p>Not everything you need will be included below, because this is some deeply
+custom code. But you should be able to merge these examples with your code and
+get things running.</p>
+<p>We also are not going to tackle the actual deployment step in this article. At
+Trilliant Health, we use Azure Blob Storage (ABS) to serve our apps. Our final
+step in deployment is to upload all our files to ABS. Since our asset filenames
+contain a unique hash, we just let it upload and overwrite files with
+conflicting names. The result is that our <em>new</em> assets get uploaded with no
+conflict, <em>old</em> assets are rewritten with the same content, and
+<code>{variantName}.json</code> files get updated to point to new build assets.</p>
+<h3 id="indexhtml">index.html</h3>
+<p>This is a slightly simplified version of the <code>index.html</code> file we use for all
+our SPAs at Trilliant Health.</p>
+<pre is:raw="" class="astro-code" style="background-color: #0d1117; overflow-x: auto;"><code><span class="line"><span style="color: #C9D1D9">&#x3C;!</span><span style="color: #7EE787">DOCTYPE</span><span style="color: #C9D1D9"> </span><span style="color: #79C0FF">html</span><span style="color: #C9D1D9">></span></span>
+<span class="line"><span style="color: #C9D1D9">&#x3C;</span><span style="color: #7EE787">html</span><span style="color: #C9D1D9">></span></span>
+<span class="line"><span style="color: #C9D1D9">  &#x3C;</span><span style="color: #7EE787">head</span><span style="color: #C9D1D9">></span></span>
+<span class="line"><span style="color: #C9D1D9">    &#x3C;</span><span style="color: #7EE787">title</span><span style="color: #C9D1D9">>Your title here&#x3C;/</span><span style="color: #7EE787">title</span><span style="color: #C9D1D9">></span></span>
+<span class="line"><span style="color: #C9D1D9">  &#x3C;/</span><span style="color: #7EE787">head</span><span style="color: #C9D1D9">></span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #C9D1D9">  &#x3C;</span><span style="color: #7EE787">body</span><span style="color: #C9D1D9">></span></span>
+<span class="line"><span style="color: #C9D1D9">    &#x3C;</span><span style="color: #7EE787">div</span><span style="color: #C9D1D9"> </span><span style="color: #79C0FF">id</span><span style="color: #C9D1D9">=</span><span style="color: #A5D6FF">"app"</span><span style="color: #C9D1D9">>&#x3C;/</span><span style="color: #7EE787">div</span><span style="color: #C9D1D9">></span></span>
+<span class="line"><span style="color: #C9D1D9">    &#x3C;</span><span style="color: #7EE787">script</span><span style="color: #C9D1D9"> </span><span style="color: #79C0FF">type</span><span style="color: #C9D1D9">=</span><span style="color: #A5D6FF">"text/javascript"</span><span style="color: #C9D1D9">></span></span>
+<span class="line"><span style="color: #C9D1D9">      </span><span style="color: #8B949E">// We use this IIFE to prevent global namespace pollution.</span></span>
+<span class="line"><span style="color: #C9D1D9">      ;(</span><span style="color: #FF7B72">function</span><span style="color: #C9D1D9"> () {</span></span>
+<span class="line"><span style="color: #C9D1D9">        </span><span style="color: #FF7B72">var</span><span style="color: #C9D1D9"> defaultVariantName </span><span style="color: #FF7B72">=</span><span style="color: #C9D1D9"> </span><span style="color: #A5D6FF">"public"</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #C9D1D9">        </span><span style="color: #8B949E">/**</span></span>
+<span class="line"><span style="color: #8B949E">         * </span><span style="color: #FF7B72">@returns</span><span style="color: #8B949E"> </span><span style="color: #FFA657">{string | null}</span></span>
+<span class="line"><span style="color: #8B949E">         */</span></span>
+<span class="line"><span style="color: #C9D1D9">        </span><span style="color: #FF7B72">function</span><span style="color: #C9D1D9"> </span><span style="color: #D2A8FF">getStoredVariant</span><span style="color: #C9D1D9">() {</span></span>
+<span class="line"><span style="color: #C9D1D9">          </span><span style="color: #FF7B72">return</span><span style="color: #C9D1D9"> window.sessionStorage.</span><span style="color: #D2A8FF">getItem</span><span style="color: #C9D1D9">(</span><span style="color: #A5D6FF">"variant"</span><span style="color: #C9D1D9">)</span></span>
+<span class="line"><span style="color: #C9D1D9">        }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #C9D1D9">        </span><span style="color: #8B949E">/**</span></span>
+<span class="line"><span style="color: #8B949E">         * Changes the variant name in Session Storage. If we are</span></span>
+<span class="line"><span style="color: #8B949E">         * changing to the default variant name, it removes the item</span></span>
+<span class="line"><span style="color: #8B949E">         * from Session Storage entirely.</span></span>
+<span class="line"><span style="color: #8B949E">         *</span></span>
+<span class="line"><span style="color: #8B949E">         * </span><span style="color: #FF7B72">@param</span><span style="color: #8B949E"> </span><span style="color: #FFA657">{string}</span><span style="color: #8B949E"> </span><span style="color: #C9D1D9">variantName</span></span>
+<span class="line"><span style="color: #8B949E">         */</span></span>
+<span class="line"><span style="color: #C9D1D9">        </span><span style="color: #FF7B72">function</span><span style="color: #C9D1D9"> </span><span style="color: #D2A8FF">updateStoredVariant</span><span style="color: #C9D1D9">(</span><span style="color: #FFA657">variantName</span><span style="color: #C9D1D9">) {</span></span>
+<span class="line"><span style="color: #C9D1D9">          variantName </span><span style="color: #FF7B72">===</span><span style="color: #C9D1D9"> defaultVariantName</span></span>
+<span class="line"><span style="color: #C9D1D9">            </span><span style="color: #FF7B72">?</span><span style="color: #C9D1D9"> window.sessionStorage.</span><span style="color: #D2A8FF">removeItem</span><span style="color: #C9D1D9">(</span><span style="color: #A5D6FF">"variant"</span><span style="color: #C9D1D9">)</span></span>
+<span class="line"><span style="color: #C9D1D9">            </span><span style="color: #FF7B72">:</span><span style="color: #C9D1D9"> window.sessionStorage.</span><span style="color: #D2A8FF">setItem</span><span style="color: #C9D1D9">(</span><span style="color: #A5D6FF">"variant"</span><span style="color: #C9D1D9">, variantName)</span></span>
+<span class="line"><span style="color: #C9D1D9">        }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #C9D1D9">        </span><span style="color: #8B949E">/**</span></span>
+<span class="line"><span style="color: #8B949E">         * If the `variant` query param is available, this returns it.</span></span>
+<span class="line"><span style="color: #8B949E">         *</span></span>
+<span class="line"><span style="color: #8B949E">         * </span><span style="color: #FF7B72">@returns</span><span style="color: #8B949E"> </span><span style="color: #FFA657">{string | null}</span></span>
+<span class="line"><span style="color: #8B949E">         */</span></span>
+<span class="line"><span style="color: #C9D1D9">        </span><span style="color: #FF7B72">function</span><span style="color: #C9D1D9"> </span><span style="color: #D2A8FF">getRequestedVariantViaSearchParam</span><span style="color: #C9D1D9">() {</span></span>
+<span class="line"><span style="color: #C9D1D9">          </span><span style="color: #FF7B72">return</span><span style="color: #C9D1D9"> </span><span style="color: #FF7B72">new</span><span style="color: #C9D1D9"> </span><span style="color: #D2A8FF">URLSearchParams</span><span style="color: #C9D1D9">(document.location.search).</span><span style="color: #D2A8FF">get</span><span style="color: #C9D1D9">(</span><span style="color: #A5D6FF">"variant"</span><span style="color: #C9D1D9">)</span></span>
+<span class="line"><span style="color: #C9D1D9">        }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #C9D1D9">        </span><span style="color: #8B949E">/**</span></span>
+<span class="line"><span style="color: #8B949E">         * Returns the URL for the JSON file that houses all the variant</span></span>
+<span class="line"><span style="color: #8B949E">         * assets.</span></span>
+<span class="line"><span style="color: #8B949E">         *</span></span>
+<span class="line"><span style="color: #8B949E">         * </span><span style="color: #FF7B72">@param</span><span style="color: #8B949E"> </span><span style="color: #FFA657">{string}</span><span style="color: #8B949E"> </span><span style="color: #C9D1D9">variantName</span></span>
+<span class="line"><span style="color: #8B949E">         */</span></span>
+<span class="line"><span style="color: #C9D1D9">        </span><span style="color: #FF7B72">function</span><span style="color: #C9D1D9"> </span><span style="color: #D2A8FF">getUrlForVariant</span><span style="color: #C9D1D9">(</span><span style="color: #FFA657">variantName</span><span style="color: #C9D1D9">) {</span></span>
+<span class="line"><span style="color: #C9D1D9">          </span><span style="color: #8B949E">// Date.now() ensures there is no browser caching. The named</span></span>
+<span class="line"><span style="color: #C9D1D9">          </span><span style="color: #8B949E">// JSON file's contents can and will change often.</span></span>
+<span class="line"><span style="color: #C9D1D9">          </span><span style="color: #FF7B72">return</span><span style="color: #C9D1D9"> </span><span style="color: #A5D6FF">"/variants/"</span><span style="color: #C9D1D9"> </span><span style="color: #FF7B72">+</span><span style="color: #C9D1D9"> variantName </span><span style="color: #FF7B72">+</span><span style="color: #C9D1D9"> </span><span style="color: #A5D6FF">".json?t="</span><span style="color: #C9D1D9"> </span><span style="color: #FF7B72">+</span><span style="color: #C9D1D9"> Date.</span><span style="color: #D2A8FF">now</span><span style="color: #C9D1D9">()</span></span>
+<span class="line"><span style="color: #C9D1D9">        }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #C9D1D9">        </span><span style="color: #8B949E">/**</span></span>
+<span class="line"><span style="color: #8B949E">         * When the requested variant is missing, we render a message on</span></span>
+<span class="line"><span style="color: #8B949E">         * screen to the user to let them know that the variant they</span></span>
+<span class="line"><span style="color: #8B949E">         * requested does not exist and we render a link which will</span></span>
+<span class="line"><span style="color: #8B949E">         * reset the variant to the default.</span></span>
+<span class="line"><span style="color: #8B949E">         *</span></span>
+<span class="line"><span style="color: #8B949E">         * </span><span style="color: #FF7B72">@param</span><span style="color: #8B949E"> </span><span style="color: #FFA657">{string}</span><span style="color: #8B949E"> </span><span style="color: #C9D1D9">variantName</span></span>
+<span class="line"><span style="color: #8B949E">         */</span></span>
+<span class="line"><span style="color: #C9D1D9">        </span><span style="color: #FF7B72">function</span><span style="color: #C9D1D9"> </span><span style="color: #D2A8FF">updateViewExplainingMissingVariant</span><span style="color: #C9D1D9">(</span><span style="color: #FFA657">variantName</span><span style="color: #C9D1D9">) {</span></span>
+<span class="line"><span style="color: #C9D1D9">          </span><span style="color: #FF7B72">var</span><span style="color: #C9D1D9"> root </span><span style="color: #FF7B72">=</span><span style="color: #C9D1D9"> document.</span><span style="color: #D2A8FF">querySelector</span><span style="color: #C9D1D9">(</span><span style="color: #A5D6FF">"#root"</span><span style="color: #C9D1D9">)</span></span>
+<span class="line"><span style="color: #C9D1D9">          </span><span style="color: #FF7B72">var</span><span style="color: #C9D1D9"> p </span><span style="color: #FF7B72">=</span><span style="color: #C9D1D9"> document.</span><span style="color: #D2A8FF">createElement</span><span style="color: #C9D1D9">(</span><span style="color: #A5D6FF">"p"</span><span style="color: #C9D1D9">)</span></span>
+<span class="line"><span style="color: #C9D1D9">          p.textContent </span><span style="color: #FF7B72">=</span><span style="color: #C9D1D9"> </span><span style="color: #A5D6FF">"App failed to load the "</span><span style="color: #C9D1D9"> </span><span style="color: #FF7B72">+</span><span style="color: #C9D1D9"> variantName </span><span style="color: #FF7B72">+</span><span style="color: #C9D1D9"> </span><span style="color: #A5D6FF">" variant."</span></span>
+<span class="line"><span style="color: #C9D1D9">          </span><span style="color: #FF7B72">var</span><span style="color: #C9D1D9"> link </span><span style="color: #FF7B72">=</span><span style="color: #C9D1D9"> document.</span><span style="color: #D2A8FF">createElement</span><span style="color: #C9D1D9">(</span><span style="color: #A5D6FF">"a"</span><span style="color: #C9D1D9">)</span></span>
+<span class="line"><span style="color: #C9D1D9">          link.href </span><span style="color: #FF7B72">=</span></span>
+<span class="line"><span style="color: #C9D1D9">            </span><span style="color: #8B949E">// Drop all query params and just use the default variant.</span></span>
+<span class="line"><span style="color: #C9D1D9">            </span><span style="color: #8B949E">// (You could do this differently and try to preserve all</span></span>
+<span class="line"><span style="color: #C9D1D9">            </span><span style="color: #8B949E">// other query params aside from "variant" if you prefer.)</span></span>
+<span class="line"><span style="color: #C9D1D9">            document.location.href.</span><span style="color: #D2A8FF">replace</span><span style="color: #C9D1D9">(</span><span style="color: #A5D6FF">/</span><span style="color: #7EE787; font-style: italic">\?</span><span style="color: #79C0FF">.</span><span style="color: #FF7B72">*</span><span style="color: #A5D6FF">/</span><span style="color: #C9D1D9">, </span><span style="color: #A5D6FF">""</span><span style="color: #C9D1D9">) </span><span style="color: #FF7B72">+</span></span>
+<span class="line"><span style="color: #C9D1D9">            </span><span style="color: #A5D6FF">"?variant="</span><span style="color: #C9D1D9"> </span><span style="color: #FF7B72">+</span></span>
+<span class="line"><span style="color: #C9D1D9">            defaultVariantName</span></span>
+<span class="line"><span style="color: #C9D1D9">          link.textContent </span><span style="color: #FF7B72">=</span><span style="color: #C9D1D9"> </span><span style="color: #A5D6FF">"Reload the default version."</span></span>
+<span class="line"><span style="color: #C9D1D9">          root.</span><span style="color: #D2A8FF">append</span><span style="color: #C9D1D9">(p)</span></span>
+<span class="line"><span style="color: #C9D1D9">          root.</span><span style="color: #D2A8FF">append</span><span style="color: #C9D1D9">(link)</span></span>
+<span class="line"><span style="color: #C9D1D9">        }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #C9D1D9">        </span><span style="color: #8B949E">/**</span></span>
+<span class="line"><span style="color: #8B949E">         * Appends all the variant's `&#x3C;script>` and `&#x3C;link>` elements to</span></span>
+<span class="line"><span style="color: #8B949E">         * the DOM</span></span>
+<span class="line"><span style="color: #8B949E">         *</span></span>
+<span class="line"><span style="color: #8B949E">         * </span><span style="color: #FF7B72">@param</span><span style="color: #8B949E"> </span><span style="color: #FFA657">{{ css: string[], scripts: string[] }}</span><span style="color: #8B949E"> </span><span style="color: #C9D1D9">data</span></span>
+<span class="line"><span style="color: #8B949E">         */</span></span>
+<span class="line"><span style="color: #C9D1D9">        </span><span style="color: #FF7B72">function</span><span style="color: #C9D1D9"> </span><span style="color: #D2A8FF">addAssetsToDom</span><span style="color: #C9D1D9">(</span><span style="color: #FFA657">data</span><span style="color: #C9D1D9">) {</span></span>
+<span class="line"><span style="color: #C9D1D9">          data.scripts.</span><span style="color: #D2A8FF">forEach</span><span style="color: #C9D1D9">(</span><span style="color: #FF7B72">function</span><span style="color: #C9D1D9"> (</span><span style="color: #FFA657">src</span><span style="color: #C9D1D9">) {</span></span>
+<span class="line"><span style="color: #C9D1D9">            </span><span style="color: #FF7B72">var</span><span style="color: #C9D1D9"> tag </span><span style="color: #FF7B72">=</span><span style="color: #C9D1D9"> document.</span><span style="color: #D2A8FF">createElement</span><span style="color: #C9D1D9">(</span><span style="color: #A5D6FF">"script"</span><span style="color: #C9D1D9">)</span></span>
+<span class="line"><span style="color: #C9D1D9">            tag.src </span><span style="color: #FF7B72">=</span><span style="color: #C9D1D9"> src</span></span>
+<span class="line"><span style="color: #C9D1D9">            tag.type </span><span style="color: #FF7B72">=</span><span style="color: #C9D1D9"> </span><span style="color: #A5D6FF">"text/javascript"</span></span>
+<span class="line"><span style="color: #C9D1D9">            document.body.</span><span style="color: #D2A8FF">append</span><span style="color: #C9D1D9">(tag)</span></span>
+<span class="line"><span style="color: #C9D1D9">          })</span></span>
+<span class="line"><span style="color: #C9D1D9">          data.css.</span><span style="color: #D2A8FF">forEach</span><span style="color: #C9D1D9">(</span><span style="color: #FF7B72">function</span><span style="color: #C9D1D9"> (</span><span style="color: #FFA657">src</span><span style="color: #C9D1D9">) {</span></span>
+<span class="line"><span style="color: #C9D1D9">            </span><span style="color: #FF7B72">var</span><span style="color: #C9D1D9"> tag </span><span style="color: #FF7B72">=</span><span style="color: #C9D1D9"> document.</span><span style="color: #D2A8FF">createElement</span><span style="color: #C9D1D9">(</span><span style="color: #A5D6FF">"link"</span><span style="color: #C9D1D9">)</span></span>
+<span class="line"><span style="color: #C9D1D9">            tag.rel </span><span style="color: #FF7B72">=</span><span style="color: #C9D1D9"> </span><span style="color: #A5D6FF">"stylesheet"</span></span>
+<span class="line"><span style="color: #C9D1D9">            tag.type </span><span style="color: #FF7B72">=</span><span style="color: #C9D1D9"> </span><span style="color: #A5D6FF">"text/css"</span></span>
+<span class="line"><span style="color: #C9D1D9">            tag.href </span><span style="color: #FF7B72">=</span><span style="color: #C9D1D9"> src</span></span>
+<span class="line"><span style="color: #C9D1D9">            document.head.</span><span style="color: #D2A8FF">append</span><span style="color: #C9D1D9">(tag)</span></span>
+<span class="line"><span style="color: #C9D1D9">          })</span></span>
+<span class="line"><span style="color: #C9D1D9">        }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #C9D1D9">        </span><span style="color: #8B949E">// Definitions are done. Time for the action to begin. The</span></span>
+<span class="line"><span style="color: #C9D1D9">        </span><span style="color: #8B949E">// variant query param overrides any stored variant. Then we</span></span>
+<span class="line"><span style="color: #C9D1D9">        </span><span style="color: #8B949E">// check for a stored variant if that doesn't exist. Finally, we</span></span>
+<span class="line"><span style="color: #C9D1D9">        </span><span style="color: #8B949E">// use the default if the other two functions return null.</span></span>
+<span class="line"><span style="color: #C9D1D9">        </span><span style="color: #FF7B72">var</span><span style="color: #C9D1D9"> variantName </span><span style="color: #FF7B72">=</span></span>
+<span class="line"><span style="color: #C9D1D9">          </span><span style="color: #D2A8FF">getRequestedVariantViaSearchParam</span><span style="color: #C9D1D9">() </span><span style="color: #FF7B72">||</span></span>
+<span class="line"><span style="color: #C9D1D9">          </span><span style="color: #D2A8FF">getStoredVariant</span><span style="color: #C9D1D9">() </span><span style="color: #FF7B72">||</span></span>
+<span class="line"><span style="color: #C9D1D9">          defaultVariantName</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #C9D1D9">        </span><span style="color: #D2A8FF">updateStoredVariant</span><span style="color: #C9D1D9">(variantName)</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #C9D1D9">        window</span></span>
+<span class="line"><span style="color: #C9D1D9">          .</span><span style="color: #D2A8FF">fetch</span><span style="color: #C9D1D9">(</span><span style="color: #D2A8FF">getUrlForVariant</span><span style="color: #C9D1D9">(variantName))</span></span>
+<span class="line"><span style="color: #C9D1D9">          .</span><span style="color: #D2A8FF">then</span><span style="color: #C9D1D9">(</span><span style="color: #FF7B72">function</span><span style="color: #C9D1D9"> (</span><span style="color: #FFA657">resp</span><span style="color: #C9D1D9">) {</span></span>
+<span class="line"><span style="color: #C9D1D9">            </span><span style="color: #FF7B72">if</span><span style="color: #C9D1D9"> (resp.status </span><span style="color: #FF7B72">>=</span><span style="color: #C9D1D9"> </span><span style="color: #79C0FF">300</span><span style="color: #C9D1D9">) {</span></span>
+<span class="line"><span style="color: #C9D1D9">              </span><span style="color: #D2A8FF">updateViewExplainingMissingVariant</span><span style="color: #C9D1D9">(variantName)</span></span>
+<span class="line"><span style="color: #C9D1D9">              </span><span style="color: #FF7B72">throw</span><span style="color: #C9D1D9"> </span><span style="color: #FF7B72">new</span><span style="color: #C9D1D9"> </span><span style="color: #D2A8FF">Error</span><span style="color: #C9D1D9">(</span><span style="color: #A5D6FF">"Could not load requested variant."</span><span style="color: #C9D1D9">)</span></span>
+<span class="line"><span style="color: #C9D1D9">            }</span></span>
+<span class="line"><span style="color: #C9D1D9">            </span><span style="color: #FF7B72">return</span><span style="color: #C9D1D9"> resp.</span><span style="color: #D2A8FF">json</span><span style="color: #C9D1D9">()</span></span>
+<span class="line"><span style="color: #C9D1D9">          })</span></span>
+<span class="line"><span style="color: #C9D1D9">          .</span><span style="color: #D2A8FF">then</span><span style="color: #C9D1D9">(addAssetsToDom)</span></span>
+<span class="line"><span style="color: #C9D1D9">      })()</span></span>
+<span class="line"><span style="color: #C9D1D9">    &#x3C;/</span><span style="color: #7EE787">script</span><span style="color: #C9D1D9">></span></span>
+<span class="line"><span style="color: #C9D1D9">  &#x3C;/</span><span style="color: #7EE787">body</span><span style="color: #C9D1D9">></span></span>
+<span class="line"><span style="color: #C9D1D9">&#x3C;/</span><span style="color: #7EE787">html</span><span style="color: #C9D1D9">></span></span></code></pre>
+<p>You’ll note that we decided to inform the user of the missing variant in case it
+is unavailable, instead of just reloading on their behalf. Depending on the
+kinds of differences between variants, just loading the default variant might be
+too subtle for the user to realize something didn’t work. So, we display a very
+simple message.</p>
+<p><img src="/app-variants/img/missing.png" alt="The UI when a variant JSON file cannot be found"></p>
+<p>The structure above expects the server to house all the variant information in
+the <code>/variants/</code> directory. That directory might look like this:</p>
+<pre is:raw="" class="astro-code" style="background-color: #0d1117; overflow-x: auto;"><code><span class="line"><span style="color: #c9d1d9">variants</span></span>
+<span class="line"><span style="color: #c9d1d9">├── mock.json</span></span>
+<span class="line"><span style="color: #c9d1d9">├── my_new_feature.json</span></span>
+<span class="line"><span style="color: #c9d1d9">└── public.json</span></span></code></pre>
+<p>But how do we build those files? This is where we need to customize our Webpack
+configuration.</p>
+<h3 id="webpackconfigts">webpack.config.ts</h3>
+<p>The code below will not work in your project unless you add loader rules to your
+Webpack config. Additionally, you may not have things set up to use TypeScript
+in your Webpack config, but the TypeScript in this code example is limited and
+easily removed.</p>
+<pre is:raw="" class="astro-code" style="background-color: #0d1117; overflow-x: auto;"><code><span class="line"><span style="color: #FF7B72">import</span><span style="color: #C9D1D9"> path </span><span style="color: #FF7B72">from</span><span style="color: #C9D1D9"> </span><span style="color: #A5D6FF">"path"</span></span>
+<span class="line"><span style="color: #FF7B72">import</span><span style="color: #C9D1D9"> { DefinePlugin } </span><span style="color: #FF7B72">from</span><span style="color: #C9D1D9"> </span><span style="color: #A5D6FF">"webpack"</span></span>
+<span class="line"><span style="color: #FF7B72">import</span><span style="color: #C9D1D9"> MiniCssExtractPlugin </span><span style="color: #FF7B72">from</span><span style="color: #C9D1D9"> </span><span style="color: #A5D6FF">"mini-css-extract-plugin"</span></span>
+<span class="line"><span style="color: #FF7B72">import</span><span style="color: #C9D1D9"> HtmlWebpackPlugin </span><span style="color: #FF7B72">from</span><span style="color: #C9D1D9"> </span><span style="color: #A5D6FF">"html-webpack-plugin"</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #FF7B72">type</span><span style="color: #C9D1D9"> </span><span style="color: #FFA657">WebpackEnv</span><span style="color: #C9D1D9"> </span><span style="color: #FF7B72">=</span><span style="color: #C9D1D9"> {</span></span>
+<span class="line"><span style="color: #C9D1D9">  </span><span style="color: #8B949E">/** Webpack adds this boolean when running the dev server */</span></span>
+<span class="line"><span style="color: #C9D1D9">  </span><span style="color: #FFA657">WEBPACK_SERVE</span><span style="color: #FF7B72">?:</span><span style="color: #C9D1D9"> </span><span style="color: #79C0FF">boolean</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #C9D1D9">  </span><span style="color: #8B949E">/** This is the webpack env var that we're requiring from the CLI */</span></span>
+<span class="line"><span style="color: #C9D1D9">  </span><span style="color: #FFA657">variantName</span><span style="color: #FF7B72">:</span><span style="color: #C9D1D9"> </span><span style="color: #79C0FF">string</span></span>
+<span class="line"><span style="color: #C9D1D9">}</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #FF7B72">const</span><span style="color: #C9D1D9"> </span><span style="color: #79C0FF">defaultVariantName</span><span style="color: #C9D1D9"> </span><span style="color: #FF7B72">=</span><span style="color: #C9D1D9"> </span><span style="color: #A5D6FF">"public"</span></span>
+<span class="line"><span style="color: #FF7B72">const</span><span style="color: #C9D1D9"> </span><span style="color: #79C0FF">dir</span><span style="color: #C9D1D9"> </span><span style="color: #FF7B72">=</span><span style="color: #C9D1D9"> path.</span><span style="color: #D2A8FF">resolve</span><span style="color: #C9D1D9">(__dirname)</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #8B949E">/**</span></span>
+<span class="line"><span style="color: #8B949E"> * This function can be replaced with anything that loads a particular</span></span>
+<span class="line"><span style="color: #8B949E"> * config based on a variant name. In our codebase, we load some fairly</span></span>
+<span class="line"><span style="color: #8B949E"> * intricate configuration files written in JavaScript. For simplicity</span></span>
+<span class="line"><span style="color: #8B949E"> * though, I've hard-coded some values directly.</span></span>
+<span class="line"><span style="color: #8B949E"> *</span></span>
+<span class="line"><span style="color: #8B949E"> * The comments inside each variant help explain the imaginary state I</span></span>
+<span class="line"><span style="color: #8B949E"> * am setting up, which is somewhat similar to what we use at Trilliant</span></span>
+<span class="line"><span style="color: #8B949E"> * Health. As I said, though, this part is completely up to you. You can</span></span>
+<span class="line"><span style="color: #8B949E"> * expose anything you want to your app via some kind of variant</span></span>
+<span class="line"><span style="color: #8B949E"> * configuration, coupled with--in the case of Webpack--the</span></span>
+<span class="line"><span style="color: #8B949E"> * `WebpackDefinePlugin`.</span></span>
+<span class="line"><span style="color: #8B949E"> */</span></span>
+<span class="line"><span style="color: #FF7B72">function</span><span style="color: #C9D1D9"> </span><span style="color: #D2A8FF">getVariantConfig</span><span style="color: #C9D1D9">(</span><span style="color: #FFA657">variantName</span><span style="color: #FF7B72">:</span><span style="color: #C9D1D9"> </span><span style="color: #79C0FF">string</span><span style="color: #C9D1D9">) {</span></span>
+<span class="line"><span style="color: #C9D1D9">  </span><span style="color: #FF7B72">const</span><span style="color: #C9D1D9"> </span><span style="color: #79C0FF">variants</span><span style="color: #C9D1D9"> </span><span style="color: #FF7B72">=</span><span style="color: #C9D1D9"> [</span></span>
+<span class="line"><span style="color: #C9D1D9">    {</span></span>
+<span class="line"><span style="color: #C9D1D9">      </span><span style="color: #8B949E">// This is what I'd consider the "production" version of the app.</span></span>
+<span class="line"><span style="color: #C9D1D9">      </span><span style="color: #8B949E">// I call it public here because I don't want to confuse it with</span></span>
+<span class="line"><span style="color: #C9D1D9">      </span><span style="color: #8B949E">// the Node environment name.</span></span>
+<span class="line"><span style="color: #C9D1D9">      name: </span><span style="color: #A5D6FF">"public"</span><span style="color: #C9D1D9">,</span></span>
+<span class="line"><span style="color: #C9D1D9">      buildConfig: {</span></span>
+<span class="line"><span style="color: #C9D1D9">        apiBaseUrl: </span><span style="color: #A5D6FF">"https://api.example.com"</span><span style="color: #C9D1D9">,</span></span>
+<span class="line"><span style="color: #C9D1D9">        auth0Audience: </span><span style="color: #A5D6FF">"http://stable-example.com/api"</span><span style="color: #C9D1D9">,</span></span>
+<span class="line"><span style="color: #C9D1D9">        auth0ClientId: </span><span style="color: #A5D6FF">"A92H..."</span><span style="color: #C9D1D9">,</span></span>
+<span class="line"><span style="color: #C9D1D9">        auth0Domain: </span><span style="color: #A5D6FF">"your-account.us.auth0.com"</span><span style="color: #C9D1D9">,</span></span>
+<span class="line"><span style="color: #C9D1D9">        mockServer: </span><span style="color: #79C0FF">false</span><span style="color: #C9D1D9">,</span></span>
+<span class="line"><span style="color: #C9D1D9">      },</span></span>
+<span class="line"><span style="color: #C9D1D9">    },</span></span>
+<span class="line"><span style="color: #C9D1D9">    {</span></span>
+<span class="line"><span style="color: #C9D1D9">      </span><span style="color: #8B949E">// In this imaginary scenario, the mock server handles everything,</span></span>
+<span class="line"><span style="color: #C9D1D9">      </span><span style="color: #8B949E">// so we don't need to provide a real server URL</span></span>
+<span class="line"><span style="color: #C9D1D9">      name: </span><span style="color: #A5D6FF">"mock"</span><span style="color: #C9D1D9">,</span></span>
+<span class="line"><span style="color: #C9D1D9">      buildConfig: {</span></span>
+<span class="line"><span style="color: #C9D1D9">        apiBaseUrl: </span><span style="color: #A5D6FF">"https://api-does-not-exist.example.com"</span><span style="color: #C9D1D9">,</span></span>
+<span class="line"><span style="color: #C9D1D9">        auth0Audience: </span><span style="color: #A5D6FF">"http://stable-example.com/api"</span><span style="color: #C9D1D9">,</span></span>
+<span class="line"><span style="color: #C9D1D9">        auth0ClientId: </span><span style="color: #A5D6FF">"A92H..."</span><span style="color: #C9D1D9">,</span></span>
+<span class="line"><span style="color: #C9D1D9">        auth0Domain: </span><span style="color: #A5D6FF">"your-account.us.auth0.com"</span><span style="color: #C9D1D9">,</span></span>
+<span class="line"><span style="color: #C9D1D9">        mockServer: </span><span style="color: #79C0FF">true</span><span style="color: #C9D1D9">,</span></span>
+<span class="line"><span style="color: #C9D1D9">      },</span></span>
+<span class="line"><span style="color: #C9D1D9">    },</span></span>
+<span class="line"><span style="color: #C9D1D9">    {</span></span>
+<span class="line"><span style="color: #C9D1D9">      </span><span style="color: #8B949E">// Let's say that local development for the new feature is faster</span></span>
+<span class="line"><span style="color: #C9D1D9">      </span><span style="color: #8B949E">// with a mock server. So for this variant, we are working on some</span></span>
+<span class="line"><span style="color: #C9D1D9">      </span><span style="color: #8B949E">// new feature, but using our mock server to do so.</span></span>
+<span class="line"><span style="color: #C9D1D9">      name: </span><span style="color: #A5D6FF">"my_new_feature_local"</span><span style="color: #C9D1D9">,</span></span>
+<span class="line"><span style="color: #C9D1D9">      buildConfig: {</span></span>
+<span class="line"><span style="color: #C9D1D9">        apiBaseUrl: </span><span style="color: #A5D6FF">"https://api-feature-branch.example.com"</span><span style="color: #C9D1D9">,</span></span>
+<span class="line"><span style="color: #C9D1D9">        auth0Audience: </span><span style="color: #A5D6FF">"http://experimental-example.com/api"</span><span style="color: #C9D1D9">,</span></span>
+<span class="line"><span style="color: #C9D1D9">        auth0ClientId: </span><span style="color: #A5D6FF">"B93I..."</span><span style="color: #C9D1D9">,</span></span>
+<span class="line"><span style="color: #C9D1D9">        auth0Domain: </span><span style="color: #A5D6FF">"your-feature-account.us.auth0.com"</span><span style="color: #C9D1D9">,</span></span>
+<span class="line"><span style="color: #C9D1D9">        mockServer: </span><span style="color: #79C0FF">true</span><span style="color: #C9D1D9">,</span></span>
+<span class="line"><span style="color: #C9D1D9">      },</span></span>
+<span class="line"><span style="color: #C9D1D9">    },</span></span>
+<span class="line"><span style="color: #C9D1D9">    {</span></span>
+<span class="line"><span style="color: #C9D1D9">      </span><span style="color: #8B949E">// This variant is fully integrated end-to-end, so we</span></span>
+<span class="line"><span style="color: #C9D1D9">      </span><span style="color: #8B949E">// don't use the mock server. We can push this version up to the</span></span>
+<span class="line"><span style="color: #C9D1D9">      </span><span style="color: #8B949E">// server to let our teammates see how work is progressing and how</span></span>
+<span class="line"><span style="color: #C9D1D9">      </span><span style="color: #8B949E">// the actual new server endpoints are working.</span></span>
+<span class="line"><span style="color: #C9D1D9">      name: </span><span style="color: #A5D6FF">"my_new_feature"</span><span style="color: #C9D1D9">,</span></span>
+<span class="line"><span style="color: #C9D1D9">      buildConfig: {</span></span>
+<span class="line"><span style="color: #C9D1D9">        apiBaseUrl: </span><span style="color: #A5D6FF">"https://api-feature-branch.example.com"</span><span style="color: #C9D1D9">,</span></span>
+<span class="line"><span style="color: #C9D1D9">        auth0Audience: </span><span style="color: #A5D6FF">"http://experimental-example.com/api"</span><span style="color: #C9D1D9">,</span></span>
+<span class="line"><span style="color: #C9D1D9">        auth0ClientId: </span><span style="color: #A5D6FF">"B93I..."</span><span style="color: #C9D1D9">,</span></span>
+<span class="line"><span style="color: #C9D1D9">        auth0Domain: </span><span style="color: #A5D6FF">"your-feature-account.us.auth0.com"</span><span style="color: #C9D1D9">,</span></span>
+<span class="line"><span style="color: #C9D1D9">        mockServer: </span><span style="color: #79C0FF">false</span><span style="color: #C9D1D9">,</span></span>
+<span class="line"><span style="color: #C9D1D9">      },</span></span>
+<span class="line"><span style="color: #C9D1D9">    },</span></span>
+<span class="line"><span style="color: #C9D1D9">  ]</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #C9D1D9">  </span><span style="color: #FF7B72">const</span><span style="color: #C9D1D9"> </span><span style="color: #79C0FF">variant</span><span style="color: #C9D1D9"> </span><span style="color: #FF7B72">=</span><span style="color: #C9D1D9"> variants.</span><span style="color: #D2A8FF">find</span><span style="color: #C9D1D9">((</span><span style="color: #FFA657">x</span><span style="color: #C9D1D9">) </span><span style="color: #FF7B72">=></span><span style="color: #C9D1D9"> x.name </span><span style="color: #FF7B72">===</span><span style="color: #C9D1D9"> variantName)</span></span>
+<span class="line"><span style="color: #C9D1D9">  </span><span style="color: #FF7B72">if</span><span style="color: #C9D1D9"> (</span><span style="color: #FF7B72">!</span><span style="color: #C9D1D9">variant) </span><span style="color: #FF7B72">throw</span><span style="color: #C9D1D9"> </span><span style="color: #FF7B72">new</span><span style="color: #C9D1D9"> </span><span style="color: #D2A8FF">Error</span><span style="color: #C9D1D9">(</span><span style="color: #A5D6FF">"No variant found called "</span><span style="color: #C9D1D9"> </span><span style="color: #FF7B72">+</span><span style="color: #C9D1D9"> variantName)</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #C9D1D9">  </span><span style="color: #FF7B72">return</span><span style="color: #C9D1D9"> variant</span></span>
+<span class="line"><span style="color: #C9D1D9">}</span></span>
+<span class="line"><span style="color: #8B949E">/**</span></span>
+<span class="line"><span style="color: #8B949E"> * The Webpack config. Don't forget to specify a variant when you call</span></span>
+<span class="line"><span style="color: #8B949E"> * it from the CLI:</span></span>
+<span class="line"><span style="color: #8B949E"> *</span></span>
+<span class="line"><span style="color: #8B949E"> *   webpack --env variantName=public</span></span>
+<span class="line"><span style="color: #8B949E"> *</span></span>
+<span class="line"><span style="color: #8B949E"> */</span></span>
+<span class="line"><span style="color: #FF7B72">export</span><span style="color: #FFA657"> </span><span style="color: #FF7B72">default</span><span style="color: #FFA657"> </span><span style="color: #FF7B72">async</span><span style="color: #FFA657"> (webpackEnv</span><span style="color: #FF7B72">:</span><span style="color: #FFA657"> WebpackEnv) </span><span style="color: #FF7B72">=></span><span style="color: #FFA657"> </span><span style="color: #C9D1D9">{</span></span>
+<span class="line"><span style="color: #C9D1D9">  </span><span style="color: #FF7B72">if</span><span style="color: #C9D1D9"> (</span><span style="color: #FF7B72">!</span><span style="color: #C9D1D9">webpackEnv.variantName)</span></span>
+<span class="line"><span style="color: #C9D1D9">    </span><span style="color: #FF7B72">throw</span><span style="color: #C9D1D9"> </span><span style="color: #FF7B72">new</span><span style="color: #C9D1D9"> </span><span style="color: #D2A8FF">Error</span><span style="color: #C9D1D9">(</span><span style="color: #A5D6FF">"You must specify a `variantName`."</span><span style="color: #C9D1D9">)</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #C9D1D9">  </span><span style="color: #FF7B72">const</span><span style="color: #C9D1D9"> </span><span style="color: #79C0FF">variant</span><span style="color: #C9D1D9"> </span><span style="color: #FF7B72">=</span><span style="color: #C9D1D9"> </span><span style="color: #D2A8FF">getVariantConfig</span><span style="color: #C9D1D9">(webpackEnv.variantName)</span></span>
+<span class="line"><span style="color: #C9D1D9">  </span><span style="color: #FF7B72">const</span><span style="color: #C9D1D9"> </span><span style="color: #79C0FF">entry</span><span style="color: #C9D1D9"> </span><span style="color: #FF7B72">=</span><span style="color: #C9D1D9"> [</span><span style="color: #A5D6FF">`${</span><span style="color: #C9D1D9">dir</span><span style="color: #A5D6FF">}/src/index.ts`</span><span style="color: #C9D1D9">]</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #C9D1D9">  </span><span style="color: #FF7B72">return</span><span style="color: #C9D1D9"> {</span></span>
+<span class="line"><span style="color: #C9D1D9">    </span><span style="color: #8B949E">// An example of how a variant's config can be used to add a mock</span></span>
+<span class="line"><span style="color: #C9D1D9">    </span><span style="color: #8B949E">// server.</span></span>
+<span class="line"><span style="color: #C9D1D9">    entry: variant.buildConfig.mockServer</span></span>
+<span class="line"><span style="color: #C9D1D9">      </span><span style="color: #FF7B72">?</span><span style="color: #C9D1D9"> [</span><span style="color: #A5D6FF">`${</span><span style="color: #C9D1D9">dir</span><span style="color: #A5D6FF">}/src/mockServer.ts`</span><span style="color: #C9D1D9">, </span><span style="color: #FF7B72">...</span><span style="color: #C9D1D9">entry]</span></span>
+<span class="line"><span style="color: #C9D1D9">      </span><span style="color: #FF7B72">:</span><span style="color: #C9D1D9"> entry,</span></span>
+<span class="line"><span style="color: #C9D1D9">    output: {</span></span>
+<span class="line"><span style="color: #C9D1D9">      </span><span style="color: #8B949E">// Fingerprint the image files</span></span>
+<span class="line"><span style="color: #C9D1D9">      assetModuleFilename: </span><span style="color: #A5D6FF">"assets/images/[contenthash][ext]"</span><span style="color: #C9D1D9">,</span></span>
+<span class="line"><span style="color: #C9D1D9">      </span><span style="color: #8B949E">// Fingerprint the JS files</span></span>
+<span class="line"><span style="color: #C9D1D9">      filename: </span><span style="color: #A5D6FF">"assets/js/[name].[contenthash].js"</span><span style="color: #C9D1D9">,</span></span>
+<span class="line"><span style="color: #C9D1D9">      path: </span><span style="color: #A5D6FF">"build"</span><span style="color: #C9D1D9">,</span></span>
+<span class="line"><span style="color: #C9D1D9">      publicPath: </span><span style="color: #A5D6FF">"/"</span><span style="color: #C9D1D9">,</span></span>
+<span class="line"><span style="color: #C9D1D9">    },</span></span>
+<span class="line"><span style="color: #C9D1D9">    </span><span style="color: #8B949E">//</span></span>
+<span class="line"><span style="color: #C9D1D9">    </span><span style="color: #8B949E">//</span></span>
+<span class="line"><span style="color: #C9D1D9">    </span><span style="color: #8B949E">// NOTE: I have left out all the usual loader and file type</span></span>
+<span class="line"><span style="color: #C9D1D9">    </span><span style="color: #8B949E">// configuration. It's up to you to merge the examples here with</span></span>
+<span class="line"><span style="color: #C9D1D9">    </span><span style="color: #8B949E">// your actual Webpack configuration.</span></span>
+<span class="line"><span style="color: #C9D1D9">    </span><span style="color: #8B949E">//</span></span>
+<span class="line"><span style="color: #C9D1D9">    </span><span style="color: #8B949E">//</span></span>
+<span class="line"><span style="color: #C9D1D9">    plugins: [</span></span>
+<span class="line"><span style="color: #C9D1D9">      </span><span style="color: #FF7B72">new</span><span style="color: #C9D1D9"> </span><span style="color: #D2A8FF">MiniCssExtractPlugin</span><span style="color: #C9D1D9">({</span></span>
+<span class="line"><span style="color: #C9D1D9">        </span><span style="color: #8B949E">// We want to fingerprint the CSS files, just like the JS files</span></span>
+<span class="line"><span style="color: #C9D1D9">        filename: </span><span style="color: #A5D6FF">"assets/css/[name].[contenthash].css"</span><span style="color: #C9D1D9">,</span></span>
+<span class="line"><span style="color: #C9D1D9">      }),</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #C9D1D9">      </span><span style="color: #8B949E">// Examples of using the variant config to change constants inside</span></span>
+<span class="line"><span style="color: #C9D1D9">      </span><span style="color: #8B949E">// the app</span></span>
+<span class="line"><span style="color: #C9D1D9">      </span><span style="color: #FF7B72">new</span><span style="color: #C9D1D9"> </span><span style="color: #D2A8FF">DefinePlugin</span><span style="color: #C9D1D9">({</span></span>
+<span class="line"><span style="color: #C9D1D9">        AUTH_0_AUDIENCE: </span><span style="color: #79C0FF">JSON</span><span style="color: #C9D1D9">.</span><span style="color: #D2A8FF">stringify</span><span style="color: #C9D1D9">(variant.buildConfig.auth0Audience),</span></span>
+<span class="line"><span style="color: #C9D1D9">        AUTH_0_CLIENT_ID: </span><span style="color: #79C0FF">JSON</span><span style="color: #C9D1D9">.</span><span style="color: #D2A8FF">stringify</span><span style="color: #C9D1D9">(variant.buildConfig.auth0ClientId),</span></span>
+<span class="line"><span style="color: #C9D1D9">        AUTH_0_DOMAIN: </span><span style="color: #79C0FF">JSON</span><span style="color: #C9D1D9">.</span><span style="color: #D2A8FF">stringify</span><span style="color: #C9D1D9">(variant.buildConfig.auth0Domain),</span></span>
+<span class="line"><span style="color: #C9D1D9">        API_BASE_URL: </span><span style="color: #79C0FF">JSON</span><span style="color: #C9D1D9">.</span><span style="color: #D2A8FF">stringify</span><span style="color: #C9D1D9">(variant.buildConfig.apiBaseUrl),</span></span>
+<span class="line"><span style="color: #C9D1D9">      }),</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #C9D1D9">      </span><span style="color: #8B949E">// Creates the variant dependencies JSON file:</span></span>
+<span class="line"><span style="color: #C9D1D9">      </span><span style="color: #8B949E">// variants/{variantName}.json.</span></span>
+<span class="line"><span style="color: #C9D1D9">      </span><span style="color: #8B949E">//</span></span>
+<span class="line"><span style="color: #C9D1D9">      </span><span style="color: #8B949E">// The HtmlWebpackPlugin is really not meant for creating JSON</span></span>
+<span class="line"><span style="color: #C9D1D9">      </span><span style="color: #8B949E">// files, but it is situated perfectly in the build process for</span></span>
+<span class="line"><span style="color: #C9D1D9">      </span><span style="color: #8B949E">// this exact task. If you think about it, we are just replacing</span></span>
+<span class="line"><span style="color: #C9D1D9">      </span><span style="color: #8B949E">// the use of `HtmlWebpackPlugin` as a way to inject our</span></span>
+<span class="line"><span style="color: #C9D1D9">      </span><span style="color: #8B949E">// dependencies into "index.html" with the exact same files</span></span>
+<span class="line"><span style="color: #C9D1D9">      </span><span style="color: #8B949E">// enumerated in a JSON file.</span></span>
+<span class="line"><span style="color: #C9D1D9">      </span><span style="color: #FF7B72">new</span><span style="color: #C9D1D9"> </span><span style="color: #D2A8FF">HtmlWebpackPlugin</span><span style="color: #C9D1D9">({</span></span>
+<span class="line"><span style="color: #C9D1D9">        inject: </span><span style="color: #79C0FF">false</span><span style="color: #C9D1D9">,</span></span>
+<span class="line"><span style="color: #C9D1D9">        minify: </span><span style="color: #79C0FF">false</span><span style="color: #C9D1D9">,</span></span>
+<span class="line"><span style="color: #C9D1D9">        </span><span style="color: #D2A8FF">templateParameters</span><span style="color: #C9D1D9">: (</span><span style="color: #FFA657">_compilation</span><span style="color: #C9D1D9">, </span><span style="color: #FFA657">assets</span><span style="color: #C9D1D9">, </span><span style="color: #FFA657">_tags</span><span style="color: #C9D1D9">, </span><span style="color: #FFA657">_opts</span><span style="color: #C9D1D9">) </span><span style="color: #FF7B72">=></span><span style="color: #C9D1D9"> ({</span></span>
+<span class="line"><span style="color: #C9D1D9">          assets,</span></span>
+<span class="line"><span style="color: #C9D1D9">        }),</span></span>
+<span class="line"><span style="color: #C9D1D9">        templateContent: </span><span style="color: #A5D6FF">`{</span></span>
+<span class="line"><span style="color: #A5D6FF">          "css": &#x3C;%= JSON.stringify(assets.css) %>,</span></span>
+<span class="line"><span style="color: #A5D6FF">          "scripts": &#x3C;%= JSON.stringify(assets.js) %>,</span></span>
+<span class="line"><span style="color: #A5D6FF">        }`</span><span style="color: #C9D1D9">,</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #C9D1D9">        </span><span style="color: #8B949E">// When running locally for development, we just use the default</span></span>
+<span class="line"><span style="color: #C9D1D9">        </span><span style="color: #8B949E">// variant name as the name of the JSON file. The specified</span></span>
+<span class="line"><span style="color: #C9D1D9">        </span><span style="color: #8B949E">// variant's settings will still be loaded, but you won't have</span></span>
+<span class="line"><span style="color: #C9D1D9">        </span><span style="color: #8B949E">// to include a variant in your query params just for local</span></span>
+<span class="line"><span style="color: #C9D1D9">        </span><span style="color: #8B949E">// development. (Remember, no variant is the same as loading the</span></span>
+<span class="line"><span style="color: #C9D1D9">        </span><span style="color: #8B949E">// default variant. See the JavaScript in the index.html file)</span></span>
+<span class="line"><span style="color: #C9D1D9">        filename: </span><span style="color: #A5D6FF">`variants/${</span></span>
+<span class="line"><span style="color: #A5D6FF">          </span><span style="color: #C9D1D9">webpackEnv</span><span style="color: #A5D6FF">.</span><span style="color: #79C0FF">WEBPACK_SERVE</span><span style="color: #A5D6FF"> </span><span style="color: #FF7B72">?</span><span style="color: #A5D6FF"> </span><span style="color: #C9D1D9">defaultVariantName</span><span style="color: #A5D6FF"> </span><span style="color: #FF7B72">:</span><span style="color: #A5D6FF"> </span><span style="color: #C9D1D9">variant</span><span style="color: #A5D6FF">.</span><span style="color: #C9D1D9">name</span></span>
+<span class="line"><span style="color: #A5D6FF">        </span><span style="color: #A5D6FF">}.json`</span><span style="color: #C9D1D9">,</span></span>
+<span class="line"><span style="color: #C9D1D9">      }),</span></span>
+<span class="line"><span style="color: #C9D1D9">    ],</span></span>
+<span class="line"><span style="color: #C9D1D9">  }</span></span>
+<span class="line"><span style="color: #C9D1D9">}</span></span></code></pre>
+<p>This configuration will build our app into the <code>build</code> folder or serve it up via
+the dev server when running locally. Assuming you fill in the missing loaders
+and such to fit your needs, the config above will allow you to start a dev
+server or build via the following command.</p>
+<pre is:raw="" class="astro-code" style="background-color: #0d1117; overflow-x: auto;"><code><span class="line"><span style="color: #8B949E"># compile and start the dev server for the my_new_feature variant</span></span>
+<span class="line"><span style="color: #C9D1D9">webpack serve --env variantName=my_new_feature</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #8B949E"># build the public variant</span></span>
+<span class="line"><span style="color: #C9D1D9">webpack --env variantName=public</span></span></code></pre>
+<p>When you build, you’ll get something approximating the following folder output.</p>
+<pre is:raw="" class="astro-code" style="background-color: #0d1117; overflow-x: auto;"><code><span class="line"><span style="color: #c9d1d9">build</span></span>
+<span class="line"><span style="color: #c9d1d9">├── assets</span></span>
+<span class="line"><span style="color: #c9d1d9">│   ├── css</span></span>
+<span class="line"><span style="color: #c9d1d9">│   │   ├── main.2a70d927cdc35881336a.css</span></span>
+<span class="line"><span style="color: #c9d1d9">│   │   └── main.2a70d927cdc35881336a.css.map</span></span>
+<span class="line"><span style="color: #c9d1d9">│   ├── images</span></span>
+<span class="line"><span style="color: #c9d1d9">│   │   └── 71124d3ac27ba0a97f64.png</span></span>
+<span class="line"><span style="color: #c9d1d9">│   └── js</span></span>
+<span class="line"><span style="color: #c9d1d9">│       ├── main.dac8c08c71723ee316dc.js</span></span>
+<span class="line"><span style="color: #c9d1d9">│       └── main.dac8c08c71723ee316dc.js.map</span></span>
+<span class="line"><span style="color: #c9d1d9">├── index.html</span></span>
+<span class="line"><span style="color: #c9d1d9">└── variants</span></span>
+<span class="line"><span style="color: #c9d1d9">    └── public.json</span></span></code></pre>
+<p>If you make a change and build again, you’ll get the exact same <code>index.html</code>,
+but a different version of <code>public.json</code> and different asset files. The magic
+happens when you push these files to your server and build a <em>different</em>
+variant.</p>
+<p>If we were to build the “mock” variant, the resulting build is similar.</p>
+<pre is:raw="" class="astro-code" style="background-color: #0d1117; overflow-x: auto;"><code><span class="line"><span style="color: #C9D1D9">webpack --env variantName=mock</span></span></code></pre>
+<pre is:raw="" class="astro-code" style="background-color: #0d1117; overflow-x: auto;"><code><span class="line"><span style="color: #c9d1d9">build</span></span>
+<span class="line"><span style="color: #c9d1d9">├── assets</span></span>
+<span class="line"><span style="color: #c9d1d9">│   ├── css</span></span>
+<span class="line"><span style="color: #c9d1d9">│   │   ├── main.2a70d927cdc35881336a.css</span></span>
+<span class="line"><span style="color: #c9d1d9">│   │   └── main.2a70d927cdc35881336a.css.map</span></span>
+<span class="line"><span style="color: #c9d1d9">│   ├── images</span></span>
+<span class="line"><span style="color: #c9d1d9">│   │   └── 71124d3ac27ba0a97f64.png</span></span>
+<span class="line"><span style="color: #c9d1d9">│   └── js</span></span>
+<span class="line"><span style="color: #c9d1d9">│       ├── main.486ca92fcb722bcd7339.js</span></span>
+<span class="line"><span style="color: #c9d1d9">│       └── main.486ca92fcb722bcd7339.js.map</span></span>
+<span class="line"><span style="color: #c9d1d9">├── index.html</span></span>
+<span class="line"><span style="color: #c9d1d9">└── variants</span></span>
+<span class="line"><span style="color: #c9d1d9">    └── mock.json</span></span></code></pre>
+<p>You’ll see that the CSS and images are the same, but the JavaScript files are
+different and we have a different variant JSON file named <code>mock.json</code>. If you
+upload these files to your server alongside your previous uploaded files, you’ll
+get something like the following.</p>
+<pre is:raw="" class="astro-code" style="background-color: #0d1117; overflow-x: auto;"><code><span class="line"><span style="color: #c9d1d9">(server)</span></span>
+<span class="line"><span style="color: #c9d1d9">├── assets</span></span>
+<span class="line"><span style="color: #c9d1d9">│   ├── css</span></span>
+<span class="line"><span style="color: #c9d1d9">│   │   ├── main.2a70d927cdc35881336a.css</span></span>
+<span class="line"><span style="color: #c9d1d9">│   │   └── main.2a70d927cdc35881336a.css.map</span></span>
+<span class="line"><span style="color: #c9d1d9">│   ├── images</span></span>
+<span class="line"><span style="color: #c9d1d9">│   │   └── 71124d3ac27ba0a97f64.png</span></span>
+<span class="line"><span style="color: #c9d1d9">│   └── js</span></span>
+<span class="line"><span style="color: #c9d1d9">│       ├── main.486ca92fcb722bcd7339.js</span></span>
+<span class="line"><span style="color: #c9d1d9">│       ├── main.486ca92fcb722bcd7339.js.map</span></span>
+<span class="line"><span style="color: #c9d1d9">│       ├── main.dac8c08c71723ee316dc.js</span></span>
+<span class="line"><span style="color: #c9d1d9">│       └── main.dac8c08c71723ee316dc.js.map</span></span>
+<span class="line"><span style="color: #c9d1d9">├── index.html</span></span>
+<span class="line"><span style="color: #c9d1d9">└── variants</span></span>
+<span class="line"><span style="color: #c9d1d9">    ├── mock.json</span></span>
+<span class="line"><span style="color: #c9d1d9">    └── public.json</span></span></code></pre>
+<p>Now, visiting your site at <code>example.com</code> will serve up the <code>public</code> variant
+using <code>main.dac8c[...].js</code> while visiting <code>example.com/?variant=mock</code> will serve
+up the <code>mock</code> variant using <code>main.486ca[...].js</code>.</p>
+<h2 id="diverging-even-farther">Diverging even farther</h2>
+<p><img src="/app-variants/img/farther.jpeg" alt="A monitor showing a highly divergent timeline from the TV series Loki"></p>
+<p>I mentioned a few times above that the code here is similar to what we use at
+Trilliant Health. There are tons of little features we’ve layered on top of our
+variant system. We’ve layered in a CLI that builds and deploys multiple variants
+at once, so that you can have several variants all based on the latest changes
+in your main branch. We’ve added a way to cut and freeze versions of our
+application to allow internal users to work with older versions of a tool that
+depends highly on a rapidly changing data structure. We’ve deployed variants
+that allowed our marketing department personnel to capture images of
+<a href="https://datalab.trillianthealth.com">our Similarity Index™ tools</a> unencumbered
+by explanatory text. We’ve added descriptions to the internal variants and UI
+elements in the actual app that can read and understand which variants are
+available to give users a way to switch as needed.</p>
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th align="center"><img src="/app-variants/img/our-ui.png" alt="A screenshot of a small section of Trilliant Health&#x27;s custom UI for describing app variants, including a cartoonish icon of Loki&#x27;s head"></th></tr></thead><tbody><tr><td align="center">Had I just finished watching Marvel’s Loki series when I created this system? Maybe. Does our internal UI lean into that origin? Maybe. Icon available at <a href="https://slackmojis.com">Slackmojis.com</a>.</td></tr></tbody></table>
+<p>The possibilities are vast and the latitude you can gain from using a system
+like this is very freeing. (You know what else is freeing? <em>Not</em> doing automatic
+deployments when your PRs get merged to main. 😱 But that is a heretical rant
+for another time.)</p>
+<h2 id="app-variants-in-a-nutshell">App Variants in a Nutshell</h2>
+<p>Everything in the code above is just a single implementation of the idea of “app
+variants”. And “app variants” is just a name I slapped onto a simple idea: By
+moving the dependencies needed to boot your app into a file external to the
+<code>index.html</code>, you can have multiple dependency definitions for multiple apps,
+and you can write a bit of JavaScript to decide which app to load altogether.</p>
+<p>Have you ever seen anyone else use this technique before? I’d love to know.</p>
+<p>In any case, if these ideas are useful to you, please run with them! Let me know
+what works for you and what you needed to change.</p>
+    </article>
+  </div>
+      </div>
+    </div>
+
+    <footer class="site-footer">
+      <div class="wrapper">
+        <h2 class="footer-heading">
+          Happy Collision
+        </h2>
+
+        <div class="footer-col-wrapper">
+          <div class="footer-col footer-col-1">
+            <ul class="contact-list">
+              <li>
+                Happy Collision
+              </li>
+              <li>
+                <a href="mailto:don@happycollision.com">
+                  don@happycollision.com
+                </a>
+              </li>
+            </ul>
+          </div>
+
+          <div class="footer-col footer-col-2">
+            <ul class="social-media-list">
+              <li>
+                <a href="https://github.com/happycollision">
+                  <span class="icon icon--github">
+                    <svg viewBox="0 0 16 16">
+                      <path fill="#828282" d="M7.999,0.431c-4.285,0-7.76,3.474-7.76,7.761 c0,3.428,2.223,6.337,5.307,7.363c0.388,0.071,0.53-0.168,0.53-0.374c0-0.184-0.007-0.672-0.01-1.32 c-2.159,0.469-2.614-1.04-2.614-1.04c-0.353-0.896-0.862-1.135-0.862-1.135c-0.705-0.481,0.053-0.472,0.053-0.472 c0.779,0.055,1.189,0.8,1.189,0.8c0.692,1.186,1.816,0.843,2.258,0.645c0.071-0.502,0.271-0.843,0.493-1.037 C4.86,11.425,3.049,10.76,3.049,7.786c0-0.847,0.302-1.54,0.799-2.082C3.768,5.507,3.501,4.718,3.924,3.65 c0,0,0.652-0.209,2.134,0.796C6.677,4.273,7.34,4.187,8,4.184c0.659,0.003,1.323,0.089,1.943,0.261 c1.482-1.004,2.132-0.796,2.132-0.796c0.423,1.068,0.157,1.857,0.077,2.054c0.497,0.542,0.798,1.235,0.798,2.082 c0,2.981-1.814,3.637-3.543,3.829c0.279,0.24,0.527,0.713,0.527,1.437c0,1.037-0.01,1.874-0.01,2.129 c0,0.208,0.14,0.449,0.534,0.373c3.081-1.028,5.302-3.935,5.302-7.362C15.76,3.906,12.285,0.431,7.999,0.431z"></path>
+                    </svg>
+                  </span>
+
+                  <span class="username">
+                    happycollision
+                  </span>
+                </a>
+              </li>
+
+              <li>
+                <a href="https://twitter.com/happycollision">
+                  <span class="icon icon--twitter">
+                    <svg viewBox="0 0 16 16">
+                      <path fill="#828282" d="M15.969,3.058c-0.586,0.26-1.217,0.436-1.878,0.515c0.675-0.405,1.194-1.045,1.438-1.809
+											c-0.632,0.375-1.332,0.647-2.076,0.793c-0.596-0.636-1.446-1.033-2.387-1.033c-1.806,0-3.27,1.464-3.27,3.27 c0,0.256,0.029,0.506,0.085,0.745C5.163,5.404,2.753,4.102,1.14,2.124C0.859,2.607,0.698,3.168,0.698,3.767 c0,1.134,0.577,2.135,1.455,2.722C1.616,6.472,1.112,6.325,0.671,6.08c0,0.014,0,0.027,0,0.041c0,1.584,1.127,2.906,2.623,3.206 C3.02,9.402,2.731,9.442,2.433,9.442c-0.211,0-0.416-0.021-0.615-0.059c0.416,1.299,1.624,2.245,3.055,2.271 c-1.119,0.877-2.529,1.4-4.061,1.4c-0.264,0-0.524-0.015-0.78-0.046c1.447,0.928,3.166,1.469,5.013,1.469 c6.015,0,9.304-4.983,9.304-9.304c0-0.142-0.003-0.283-0.009-0.423C14.976,4.29,15.531,3.714,15.969,3.058z"></path>
+                    </svg>
+                  </span>
+
+                  <span class="username">
+                    happycollision
+                  </span>
+                </a>
+              </li>
+            </ul>
+          </div>
+
+          <div class="footer-col footer-col-3">
+            <p class="text">
+              I am happy to help with many a digital-world need. It was nice to run into you today.
+            </p>
+          </div>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

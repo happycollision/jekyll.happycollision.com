@@ -1,15 +1,18 @@
 ---
 export interface Props {
-	videoId: string;
-	type: "vimeo"|"youtube"
+  videoId: string
+  type: "vimeo" | "youtube"
 }
 
-const { videoId , type} = Astro.props;
+const { videoId, type } = Astro.props
 
-const url = type === "vimeo"?`//player.vimeo.com/video/${videoId}?color=2b8609&amp;title=0&amp;byline=0&amp;portrait=0`:`https://www.youtube.com/embed/${videoId}?rel=0&amp;showinfo=0`
+const url =
+  type === "vimeo"
+    ? `//player.vimeo.com/video/${videoId}?color=2b8609&amp;title=0&amp;byline=0&amp;portrait=0`
+    : `https://www.youtube.com/embed/${videoId}?rel=0&amp;showinfo=0`
 ---
 
 <div class="video">
-		<iframe width="640" height="360" src={url} frameborder="0"
-		  allowfullscreen></iframe>
-	</div>
+  <iframe width="640" height="360" src={url} frameborder="0" allowfullscreen
+  ></iframe>
+</div>

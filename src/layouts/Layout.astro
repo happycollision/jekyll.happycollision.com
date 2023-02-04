@@ -1,27 +1,27 @@
 ---
-import * as site from "$data/site";
+import * as site from "$data/site"
 export interface Props {
-  title: string;
-  compact?: boolean | undefined;
+  title: string
+  compact?: boolean | undefined
 }
 const rootMdPages = await Astro.glob<{ title: string; mainNav?: boolean }>(
-  "../pages/*.md"
-);
+  "../pages/*.md",
+)
 const rootMdxPages = await Astro.glob<{ title: string; mainNav?: boolean }>(
-  "../pages/*.mdx"
-);
+  "../pages/*.mdx",
+)
 const rootPages = [...rootMdPages, ...rootMdxPages].sort((a, b) =>
-  a.file.localeCompare(b.file)
-);
+  a.file.localeCompare(b.file),
+)
 
 const pages = rootPages
   .filter((x) => x.frontmatter.mainNav)
   .map((x) => ({
     url: x.url,
     title: x.frontmatter.title,
-  }));
+  }))
 
-const { title, compact } = Astro.props;
+const { title, compact } = Astro.props
 ---
 
 <!DOCTYPE html>

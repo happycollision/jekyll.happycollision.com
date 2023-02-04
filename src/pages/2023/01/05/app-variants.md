@@ -31,7 +31,6 @@ that you can trade _one more round trip to the server_ for completely isolated
 front-end builds that are dynamically loaded without the need for special
 back-end logic.
 
-
 ## Variants
 
 Trying to achieve isolated feature branch builds solely through static,
@@ -86,9 +85,9 @@ as well, but by then your app is already running.
 Every change to your application requires a brand-new build of `index.html` to
 reference multiple new CSS and JS files.
 
-|![Sequence diagram of a typical SPA page load https://play.d2lang.com/?script=rJKxTvMwEMd3P8W9wJeq3-gBiTJRdagwbEjI2EewlNjmzi1UKO-OHBOnIIEyMMW6-90v-edcf58EyunF7Sk6oztQ-0vYBW2db0HhywG9QQnvAkAljLAuZ4AxpwT-RB6s0y3pfuw9UnhlJAmbcigDSMdcU-PznIN_F7W7OmNzvaqct_jWPKe--z5akb0mRtDegnVswhHp3luM6C16c4K7mx0LgEFMWf7_ZRYTvDkQoU9A2cOJV4Qcg2fk6UVV16Q5dJMkXCk1fd_sL1CdKNST65B_l22XuLaLVNe9bnGBrXCzcPhxSZsQEugYO2d0vn9fNrLOaNmNGMRHAAAA__8%3D&sketch=0&theme=104](/app-variants/img/typical.png)|
-|:--:|
-|(Diagrams created at https://play.d2lang.com)|
+| ![Sequence diagram of a typical SPA page load https://play.d2lang.com/?script=rJKxTvMwEMd3P8W9wJeq3-gBiTJRdagwbEjI2EewlNjmzi1UKO-OHBOnIIEyMMW6-90v-edcf58EyunF7Sk6oztQ-0vYBW2db0HhywG9QQnvAkAljLAuZ4AxpwT-RB6s0y3pfuw9UnhlJAmbcigDSMdcU-PznIN_F7W7OmNzvaqct_jWPKe--z5akb0mRtDegnVswhHp3luM6C16c4K7mx0LgEFMWf7_ZRYTvDkQoU9A2cOJV4Qcg2fk6UVV16Q5dJMkXCk1fd_sL1CdKNST65B_l22XuLaLVNe9bnGBrXCzcPhxSZsQEugYO2d0vn9fNrLOaNmNGMRHAAAA__8%3D&sketch=0&theme=104](/app-variants/img/typical.png) |
+| :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: |
+|                                                                                                                                                                                                                      (Diagrams created at https://play.d2lang.com)                                                                                                                                                                                                                      |
 
 ### Variant loading
 
@@ -115,9 +114,9 @@ arbitrary variant JSON file we request by name via a query parameter. Once that
 JSON file is loaded, we can use it to gather our actual application
 dependencies.
 
-|![Sequence diagram of modified "variant" SPA architecture page load https://play.d2lang.com/?script=rJPBTsMwDIbvfQo_wOg0jj0gMU5UE0xEcJqETGNGUOcEJx0gtHdHadZuYwz1wKlR8vnLH1vt21eAxNdnDygGOYCaX8LMoja8BEVvDXFFBXxlACqQg0laA7TvLMBvkUdtcCm4as-exL57kgKmaZEKSNZxT7XffQ7OLvrT8R4b93uVYU0f-UtY1S2BWpMGsQ1rCGJcF-tA2hfPUTyNQBqGNbKpa4RSjQBZL1gbX9l423rbgVLd3sD93ezY14U8Qf6Sekvmr95yS21-PvwwY4wEXaIFa3LEmrj6jNf4LNZ3kzj_z0lUlqtGhDiARI8PfizknWVP_qi3edh1Iw8FXCnV5dv5E9RXJOrZ1OT_lpVDXOUg1fUKlzTAlrid8PSQptYGQOdqU2H8ew4mMolomk22yb4DAAD__w%3D%3D&sketch=0&theme=104](/app-variants/img/variant.png)|
-|:--:|
-|The only change from the "typical SPA loading sequence" is the added round trip in step 1.|
+| ![Sequence diagram of modified "variant" SPA architecture page load https://play.d2lang.com/?script=rJPBTsMwDIbvfQo_wOg0jj0gMU5UE0xEcJqETGNGUOcEJx0gtHdHadZuYwz1wKlR8vnLH1vt21eAxNdnDygGOYCaX8LMoja8BEVvDXFFBXxlACqQg0laA7TvLMBvkUdtcCm4as-exL57kgKmaZEKSNZxT7XffQ7OLvrT8R4b93uVYU0f-UtY1S2BWpMGsQ1rCGJcF-tA2hfPUTyNQBqGNbKpa4RSjQBZL1gbX9l423rbgVLd3sD93ezY14U8Qf6Sekvmr95yS21-PvwwY4wEXaIFa3LEmrj6jNf4LNZ3kzj_z0lUlqtGhDiARI8PfizknWVP_qi3edh1Iw8FXCnV5dv5E9RXJOrZ1OT_lpVDXOUg1fUKlzTAlrid8PSQptYGQOdqU2H8ew4mMolomk22yb4DAAD__w%3D%3D&sketch=0&theme=104](/app-variants/img/variant.png) |
+| :-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: |
+|                                                                                                                                                                                                                                                 The only change from the "typical SPA loading sequence" is the added round trip in step 1.                                                                                                                                                                                                                                                  |
 
 If your files are all properly fingerprinted --the name of the file contains a
 hash that forces it to be unique based on its exact contents --then you can keep
@@ -228,7 +227,7 @@ the `WebpackDefinePlugin`. So in our applications, calls to our API server
 resemble this:
 
 ```ts
-fetch(`${API_BASE_URL}/some-endpoint`);
+fetch(`${API_BASE_URL}/some-endpoint`)
 ```
 
 And we let Webpack do the work of replacing `API_BASE_URL` with
@@ -296,9 +295,7 @@ our SPAs at Trilliant Health.
          * @returns {string | null}
          */
         function getRequestedVariantViaSearchParam() {
-          return new URLSearchParams(document.location.search).get(
-            "variant"
-          )
+          return new URLSearchParams(document.location.search).get("variant")
         }
 
         /**
@@ -324,8 +321,7 @@ our SPAs at Trilliant Health.
         function updateViewExplainingMissingVariant(variantName) {
           var root = document.querySelector("#root")
           var p = document.createElement("p")
-          p.textContent =
-            "App failed to load the " + variantName + " variant."
+          p.textContent = "App failed to load the " + variantName + " variant."
           var link = document.createElement("a")
           link.href =
             // Drop all query params and just use the default variant.
@@ -503,8 +499,7 @@ function getVariantConfig(variantName: string) {
   ]
 
   const variant = variants.find((x) => x.name === variantName)
-  if (!variant)
-    throw new Error("No variant found called " + variantName)
+  if (!variant) throw new Error("No variant found called " + variantName)
 
   return variant
 }
@@ -552,12 +547,8 @@ export default async (webpackEnv: WebpackEnv) => {
       // Examples of using the variant config to change constants inside
       // the app
       new DefinePlugin({
-        AUTH_0_AUDIENCE: JSON.stringify(
-          variant.buildConfig.auth0Audience
-        ),
-        AUTH_0_CLIENT_ID: JSON.stringify(
-          variant.buildConfig.auth0ClientId
-        ),
+        AUTH_0_AUDIENCE: JSON.stringify(variant.buildConfig.auth0Audience),
+        AUTH_0_CLIENT_ID: JSON.stringify(variant.buildConfig.auth0ClientId),
         AUTH_0_DOMAIN: JSON.stringify(variant.buildConfig.auth0Domain),
         API_BASE_URL: JSON.stringify(variant.buildConfig.apiBaseUrl),
       }),
@@ -700,9 +691,9 @@ by explanatory text. We've added descriptions to the internal variants and UI
 elements in the actual app that can read and understand which variants are
 available to give users a way to switch as needed.
 
-|![A screenshot of a small section of Trilliant Health's custom UI for describing app variants, including a cartoonish icon of Loki's head](/app-variants/img/our-ui.png)|
-|:--:|
-|Had I just finished watching Marvel's Loki series when I created this system? Maybe. Does our internal UI lean into that origin? Maybe. Icon available at [Slackmojis.com](https://slackmojis.com).|
+|              ![A screenshot of a small section of Trilliant Health's custom UI for describing app variants, including a cartoonish icon of Loki's head](/app-variants/img/our-ui.png)               |
+| :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: |
+| Had I just finished watching Marvel's Loki series when I created this system? Maybe. Does our internal UI lean into that origin? Maybe. Icon available at [Slackmojis.com](https://slackmojis.com). |
 
 The possibilities are vast and the latitude you can gain from using a system
 like this is very freeing. (You know what else is freeing? _Not_ doing automatic

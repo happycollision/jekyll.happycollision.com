@@ -1,0 +1,116 @@
+---
+import Layout from "$layouts/Layout.astro"
+import { getCollection, getEntryBySlug } from "astro:content"
+
+import { shows } from "../shows"
+
+export async function getStaticPaths() {
+  const songList = await getCollection("songs")
+  return shows.flatMap((show) => {
+    let songNo = 0
+    const allSongs = []
+    const sets = show.sets.map((songs) =>
+      songs.map((song) => {
+        const found = songList.find((s) => s.slug === song.song)!
+        allSongs.push({ ...found, songNo: String(++songNo), feat: song.feat })
+        return {
+          ...song,
+          title: found.data.title,
+          songNo,
+        }
+      }),
+    )
+
+    const showDetails = {
+      ...show,
+      sets,
+      allSongs,
+    }
+    return [
+      {
+        params: { path: show.slug },
+
+        props: { ...showDetails },
+      },
+      ...allSongs.map((s) => ({
+        params: { path: `${show.slug}/${s.songNo}` },
+
+        props: { ...showDetails },
+      })),
+    ]
+  })
+}
+
+const { path } = Astro.params
+const { sets, allSongs } = Astro.props
+
+const [show, songNo] = path?.split("/")
+
+const theSong = songNo ? allSongs.find((s) => s.songNo === songNo) : undefined
+console.log(show, songNo, theSong)
+
+const pulledSong = theSong
+  ? await getEntryBySlug("songs", theSong.slug)
+  : undefined
+
+const { Content } = (await pulledSong?.render()) ?? { Content: undefined }
+const nextSongNum = theSong && Number(theSong.songNo) + 1
+const prevSongNum = theSong && Number(theSong.songNo) - 1
+
+const nextUrl =
+  nextSongNum <= allSongs.length
+    ? `/trigger/shows/${show}/${nextSongNum}`
+    : undefined
+const prevUrl =
+  prevSongNum > 0 ? `/trigger/shows/${show}/${prevSongNum}` : undefined
+---
+
+<Layout title={theSong ? `${show}: ${theSong.data.title}` : show} compact>
+  <a href={`/trigger/shows/${show}`}>
+    {show}
+  </a>
+
+  {
+    theSong && Content && (
+      <div>
+        <div>
+          <a href={`/trigger/shows/${show}`}>Close</a>
+        </div>
+        <div>
+          <div class="flex">
+            {prevUrl ? (
+              <a href={prevUrl}>← Previous Song</a>
+            ) : (
+              <span>← Previous Song</span>
+            )}
+            <h2>{theSong.data.title}</h2>
+            {nextUrl ? (
+              <a href={nextUrl}>Next Song →</a>
+            ) : (
+              <span>Next Song →</span>
+            )}
+          </div>
+          <h3>lead vocals: {theSong.feat}</h3>
+        </div>
+        {<Content />}
+      </div>
+    )
+  }
+
+  {
+    sets.map((set, i) => (
+      <>
+        <h2>Set {++i}</h2>
+        <ol>
+          {set.map((song) => (
+            <li>
+              <a href={`/trigger/shows/${show}/${song.songNo}`}>
+                {song.title}: {song.feat}
+              </a>
+            </li>
+          ))}
+        </ol>
+      </>
+    ))
+  }
+</Layout>

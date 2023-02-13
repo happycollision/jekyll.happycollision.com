@@ -1,7 +1,7 @@
 ---
 title: Vagrantfile that creates and populates MySQL database
 date: 2014-01-17
-layout: $layouts/Page.astro
+layout: $layouts/MarkdownPage.astro
 ---
 
 A few months ago, I started poking around a [Discourse][1] install. I was a bit

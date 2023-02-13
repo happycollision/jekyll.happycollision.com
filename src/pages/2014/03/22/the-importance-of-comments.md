@@ -1,6 +1,6 @@
 ---
 title: "//The Importance of Comments"
-layout: $layouts/Page.astro
+layout: $layouts/MarkdownPage.astro
 date: 2014-03-22
 ---
 

@@ -1,7 +1,7 @@
 ---
 title: "Heartbleed: your passwords are public now"
 date: 2014-04-09
-layout: $layouts/Page.astro
+layout: $layouts/MarkdownPage.astro
 ---
 
 I am not going to waste your time here. If you want to know _exactly_ what

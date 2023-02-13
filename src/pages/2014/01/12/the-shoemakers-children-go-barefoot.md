@@ -1,5 +1,5 @@
 ---
-layout: $layouts/Page.astro
+layout: $layouts/MarkdownPage.astro
 title: "The Shoemaker's Children Go Barefoot"
 date: 2014-01-12
 ---

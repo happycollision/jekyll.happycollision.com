@@ -2,7 +2,7 @@
 title: "Client Side App Variants"
 subtitle: "Feature branch builds (and more) for your statically generated SPA"
 date: 2023-01-05
-layout: $layouts/Page.astro
+layout: $layouts/MarkdownPage.astro
 ---
 
 ![A monitor showing slight divergence from the one true timeline in the TV series Loki.](/app-variants/img/variant-timeline.jpeg)

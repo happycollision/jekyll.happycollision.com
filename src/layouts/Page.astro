@@ -7,14 +7,13 @@ export interface Props {
     title: string
     subtitle?: string
     date?: string
-    compact?: boolean
   }
 }
 
-const { title, subtitle, date, compact } = Astro.props.frontmatter
+const { title, subtitle, date } = Astro.props.frontmatter
 ---
 
-<Layout title={title} compact={compact}>
+<Layout title={title} compact={true}>
   <div class="post">
     <header class="post-header">
       <h1 class="post-title">

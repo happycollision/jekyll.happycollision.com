@@ -1,0 +1,101 @@
+---
+import Layout, { Props as PageProps } from "./Page.astro"
+export interface Props extends PageProps {}
+---
+
+<style is:global>
+  /**
+  * Set `margin-bottom` to maintain vertical rhythm
+  */
+  .markdown h1,
+  .markdown h2,
+  .markdown h3,
+  .markdown h4,
+  .markdown h5,
+  .markdown h6,
+  .markdown p,
+  .markdown blockquote,
+  .markdown pre,
+  .markdown ul,
+  .markdown ol,
+  .markdown dl,
+  .markdown figure,
+  .markdown .highlight {
+    margin-bottom: 15px;
+  }
+
+  /**
+  * Lists
+  */
+  .markdown ul,
+  .markdown ol {
+    margin-left: 2em;
+  }
+
+  .markdown ol {
+    list-style: decimal;
+  }
+
+  .markdown ul {
+    list-style: disc;
+  }
+
+  /**
+  * Links
+  */
+  .markdown a {
+    color: #2a7ae2;
+    text-decoration: none;
+  }
+  .markdown a:visited {
+    color: #1756a9;
+  }
+  .markdown a:hover {
+    color: #111;
+    text-decoration: underline;
+  }
+
+  /**
+  * Blockquotes
+  */
+  .markdown blockquote {
+    color: #828282;
+    border-left: 4px solid #e8e8e8;
+    padding-left: 15px;
+    font-style: italic;
+  }
+  .markdown blockquote > :last-child {
+    margin-bottom: 0;
+  }
+
+  /**
+  * Code formatting
+  */
+  .markdown pre,
+  .markdown code {
+    font-size: 0.9em;
+    border: 1px solid #e8e8e8;
+    border-radius: 3px;
+  }
+
+  .markdown code {
+    padding: 1px 5px;
+  }
+
+  .markdown pre {
+    padding: 8px 12px;
+    overflow-x: scroll;
+  }
+  .markdown pre > code {
+    border: 0;
+    padding-right: 0;
+    padding-left: 0;
+    background-color: transparent;
+  }
+</style>
+
+<Layout {...Astro.props}>
+  <div class="markdown">
+    <slot />
+  </div>
+</Layout>

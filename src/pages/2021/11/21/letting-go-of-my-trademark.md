@@ -1,7 +1,7 @@
 ---
 title: "Why I am letting go of my trademark"
 date: 2021-11-21
-layout: $layouts/Page.astro
+layout: $layouts/MarkdownPage.astro
 ---
 
 For years now, I have maintained [a trademark for the name Happy Collision

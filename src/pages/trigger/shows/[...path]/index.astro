@@ -1,94 +1,88 @@
 ---
+import { getCollection } from "astro:content"
 import Layout from "$layouts/Layout.astro"
-import { getCollection, getEntryBySlug } from "astro:content"
 
-import { shows, type ShowSong } from "../shows"
+import { shows } from "../shows"
 
 export async function getStaticPaths() {
+  const baseUrl = "/trigger/shows"
   const songList = await getCollection("songs")
+
   return shows.flatMap((show) => {
     let songNo = 0
-    const allSongs: Array<
-      ShowSong & (typeof songList)[number] & { songNo: string }
-    > = []
     const sets = show.sets.map((songs) =>
       songs.map((song) => {
         const found = songList.find((s) => s.slug === song.slug)
         if (!found) throw new Error(`Couldn't find song ${song.slug}`)
 
-        allSongs.push({ ...found, songNo: String(++songNo), feat: song.feat })
         return {
           ...song,
-          ...found.data,
-          songNo,
+          ...found,
+          songNo: ++songNo,
         }
       }),
     )
 
-    const showDetails = {
-      ...show,
+    const baseProps = {
+      showName: show.name,
       sets,
-      allSongs,
+      showUrl: `${baseUrl}/${show.slug}`,
     }
+
+    const allSongs = sets.flat()
     return [
       {
         params: { path: show.slug },
 
-        props: { ...showDetails },
+        props: {
+          ...baseProps,
+          songDetails: undefined as (typeof allSongs)[number] | undefined,
+          nextUrl: undefined as string | undefined,
+          prevUrl: undefined as string | undefined,
+        },
       },
-      ...allSongs.map((s) => ({
+      ...allSongs.map((s, i, arr) => ({
         params: { path: `${show.slug}/${s.songNo}` },
 
-        props: { ...showDetails },
+        props: {
+          ...baseProps,
+          songDetails: s,
+          nextUrl:
+            i < arr.length - 1
+              ? `${baseUrl}/${show.slug}/${s.songNo + 1}`
+              : undefined,
+          prevUrl:
+            i > 0 ? `${baseUrl}/${show.slug}/${s.songNo - 1}` : undefined,
+        },
       })),
     ]
   })
 }
 
-type Gsp = Awaited<ReturnType<typeof getStaticPaths>>[number]
-type GspProps = Gsp["props"]
-type GspParams = Gsp["params"]
+type GspProps = Awaited<ReturnType<typeof getStaticPaths>>[number]["props"]
 
 interface Props extends GspProps {}
 
-const { path } = Astro.params as GspParams
-const { sets, allSongs } = Astro.props
+const { sets, songDetails, nextUrl, prevUrl, showUrl, showName } = Astro.props
 
-const [show, songNo] = path.split("/") as [string, string | undefined]
-
-const theSong = songNo ? allSongs.find((s) => s.songNo === songNo) : undefined
-
-const pulledSong = theSong
-  ? await getEntryBySlug("songs", theSong.slug)
-  : undefined
-
-const { Content } = (await pulledSong?.render()) ?? { Content: undefined }
-const nextSongNum = theSong && Number(theSong.songNo) + 1
-const prevSongNum = theSong && Number(theSong.songNo) - 1
-
-const nextUrl =
-  (nextSongNum ?? Number.POSITIVE_INFINITY) <= allSongs.length
-    ? `/trigger/shows/${show}/${nextSongNum}`
-    : undefined
-const prevUrl =
-  (prevSongNum ?? -1) > 0 ? `/trigger/shows/${show}/${prevSongNum}` : undefined
+const { Content } = (await songDetails?.render()) ?? { Content: undefined }
 ---
 
 <Layout
-  title={theSong ? `${show}: ${theSong.data.title}` : show}
+  title={songDetails ? `${songDetails.data.title} | ${showName}` : showName}
   compact
   unconstrained
 >
-  <a href={`/trigger/shows/${show}`}>
-    {show}
+  <a href={showUrl}>
+    {showName}
   </a>
 
   {
-    theSong && Content && (
+    songDetails && Content && (
       <div class="markdown p-4 pt-20 bg-white/40 w-full">
         <div class="bg-white max-w-[1000px] m-auto z-10">
           <div class="mb-4">
-            <a href={`/trigger/shows/${show}`} class="text-2xl">
+            <a href={showUrl} class="text-2xl">
               Close Song
             </a>
           </div>
@@ -100,8 +94,8 @@ const prevUrl =
                 <span class="opacity-20">← Previous Song</span>
               )}
               <div>
-                <h2 class="text-2xl">{theSong.data.title}</h2>
-                <h3>lead vocals: {theSong.feat}</h3>
+                <h2 class="text-2xl">{songDetails.data.title}</h2>
+                <h3>lead vocals: {songDetails.feat}</h3>
               </div>
               {nextUrl ? (
                 <a href={nextUrl}>Next Song →</a>
@@ -124,12 +118,14 @@ const prevUrl =
           {set.map((song) => (
             <li class="py-4">
               <div>
-                <a href={`/trigger/shows/${show}/${song.songNo}`}>
-                  <span class="min-w-[12rem] inline-block">{song.title}</span>
+                <a href={`${showUrl}/${song.songNo}`}>
+                  <span class="min-w-[12rem] inline-block">
+                    {song.data.title}
+                  </span>
                 </a>
                 <strong>{song.feat}</strong>
               </div>
-              <div>{song.reminder}</div>
+              <div>{song.data.reminder}</div>
             </li>
           ))}
         </ol>

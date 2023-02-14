@@ -1,6 +1,6 @@
-export type ShowSong = { slug: string; feat?: string | undefined }
-export type ShowSet = ShowSong[]
-export type Show = { name: string; slug: string; sets: ShowSet[] }
+type ShowSong = { slug: string; feat?: string | undefined }
+type ShowSet = ShowSong[]
+type Show = { name: string; slug: string; sets: ShowSet[] }
 
 export const shows: Show[] = [
   {

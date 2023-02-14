@@ -44,14 +44,14 @@
 /**
   * Links
   */
-a:link {
+.link {
   color: #2a7ae2;
   text-decoration: none;
 }
-a:visited {
+.link:visited {
   color: #1756a9;
 }
-a:hover {
+.link:hover {
   color: #111;
   text-decoration: underline;
 }

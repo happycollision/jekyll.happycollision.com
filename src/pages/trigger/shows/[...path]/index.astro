@@ -2,17 +2,20 @@
 import Layout from "$layouts/Layout.astro"
 import { getCollection, getEntryBySlug } from "astro:content"
 
-import { shows } from "../shows"
+import { shows, type ShowSong } from "../shows"
 
 export async function getStaticPaths() {
   const songList = await getCollection("songs")
   return shows.flatMap((show) => {
     let songNo = 0
-    const allSongs = []
+    const allSongs: Array<
+      ShowSong & (typeof songList)[number] & { songNo: string }
+    > = []
     const sets = show.sets.map((songs) =>
       songs.map((song) => {
-        const found = songList.find((s) => s.slug === song.song)
-        if (!found) throw new Error(`Couldn't find song ${song.song}`)
+        const found = songList.find((s) => s.slug === song.slug)
+        if (!found) throw new Error(`Couldn't find song ${song.slug}`)
+
         allSongs.push({ ...found, songNo: String(++songNo), feat: song.feat })
         return {
           ...song,
@@ -42,10 +45,16 @@ export async function getStaticPaths() {
   })
 }
 
-const { path } = Astro.params
+type Gsp = Awaited<ReturnType<typeof getStaticPaths>>[number]
+type GspProps = Gsp["props"]
+type GspParams = Gsp["params"]
+
+interface Props extends GspProps {}
+
+const { path } = Astro.params as GspParams
 const { sets, allSongs } = Astro.props
 
-const [show, songNo] = path?.split("/")
+const [show, songNo] = path.split("/") as [string, string | undefined]
 
 const theSong = songNo ? allSongs.find((s) => s.songNo === songNo) : undefined
 
@@ -58,11 +67,11 @@ const nextSongNum = theSong && Number(theSong.songNo) + 1
 const prevSongNum = theSong && Number(theSong.songNo) - 1
 
 const nextUrl =
-  nextSongNum <= allSongs.length
+  (nextSongNum ?? Number.POSITIVE_INFINITY) <= allSongs.length
     ? `/trigger/shows/${show}/${nextSongNum}`
     : undefined
 const prevUrl =
-  prevSongNum > 0 ? `/trigger/shows/${show}/${prevSongNum}` : undefined
+  (prevSongNum ?? -1) > 0 ? `/trigger/shows/${show}/${prevSongNum}` : undefined
 ---
 
 <Layout

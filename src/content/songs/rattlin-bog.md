@@ -1,5 +1,8 @@
 ---
+title: Rattlin' Bog
 ---
+
+[YouTube link](https://www.youtube.com/watch?v=aLHuu3Ygvns)
 
 These are the lyrics that Sammy has done for a while now, I think.
 
@@ -16,12 +19,12 @@ Way, hey, the Rattlin' Bog, the bog down in the valley oh!
 D                 G             D            A
 In this bog there was a tree, a rare tree, a Rattlin' Tree
           D           G
-Well, the tree in the bog 
+Well, the tree in the bog
         D               A      D
 and the bog down in the valley oh!
 
 
-[Chorus] 
+[Chorus]
 
 [Instrumental speedup?]
 
@@ -37,7 +40,7 @@ And the tree in the bog
 and the bog down in the valley oh!
 
 
-[Chorus] 
+[Chorus]
 
 [Instrumental speedup?]
 

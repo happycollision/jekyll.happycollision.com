@@ -1,8 +1,19 @@
 ---
+title: Caledonia
 ---
 
+[YouTube link](https://www.youtube.com/watch?v=D0KZjmiL7xs)
+
+[Our recording](https://www.dropbox.com/s/35enbl2i0giyijm/14%20Caledonia.m4a?dl=0)
+
+[Chords](/trigger/caledonia)
+
+[Alt Key with transition to Wagon Wheel?](/trigger/songs/caledonia-a)
+
+[Recording of suggestion transition](/trigger/caledonia-transition.mp3)
+
 These chords are in the actual key we will play in: G major. If you'd rather
-play with D major shapes, [look at this one](/trigger/caledonia-d)
+play with D major shapes, [look at this one](/trigger/songs/caledonia-d)
 
 ```
 G               D

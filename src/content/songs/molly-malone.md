@@ -1,5 +1,11 @@
 ---
+title: Molly Malone
 ---
+
+[YouTube link](https://www.youtube.com/watch?v=R5p_mL-pnWw) (we do it more
+lively than this but you get the idea)
+
+[Maybe our chords](/trigger/molly)
 
 I am not sure about the end of this, and I also think it is possible that Nick
 only plays C and G the whole time? We should double check this one.

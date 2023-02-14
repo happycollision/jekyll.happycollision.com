@@ -11,11 +11,12 @@ export async function getStaticPaths() {
     const allSongs = []
     const sets = show.sets.map((songs) =>
       songs.map((song) => {
-        const found = songList.find((s) => s.slug === song.song)!
+        const found = songList.find((s) => s.slug === song.song)
+        if (!found) throw new Error(`Couldn't find song ${song.song}`)
         allSongs.push({ ...found, songNo: String(++songNo), feat: song.feat })
         return {
           ...song,
-          title: found.data.title,
+          ...found.data,
           songNo,
         }
       }),
@@ -47,7 +48,6 @@ const { sets, allSongs } = Astro.props
 const [show, songNo] = path?.split("/")
 
 const theSong = songNo ? allSongs.find((s) => s.songNo === songNo) : undefined
-console.log(show, songNo, theSong)
 
 const pulledSong = theSong
   ? await getEntryBySlug("songs", theSong.slug)
@@ -72,45 +72,51 @@ const prevUrl =
 
   {
     theSong && Content && (
-      <div>
-        <div>
-          <a href={`/trigger/shows/${show}`}>Close</a>
-        </div>
-        <div>
-          <div class="flex">
-            {prevUrl ? (
-              <a href={prevUrl}>← Previous Song</a>
-            ) : (
-              <span>← Previous Song</span>
-            )}
-            <h2>{theSong.data.title}</h2>
-            {nextUrl ? (
-              <a href={nextUrl}>Next Song →</a>
-            ) : (
-              <span>Next Song →</span>
-            )}
+      <div class="markdown p-4 pt-20 bg-white/40 w-full">
+        <div class="bg-white max-w-[1000px] m-auto z-10">
+          <div>
+            <a href={`/trigger/shows/${show}`}>Close</a>
           </div>
-          <h3>lead vocals: {theSong.feat}</h3>
+          <div class="overflow-y-auto">
+            <div class="flex w-full justify-between">
+              {prevUrl ? (
+                <a href={prevUrl}>← Previous Song</a>
+              ) : (
+                <span>← Previous Song</span>
+              )}
+              <h2>{theSong.data.title}</h2>
+              {nextUrl ? (
+                <a href={nextUrl}>Next Song →</a>
+              ) : (
+                <span>Next Song →</span>
+              )}
+            </div>
+            <h3>lead vocals: {theSong.feat}</h3>
+            {<Content />}
+          </div>
         </div>
-        {<Content />}
       </div>
     )
   }
 
   {
     sets.map((set, i) => (
-      <>
-        <h2>Set {++i}</h2>
-        <ol>
+      <div class="mt-12">
+        <h2 class="text-2xl">Set {++i}</h2>
+        <ol class="list-decimal pl-8 text-xl">
           {set.map((song) => (
-            <li>
-              <a href={`/trigger/shows/${show}/${song.songNo}`}>
-                {song.title}: {song.feat}
-              </a>
+            <li class="py-4">
+              <div>
+                <a href={`/trigger/shows/${show}/${song.songNo}`}>
+                  <span class="min-w-[12rem] inline-block">{song.title}</span>
+                </a>
+                <strong>{song.feat}</strong>
+              </div>
+              <div>{song.reminder}</div>
             </li>
           ))}
         </ol>
-      </>
+      </div>
     ))
   }
 </Layout>

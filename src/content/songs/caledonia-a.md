@@ -1,42 +1,43 @@
 ---
+title: Caledonia (in A)
 ---
 
-Capo on 5 to play in key of G major.
-[Actual G major chords here](/trigger/caledonia).
+POTENTIAL CHANGE - Do the song in A, with a seamless transition into Wagon
+Wheel.
 
 ```
-D               A
+A               E
 I don't know if you can see,
-    Bm                     G
+    F#m                    D
 The changes that have come over me.
-         D                  A
+         A                  E
 In these last few days I've been afraid,
-     Bm            G
+     F#m           D
 That I might drift away.
-          D                A
+          A                E
 I've been telling stories, singing songs,
-     Bm                  G
+     F#m                 D
 That make me think about where I come from.
-D                 A
+A                 E
 That's the reason why I seem
-   Bm         G
+   F#m        D
 So far away today.
 
 
 Chorus:
-        D                      A
+        A                      E
 Oh, but let me tell you that I love you
-       Bm                      G
+       F#m                     D
 That I think about you all the time
-D                A
+A                E
 Caledonia you're calling me
-            G     D
-And now I'm going home
-D                    A
+            D     A
+End now I'm going home
+A                    E
 If I should become a stranger
-              Bm                         G
+              F#m                        D
 You know that it would make me more than sad
-D                A                    D
+A                E                    A
 Caledonia's been everything I've ever had
 
 

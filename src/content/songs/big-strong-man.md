@@ -2,6 +2,15 @@
 title: Big Strong Man
 ---
 
+[YouTube link](https://www.youtube.com/watch?v=lVWykMPJlu4)
+
+[YouTube: Dublin O'Shea](https://www.youtube.com/watch?v=XxY2xat35qc)
+
+[Our recording](https://www.dropbox.com/s/rlooe53zsyptnnq/12%20Big%20Strong%20Man.m4a?dl=0)
+— Without intro
+
+[Intro into Big Strong Man MP3](/trigger/big-strong-man-intro.mp3)
+
 ```
 [Dublin O'Shea]
 

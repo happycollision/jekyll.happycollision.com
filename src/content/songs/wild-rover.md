@@ -2,6 +2,8 @@
 title: Wild Rover
 ---
 
+[YouTube link](https://www.youtube.com/watch?v=_jgd07Ica5s)
+
 ```
 [Verse 1]
      G                            C

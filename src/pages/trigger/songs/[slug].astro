@@ -1,0 +1,32 @@
+---
+import Layout from "$layouts/Layout.astro"
+import { getCollection, getEntryBySlug } from "astro:content"
+
+export async function getStaticPaths() {
+  const songs = (await getCollection("songs")).sort((a, b) =>
+    a.data.title
+      .replace(/^(a|the) /i, "")
+      .localeCompare(b.data.title.replace(/^(a|the) /i, "")),
+  )
+  return songs.map((s) => ({ params: { slug: s.slug }, props: { song: s } }))
+}
+
+const { slug } = Astro.params
+const { song } = Astro.props
+
+if (!slug) throw new Error("No slug to read")
+
+const entry = await getEntryBySlug("songs", slug)
+
+if (!entry) throw new Error("No entry for " + slug)
+
+const { Content } = await entry.render()
+---
+
+<Layout title={song.data.title} compact>
+  <a href="/trigger/songs">back to list</a>
+  <h1>
+    {song.data.title}
+  </h1>
+  <Content />
+</Layout>

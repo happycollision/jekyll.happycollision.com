@@ -1,8 +1,13 @@
 ---
+title: Nelson's Blood
 ---
 
+[YouTube link](https://www.youtube.com/watch?v=rFjnfsRoQo4)
+
+[Our recording](https://www.dropbox.com/s/auq38ftu8p49rlz/07%20Nelson%27s%20Blood.m4a?dl=0)
+
 ```
-Dm 
+Dm
 A drop of Nelson's blood wouldn't do us any harm
 C
 A drop of Nelson's blood wouldn't do us any harm

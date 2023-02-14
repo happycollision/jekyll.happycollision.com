@@ -1,0 +1,22 @@
+---
+import Layout from "$layouts/Layout.astro"
+import { getCollection } from "astro:content"
+
+const songs = (await getCollection("songs")).sort((a, b) =>
+  a.data.title
+    .replace(/^(a|the) /i, "")
+    .localeCompare(b.data.title.replace(/^(a|the) /i, "")),
+)
+---
+
+<Layout title="Songs" compact>
+  <ol class="list-decimal">
+    {
+      songs.map((song) => (
+        <li>
+          <a href={`/trigger/songs/${song.slug}`}>{song.data.title}</a>
+        </li>
+      ))
+    }
+  </ol>
+</Layout>

@@ -1,5 +1,8 @@
 ---
+title: Oh Maggie
 ---
+
+[YouTube link](https://www.youtube.com/watch?v=erFTFTjNtEE)
 
 Transcription from
 https://tabs.ultimate-guitar.com/tab/the-high-kings/oh-maggie-chords-2649372

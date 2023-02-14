@@ -1,5 +1,10 @@
 ---
+title: Black Velvet Band
 ---
+
+[YouTube link](https://www.youtube.com/watch?v=DfsgHyymG8E)
+
+[Our recording](https://www.dropbox.com/s/uu2ivw04kg3e7fs/04%20Black%20Velvet%20Band.m4a?dl=0)
 
 ```
 Verse 1:

@@ -65,7 +65,11 @@ const prevUrl =
   prevSongNum > 0 ? `/trigger/shows/${show}/${prevSongNum}` : undefined
 ---
 
-<Layout title={theSong ? `${show}: ${theSong.data.title}` : show} compact>
+<Layout
+  title={theSong ? `${show}: ${theSong.data.title}` : show}
+  compact
+  unconstrained
+>
   <a href={`/trigger/shows/${show}`}>
     {show}
   </a>
@@ -74,24 +78,28 @@ const prevUrl =
     theSong && Content && (
       <div class="markdown p-4 pt-20 bg-white/40 w-full">
         <div class="bg-white max-w-[1000px] m-auto z-10">
-          <div>
-            <a href={`/trigger/shows/${show}`}>Close</a>
+          <div class="mb-4">
+            <a href={`/trigger/shows/${show}`} class="text-2xl">
+              Close Song
+            </a>
           </div>
           <div class="overflow-y-auto">
             <div class="flex w-full justify-between">
               {prevUrl ? (
                 <a href={prevUrl}>← Previous Song</a>
               ) : (
-                <span>← Previous Song</span>
+                <span class="opacity-20">← Previous Song</span>
               )}
-              <h2>{theSong.data.title}</h2>
+              <div>
+                <h2 class="text-2xl">{theSong.data.title}</h2>
+                <h3>lead vocals: {theSong.feat}</h3>
+              </div>
               {nextUrl ? (
                 <a href={nextUrl}>Next Song →</a>
               ) : (
-                <span>Next Song →</span>
+                <span class="opacity-20">Next Song →</span>
               )}
             </div>
-            <h3>lead vocals: {theSong.feat}</h3>
             {<Content />}
           </div>
         </div>

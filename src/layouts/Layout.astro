@@ -3,6 +3,7 @@ import * as site from "$data/site"
 export interface Props {
   title: string
   compact?: boolean | undefined
+  unconstrained?: boolean | undefined
 }
 const rootMdPages = await Astro.glob<{ title: string; mainNav?: boolean }>(
   "../pages/*.md",
@@ -21,7 +22,7 @@ const pages = rootPages
     title: x.frontmatter.title,
   }))
 
-const { title, compact } = Astro.props
+const { title, compact, unconstrained } = Astro.props
 ---
 
 <!DOCTYPE html>
@@ -117,7 +118,7 @@ const { title, compact } = Astro.props
     </header>
 
     <div class="page-content">
-      <div class="wrapper">
+      <div class={unconstrained ? "" : "wrapper"}>
         <slot />
       </div>
     </div>

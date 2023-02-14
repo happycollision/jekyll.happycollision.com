@@ -42,6 +42,21 @@
 }
 
 /**
+  * Links
+  */
+.link {
+  color: #2a7ae2;
+  text-decoration: none;
+}
+.link:visited {
+  color: #1756a9;
+}
+.link:hover {
+  color: #111;
+  text-decoration: underline;
+}
+
+/**
   * Captions via table
   */
 table {

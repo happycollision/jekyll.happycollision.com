@@ -73,23 +73,28 @@ const { Content } = (await songDetails?.render()) ?? { Content: undefined }
   compact
   unconstrained
 >
-  <a href={showUrl}>
+  <a href={showUrl} class="link">
     {showName}
   </a>
 
   {
     songDetails && Content && (
-      <div class="markdown p-4 pt-20 bg-white/40 w-full">
-        <div class="bg-white max-w-[1000px] m-auto z-10">
+      <div class="p-4 bg-white/40 w-full">
+        <div class="bg-white max-w-[1000px] m-auto z-10 p-4">
           <div class="mb-4">
-            <a href={showUrl} class="text-2xl">
+            <a
+              href={showUrl}
+              class="text-2xl bg-neutral-200 rounded py-1 px-2 m-2 hover:bg-neutral-400"
+            >
               Close Song
             </a>
           </div>
           <div class="overflow-y-auto">
             <div class="flex w-full justify-between">
               {prevUrl ? (
-                <a href={prevUrl}>← Previous Song</a>
+                <a href={prevUrl} class="link">
+                  ← Previous Song
+                </a>
               ) : (
                 <span class="opacity-20">← Previous Song</span>
               )}
@@ -98,12 +103,16 @@ const { Content } = (await songDetails?.render()) ?? { Content: undefined }
                 <h3>lead vocals: {songDetails.feat}</h3>
               </div>
               {nextUrl ? (
-                <a href={nextUrl}>Next Song →</a>
+                <a href={nextUrl} class="link">
+                  Next Song →
+                </a>
               ) : (
                 <span class="opacity-20">Next Song →</span>
               )}
             </div>
-            {<Content />}
+            <div class="markdown text-xl">
+              <Content />
+            </div>
           </div>
         </div>
       </div>

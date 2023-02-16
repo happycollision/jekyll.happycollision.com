@@ -73,72 +73,84 @@ const { Content } = (await songDetails?.render()) ?? { Content: undefined }
   compact
   unconstrained
 >
-  <a href={showUrl} class="link">
-    {showName}
-  </a>
+  <div class="p-4 pt-0">
+    <h1 class="text-2xl text-center border-b border-neutral-400 pb-4">
+      <a href={showUrl} class="link">
+        {showName}
+      </a>
+    </h1>
 
-  {
-    songDetails && Content && (
-      <div class="p-4 bg-white/40 w-full">
-        <div class="bg-white max-w-[1000px] m-auto z-10 p-4">
-          <div class="mb-4">
-            <a
-              href={showUrl}
-              class="text-2xl bg-neutral-200 rounded py-1 px-2 m-2 hover:bg-neutral-400"
-            >
-              Close Song
-            </a>
-          </div>
-          <div class="overflow-y-auto">
-            <div class="flex w-full justify-between">
-              {prevUrl ? (
-                <a href={prevUrl} class="link">
-                  ← Previous Song
-                </a>
-              ) : (
-                <span class="opacity-20">← Previous Song</span>
-              )}
-              <div>
-                <h2 class="text-2xl">{songDetails.data.title}</h2>
-                <h3>lead vocals: {songDetails.feat}</h3>
-              </div>
-              {nextUrl ? (
-                <a href={nextUrl} class="link">
-                  Next Song →
-                </a>
-              ) : (
-                <span class="opacity-20">Next Song →</span>
-              )}
+    <div class="flex flex-col md:flex-row gap-4">
+      {
+        songDetails && Content && (
+          <div class="mt-4 md:order-1">
+            <div class="mb-4">
+              <a
+                href={showUrl}
+                class="text-xl bg-neutral-200 rounded py-1 px-2 hover:bg-neutral-400"
+              >
+                Close Song
+              </a>
             </div>
-            <div class="markdown text-xl">
-              <Content />
-            </div>
-          </div>
-        </div>
-      </div>
-    )
-  }
+            <div class="overflow-y-auto">
+              <div class="flex flex-wrap w-full justify-between">
+                <div>
+                  {prevUrl ? (
+                    <a href={prevUrl} class="link">
+                      ← Previous Song
+                    </a>
+                  ) : (
+                    <span class="opacity-20">← Previous Song</span>
+                  )}
+                </div>
 
-  {
-    sets.map((set, i) => (
-      <div class="mt-12">
-        <h2 class="text-2xl">Set {++i}</h2>
-        <ol class="list-decimal pl-8 text-xl">
-          {set.map((song) => (
-            <li class="py-4">
-              <div>
-                <a href={`${showUrl}/${song.songNo}`}>
-                  <span class="min-w-[12rem] inline-block">
-                    {song.data.title}
-                  </span>
-                </a>
-                <strong>{song.feat}</strong>
+                <div class="w-full order-1">
+                  <h2 class="text-3xl">{songDetails.data.title}</h2>
+                  <h3 class="text-xl">lead vocals: {songDetails.feat}</h3>
+                </div>
+
+                <div>
+                  {nextUrl ? (
+                    <a href={nextUrl} class="link">
+                      Next Song →
+                    </a>
+                  ) : (
+                    <span class="opacity-20">Next Song →</span>
+                  )}
+                </div>
               </div>
-              <div>{song.data.reminder}</div>
-            </li>
-          ))}
-        </ol>
+              <div class="markdown text-xl mt-4 [&>pre]:whitespace-pre-wrap">
+                <Content />
+              </div>
+            </div>
+          </div>
+        )
+      }
+
+      <div>
+        {
+          sets.map((set, i) => (
+            <div class="mt-4">
+              <h2 class="text-2xl">Set {++i}</h2>
+              <ol class="list-decimal pl-8 text-xl">
+                {set.map((song) => (
+                  <li class="py-4">
+                    <div>
+                      <a class="link" href={`${showUrl}/${song.songNo}`}>
+                        <span class="min-w-[12rem] inline-block">
+                          {song.data.title}
+                        </span>
+                      </a>
+                      <strong>{song.feat}</strong>
+                    </div>
+                    <div>{song.data.reminder}</div>
+                  </li>
+                ))}
+              </ol>
+            </div>
+          ))
+        }
       </div>
-    ))
-  }
+    </div>
+  </div>
 </Layout>

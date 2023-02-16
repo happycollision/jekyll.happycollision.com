@@ -5,7 +5,7 @@ title: Oh Maggie
 [YouTube link](https://www.youtube.com/watch?v=erFTFTjNtEE)
 
 Transcription from
-https://tabs.ultimate-guitar.com/tab/the-high-kings/oh-maggie-chords-2649372
+[this source online](https://tabs.ultimate-guitar.com/tab/the-high-kings/oh-maggie-chords-2649372)
 
 I've changed all the C# to C#m, as I am pretty sure that is what is actually
 going on. You can also use F#m (or A) to transitions between E and D or from D

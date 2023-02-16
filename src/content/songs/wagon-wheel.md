@@ -5,5 +5,114 @@ title: Wagon Wheel
 [YouTube link](https://www.youtube.com/watch?v=1gX1EP6mG-E)
 
 ```
+Wagon Wheel
 
+Capo 2nd fret (actual chords are A E F# D, A E D)
+
+G, D, Em, C
+G, D, C   2x
+
+G                        D
+Headed down south to the land of the pines
+        Em                   C
+And I'm thumbin' my way into North Caroline
+G
+Starin' up the road
+            D         C
+And pray to God I see headlights
+
+  G                         D
+I made it down the coast in seventeen hours
+Em                      C
+Pickin' me a bouquet of dogwood flowers
+          G
+And I'm a hopin' for Raleigh
+      D             C
+I can see my baby tonight
+
+   G                   D
+So rock me mama like a wagon wheel
+Em              C
+Rock me mama anyway you feel
+G   D     C
+Hey, mama rock me
+G                     D
+Rock me mama like the wind and the rain
+Em                  C
+Rock me mama like a south-bound train
+G   D     C
+Hey, mama rock me
+
+G, D, Em, C
+G, D, C
+
+G                     D
+Runnin' from the cold up in New England
+      Em                         C
+I was born to be a fiddler in an old-time stringband
+   G
+My baby plays the guitar
+D              C
+I pick a banjo now
+
+        G                            D
+Oh, the North country winters keep a gettin' me now
+        Em                       C
+Lost my money playin' poker so I had to up and leave
+      G
+But I ain't a turnin' back
+   D                    C
+To livin' that old life no more
+
+   G                   D
+So rock me mama like a wagon wheel
+Em              C
+Rock me mama anyway you feel
+G   D     C
+Hey, mama rock me
+G                     D
+Rock me mama like the wind and the rain
+Em                  C
+Rock me mama like a south-bound train
+G   D     C
+Hey, mama rock me
+
+G, D, Em, C
+G, D, C   2x
+
+G                    D
+Walkin' to the south out of Roanoke
+           Em
+I caught a trucker out of Philly
+      C
+Had a nice long toke
+    G                           D
+But he's a headed west from the Cumberland Gap
+   C
+To Johnson City, Tennessee
+
+      G                   D
+And I gotta get a move on fit for the sun
+          Em
+I hear my baby callin' my name
+      C
+And I know that she's the only one
+    G
+And if I die in Raleigh
+   D                C
+At least I will die free
+
+
+   G                   D
+So rock me mama like a wagon wheel
+Em              C
+Rock me mama anyway you feel
+G   D     C
+Hey, mama rock me
+G                     D
+Rock me mama like the wind and the rain
+Em                  C
+Rock me mama like a south-bound train
+G   D     C           G
+Hey, mama rock me
 ```

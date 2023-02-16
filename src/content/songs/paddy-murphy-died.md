@@ -4,8 +4,7 @@ title: The Night that Paddy Murphy Died
 
 [YouTube link](https://www.youtube.com/watch?v=q7Bsb-8pxG8)
 
-Original source:
-https://tabs.ultimate-guitar.com/tab/great-big-sea/the-night-pat-murphy-died-chords-860027
+[Original chords source](https://tabs.ultimate-guitar.com/tab/great-big-sea/the-night-pat-murphy-died-chords-860027)
 
 ```
 [Verse 1]

@@ -9,7 +9,9 @@ import { shows } from "./shows"
     {
       shows.map((show) => (
         <li>
-          <a href={`/trigger/shows/${show.slug}`}>{show.name}</a>
+          <a class="link" href={`/trigger/shows/${show.slug}`}>
+            {show.name}
+          </a>
         </li>
       ))
     }

@@ -1,43 +1,45 @@
 ---
-title: Caledonia (in A)
+title: Caledonia
+altTitle: Key of G, (capo 2 for A)
 ---
 
-POTENTIAL CHANGE - Do the song in A, with a seamless transition into Wagon
-Wheel.
+[YouTube link](https://www.youtube.com/watch?v=D0KZjmiL7xs)
+
+[Our recording (in D)](https://www.dropbox.com/s/35enbl2i0giyijm/14%20Caledonia.m4a?dl=0)
 
 ```
-A               E
+G               D
 I don't know if you can see,
-    F#m                    D
+    Em                     C
 The changes that have come over me.
-         A                  E
+         G                  D
 In these last few days I've been afraid,
-     F#m           D
+     Em            C
 That I might drift away.
-          A                E
+          G                D
 I've been telling stories, singing songs,
-     F#m                 D
+     Em                  C
 That make me think about where I come from.
-A                 E
+G                 D
 That's the reason why I seem
-   F#m        D
+   Em         C
 So far away today.
 
 
 Chorus:
-        A                      E
+        G                      D
 Oh, but let me tell you that I love you
-       F#m                     D
+       Em                      C
 That I think about you all the time
-A                E
+G                D
 Caledonia you're calling me
-            D     A
-End now I'm going home
-A                    E
+            C     G
+Dnd now I'm going home
+G                    D
 If I should become a stranger
-              F#m                        D
+              Em                         C
 You know that it would make me more than sad
-A                E                    A
+G                D                    G
 Caledonia's been everything I've ever had
 
 

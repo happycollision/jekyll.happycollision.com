@@ -5,6 +5,9 @@ import Layout from "$layouts/Layout.astro"
 import { shows } from "../shows"
 
 export async function getStaticPaths() {
+  function ensureArray<T>(x: T | T[]): T[] {
+    return Array.isArray(x) ? x : [x]
+  }
   const baseUrl = "/trigger/shows"
   const songList = await getCollection("songs")
 
@@ -12,13 +15,26 @@ export async function getStaticPaths() {
     let songNo = 0
     const sets = show.sets.map((songs) =>
       songs.map((song) => {
-        const found = songList.find((s) => s.slug === song.slug)
-        if (!found) throw new Error(`Couldn't find song ${song.slug}`)
+        const [slug, ...altSlugs] = ensureArray(song.slug)
+        const found = songList.find((s) => s.slug === slug)
+        if (!found) throw new Error(`Couldn't find song ${slug}`)
+
+        const altsFound = altSlugs.map((alt) => {
+          const altFound = songList.find((s) => s.slug === alt)
+          if (!altFound)
+            throw new Error(`Couldn't find alternative song ${alt}`)
+          return altFound
+        })
 
         return {
           ...song,
           ...found,
           songNo: ++songNo,
+          altVersions: altsFound.map((alt) => ({
+            ...song,
+            ...alt,
+            songNo,
+          })),
         }
       }),
     )
@@ -30,31 +46,84 @@ export async function getStaticPaths() {
     }
 
     const allSongs = sets.flat()
-    return [
-      {
-        params: { path: show.slug },
 
-        props: {
-          ...baseProps,
-          songDetails: undefined as (typeof allSongs)[number] | undefined,
-          nextUrl: undefined as string | undefined,
-          prevUrl: undefined as string | undefined,
-        },
+    const baseRoute = {
+      params: { path: show.slug },
+
+      props: {
+        ...baseProps,
+        songDetails: undefined as
+          | Omit<(typeof allSongs)[number], "altVersions">
+          | undefined,
+        thisUrl: baseProps.showUrl,
+        nextUrl: undefined as string | undefined,
+        prevUrl: undefined as string | undefined,
+        altVersions: undefined as
+          | { path: string; title: string | undefined }[]
+          | undefined,
       },
-      ...allSongs.map((s, i, arr) => ({
-        params: { path: `${show.slug}/${s.songNo}` },
+    }
 
-        props: {
-          ...baseProps,
-          songDetails: s,
-          nextUrl:
-            i < arr.length - 1
-              ? `${baseUrl}/${show.slug}/${s.songNo + 1}`
-              : undefined,
-          prevUrl:
-            i > 0 ? `${baseUrl}/${show.slug}/${s.songNo - 1}` : undefined,
-        },
-      })),
+    return [
+      baseRoute,
+      ...allSongs.flatMap((s, i, arr): (typeof baseRoute)[] => {
+        const { altVersions, ...details } = s
+
+        const altProps = altVersions.length
+          ? [
+              {
+                path: `${baseProps.showUrl}/${s.songNo}`,
+                title: s.data.altTitle,
+              },
+              ...altVersions.map((alt) => ({
+                path: `${baseProps.showUrl}/${s.songNo}/alt/${
+                  alt.slug.split("_")[1]
+                }`,
+                title: alt.data.altTitle,
+              })),
+            ]
+          : undefined
+
+        const altsInfo = altVersions.map((alt) => ({
+          params: {
+            path: `${show.slug}/${s.songNo}/alt/${alt.slug.split("_")[1]}`,
+          },
+
+          props: {
+            ...baseProps,
+            songDetails: alt,
+            thisUrl: `${baseProps.showUrl}/${s.songNo}/alt/${
+              alt.slug.split("_")[1]
+            }`,
+            nextUrl:
+              i < arr.length - 1
+                ? `${baseProps.showUrl}/${s.songNo + 1}`
+                : undefined,
+            prevUrl: i > 0 ? `${baseProps.showUrl}/${s.songNo - 1}` : undefined,
+            altVersions: altProps,
+          },
+        }))
+
+        return [
+          {
+            params: { path: `${show.slug}/${s.songNo}` },
+
+            props: {
+              ...baseProps,
+              songDetails: details,
+              thisUrl: `${baseProps.showUrl}/${s.songNo}`,
+              nextUrl:
+                i < arr.length - 1
+                  ? `${baseProps.showUrl}/${s.songNo + 1}`
+                  : undefined,
+              prevUrl:
+                i > 0 ? `${baseProps.showUrl}/${s.songNo - 1}` : undefined,
+              altVersions: altProps,
+            },
+          },
+          ...altsInfo,
+        ]
+      }),
     ]
   })
 }
@@ -63,7 +132,8 @@ type GspProps = Awaited<ReturnType<typeof getStaticPaths>>[number]["props"]
 
 interface Props extends GspProps {}
 
-const { sets, songDetails, nextUrl, prevUrl, showUrl, showName } = Astro.props
+const { sets, songDetails, nextUrl, prevUrl, showUrl, showName, altVersions } =
+  Astro.props
 
 const { Content } = (await songDetails?.render()) ?? { Content: undefined }
 ---
@@ -80,10 +150,10 @@ const { Content } = (await songDetails?.render()) ?? { Content: undefined }
       </a>
     </h1>
 
-    <div class="flex flex-col md:flex-row gap-4">
+    <div class="flex flex-col lg:flex-row gap-4">
       {
         songDetails && Content && (
-          <div class="mt-4 md:order-1">
+          <div class="mt-4 lg:order-1 lg:grow">
             <div class="mb-4">
               <a
                 href={showUrl}
@@ -104,7 +174,7 @@ const { Content } = (await songDetails?.render()) ?? { Content: undefined }
                   )}
                 </div>
 
-                <div class="w-full order-1">
+                <div class="w-full order-1 lg:order-none lg:w-auto">
                   <h2 class="text-3xl">{songDetails.data.title}</h2>
                   <h3 class="text-xl">lead vocals: {songDetails.feat}</h3>
                 </div>
@@ -119,6 +189,30 @@ const { Content } = (await songDetails?.render()) ?? { Content: undefined }
                   )}
                 </div>
               </div>
+
+              {altVersions && (
+                <div class="text-center mt-2">
+                  <ul class="border border-blue-400 inline-flex rounded">
+                    {altVersions.map((alt, i, arr) => {
+                      const isLast = arr.length === i + 1
+                      const isActive = Astro.url.pathname === alt.path
+                      return (
+                        <li class="flex">
+                          <a
+                            href={alt.path}
+                            class={`px-2 py-1 ${
+                              isLast ? "" : "border-r"
+                            } border-blue-400 ${isActive ? "bg-blue-400" : ""}`}
+                          >
+                            {alt.title}
+                          </a>
+                        </li>
+                      )
+                    })}
+                  </ul>
+                </div>
+              )}
+
               <div class="markdown text-xl mt-4 [&>pre]:whitespace-pre-wrap">
                 <Content />
               </div>
@@ -127,7 +221,7 @@ const { Content } = (await songDetails?.render()) ?? { Content: undefined }
         )
       }
 
-      <div>
+      <div class="lg:w-96 shrink-0">
         {
           sets.map((set, i) => (
             <div class="mt-4">
@@ -135,7 +229,10 @@ const { Content } = (await songDetails?.render()) ?? { Content: undefined }
               <ol class="list-decimal text-xl">
                 {set.map((song) => {
                   const isActive =
-                    Astro.url.pathname === `${showUrl}/${song.songNo}`
+                    Astro.url.pathname === `${showUrl}/${song.songNo}` ||
+                    Astro.url.pathname.startsWith(
+                      `${showUrl}/${song.songNo}/alt`,
+                    )
 
                   return (
                     <a

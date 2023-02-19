@@ -1,9 +1,11 @@
 ---
-title: Caledonia (in D)
+title: Caledonia
+altTitle: Key of D
 ---
 
-Capo on 5 to play in key of G major.
-[Actual G major chords here](/trigger/caledonia).
+[YouTube link](https://www.youtube.com/watch?v=D0KZjmiL7xs)
+
+[Our recording](https://www.dropbox.com/s/35enbl2i0giyijm/14%20Caledonia.m4a?dl=0)
 
 ```
 D               A

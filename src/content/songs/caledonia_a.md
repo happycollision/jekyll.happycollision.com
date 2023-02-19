@@ -1,53 +1,47 @@
 ---
 title: Caledonia
+altTitle: Key of A
 ---
 
 [YouTube link](https://www.youtube.com/watch?v=D0KZjmiL7xs)
 
-[Our recording](https://www.dropbox.com/s/35enbl2i0giyijm/14%20Caledonia.m4a?dl=0)
-
-[Chords](/trigger/caledonia)
-
-[Alt Key with transition to Wagon Wheel?](/trigger/songs/caledonia-a)
+[Our recording (in D)](https://www.dropbox.com/s/35enbl2i0giyijm/14%20Caledonia.m4a?dl=0)
 
 [Recording of suggestion transition](/trigger/caledonia-transition.mp3)
 
-These chords are in the actual key we will play in: G major. If you'd rather
-play with D major shapes, [look at this one](/trigger/songs/caledonia-d)
-
 ```
-G               D
+A               E
 I don't know if you can see,
-    Em                     C
+    F#m                    D
 The changes that have come over me.
-         G                  D
+         A                  E
 In these last few days I've been afraid,
-     Em            C
+     F#m           D
 That I might drift away.
-          G                D
+          A                E
 I've been telling stories, singing songs,
-     Em                  C
+     F#m                 D
 That make me think about where I come from.
-G                 D
+A                 E
 That's the reason why I seem
-   Em         C
+   F#m        D
 So far away today.
 
 
 Chorus:
-        G                      D
+        A                      E
 Oh, but let me tell you that I love you
-       Em                      C
+       F#m                     D
 That I think about you all the time
-G                D
+A                E
 Caledonia you're calling me
-            C     G
-Dnd now I'm going home
-G                    D
+            D     A
+End now I'm going home
+A                    E
 If I should become a stranger
-              Em                         C
+              F#m                        D
 You know that it would make me more than sad
-G                D                    G
+A                E                    A
 Caledonia's been everything I've ever had
 
 

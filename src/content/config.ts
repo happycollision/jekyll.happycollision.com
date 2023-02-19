@@ -4,6 +4,7 @@ const songs = defineCollection({
   schema: z.object({
     title: z.string(),
     reminder: z.optional(z.string()),
+    altTitle: z.optional(z.string()),
   }),
 })
 

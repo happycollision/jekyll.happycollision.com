@@ -1,4 +1,4 @@
-type ShowSong = { slug: string; feat?: string | undefined }
+type ShowSong = { slug: string | string[]; feat?: string | undefined }
 type ShowSet = ShowSong[]
 type Show = { name: string; slug: string; sets: ShowSet[] }
 
@@ -33,7 +33,7 @@ export const shows: Show[] = [
         { slug: "come-my-friends", feat: "Don" },
         { slug: "son-never-shines", feat: "Don" },
         { slug: "danny-boy", feat: "Don" },
-        { slug: "caledonia", feat: "Don" },
+        { slug: ["caledonia_a", "caledonia_g"], feat: "Don" },
         { slug: "road-to-ruin", feat: "WP" },
         { slug: "jack-dolan", feat: "WP" },
         { slug: "new-york-girls", feat: "WP" },

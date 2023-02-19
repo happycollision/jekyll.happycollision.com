@@ -29,7 +29,7 @@ export const shows: Show[] = [
         { slug: "paddy-on-the-railway", feat: "WP" },
         { slug: "big-strong-man", feat: "Adam" },
         { slug: "molly-malone", feat: "WP" },
-        { slug: "oh-maggie", feat: "Nick" },
+        { slug: ["oh-maggie_g", "oh-maggie_a"], feat: "Nick" },
         { slug: "come-my-friends", feat: "Don" },
         { slug: "son-never-shines", feat: "Don" },
         { slug: "danny-boy", feat: "Don" },

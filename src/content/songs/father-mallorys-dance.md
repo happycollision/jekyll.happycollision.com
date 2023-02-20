@@ -1,5 +1,6 @@
 ---
 title: Father Mallory's Dance
+reminder: D ..... G D, C G G/F# Em D G D
 ---
 
 [YouTube link](https://www.youtube.com/watch?v=2uB7HDrxx04)

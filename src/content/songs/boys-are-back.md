@@ -1,5 +1,6 @@
 ---
 title: The Boys Are Back
+reminder: Bb Eb, Bb Eb, Bb Eb F
 ---
 
 [YouTube link](https://www.youtube.com/watch?v=A1NZcH2haIM)

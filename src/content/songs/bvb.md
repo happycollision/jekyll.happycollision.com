@@ -1,5 +1,6 @@
 ---
 title: Black Velvet Band
+reminder: G C A7 D7, G Em C D7 G
 ---
 
 [YouTube link](https://www.youtube.com/watch?v=DfsgHyymG8E)

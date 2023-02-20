@@ -1,5 +1,6 @@
 ---
 title: The Night that Paddy Murphy Died
+reminder: A D A, A F#m D E....
 ---
 
 [YouTube link](https://www.youtube.com/watch?v=q7Bsb-8pxG8)

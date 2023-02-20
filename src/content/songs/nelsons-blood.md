@@ -1,5 +1,6 @@
 ---
 title: Nelson's Blood
+reminder: Dm C
 ---
 
 [YouTube link](https://www.youtube.com/watch?v=rFjnfsRoQo4)

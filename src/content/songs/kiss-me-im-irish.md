@@ -1,5 +1,6 @@
 ---
 title: Kiss Me I'm Irish
+reminder: G D C D, G Em C D
 ---
 
 [YouTube link](https://www.youtube.com/watch?v=3DldhiAw7l8)

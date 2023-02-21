@@ -1,5 +1,6 @@
 ---
 title: Rattlin' Bog
+reminder: D G D A
 ---
 
 [YouTube link](https://www.youtube.com/watch?v=aLHuu3Ygvns)

@@ -1,5 +1,6 @@
 ---
 title: Molly Malone
+reminder: C Am Dm G
 ---
 
 [YouTube link](https://www.youtube.com/watch?v=R5p_mL-pnWw) (we do it more

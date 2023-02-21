@@ -1,6 +1,7 @@
 ---
 title: Caledonia
 altTitle: Key of A
+reminder: A E F#m D
 ---
 
 [YouTube link](https://www.youtube.com/watch?v=D0KZjmiL7xs)

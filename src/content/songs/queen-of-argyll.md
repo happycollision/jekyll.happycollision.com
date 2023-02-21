@@ -1,5 +1,6 @@
 ---
 title: Queen of Argyll
+reminder: Dm Am, GC GC GCDm
 ---
 
 [YouTube link](https://www.youtube.com/watch?v=kEQ_glAuUhA)
@@ -16,9 +17,9 @@ Though I own she is a creature Of character and feature
 Dm                                    Am           Dm
 No words can paint the picture of the Queen of ole Argyll
 
-Chorus:
+[Chorus:]
 And if you could have seen her there, boys if you had just been there
-The swann was in her movement, and the morning in her smile
+The swan was in her movement, and the morning in her smile
 All the roses in the garden, they bow and ask her pardon
 For not one could match the beauty of the queen of ole Argyll
 

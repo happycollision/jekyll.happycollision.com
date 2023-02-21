@@ -1,5 +1,6 @@
 ---
 title: Drunken Sailor
+reminder: Dm C Dm F Am C Dm
 ---
 
 [YouTube link](https://www.youtube.com/watch?v=KI_l7U-nUmg)

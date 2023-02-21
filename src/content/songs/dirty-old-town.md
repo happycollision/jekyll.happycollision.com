@@ -1,5 +1,6 @@
 ---
 title: Dirty Old Town
+reminder: G C G D Em
 ---
 
 [YouTube link](https://www.youtube.com/watch?v=s11BuatTuXk)

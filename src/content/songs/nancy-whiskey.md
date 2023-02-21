@@ -1,5 +1,6 @@
 ---
 title: Nancy Whiskey
+reminder: G C G D
 ---
 
 [YouTube link](https://www.youtube.com/watch?v=OYFZltGztok)
@@ -7,9 +8,13 @@ title: Nancy Whiskey
 [Our recording](https://www.dropbox.com/s/6w1o9naes9b5waf/11%20Nancy%20Whiskey.m4a?dl=0)
 
 ```
+G                 C
 Whiskey, Whiskey, Nancy Whiskey
+G                 D
 Whiskey, Whiskey, Nancy-O
+G               C
 I've got silver in me pocket
+G                     D
 And I'll follow where e'er you go
 
 I'm a weaver, a Calton weaver, I'm a rash and a roving blade

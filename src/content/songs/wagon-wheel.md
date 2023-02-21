@@ -1,5 +1,6 @@
 ---
 title: Wagon Wheel
+reminder: "capo 2: G D Em C; no capo: A E F#m D"
 ---
 
 [YouTube link](https://www.youtube.com/watch?v=1gX1EP6mG-E)
@@ -7,7 +8,7 @@ title: Wagon Wheel
 ```
 Wagon Wheel
 
-Capo 2nd fret (actual chords are A E F# D, A E D)
+Capo 2nd fret (actual chords are A E F#m D, A E D)
 
 G, D, Em, C
 G, D, C   2x

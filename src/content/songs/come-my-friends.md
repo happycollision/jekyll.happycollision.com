@@ -1,5 +1,6 @@
 ---
 title: Come My Friends and Drink with Me
+reminder: D G D A
 ---
 
 [Recording](https://www.dropbox.com/s/qz9b003lmxqsf51/10%20Come%20My%20Friends%20and%20Drink%20With%20Me.m4a?dl=0)

@@ -1,5 +1,6 @@
 ---
 title: The Irish Rover
+reminder: G C G G D...
 ---
 
 [YouTube link](https://www.youtube.com/watch?v=yAEFKjqPtlU)

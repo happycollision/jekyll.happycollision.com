@@ -1,5 +1,6 @@
 ---
 title: Danny Boy
+reminder: D Dmaj7 D7 G Gm...
 ---
 
 [YouTube link](https://www.youtube.com/watch?v=a9CKSLG5cck)

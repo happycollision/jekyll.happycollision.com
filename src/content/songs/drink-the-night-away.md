@@ -1,6 +1,6 @@
 ---
 title: Drink the Night away
-reminder: "Chorus: G C G—— G D G, Verse: G D C"
+reminder: "Chorus: G C G, G D G, Verse: G D C"
 ---
 
 [YouTube link](https://www.youtube.com/watch?v=IpkG1keJ3UY)

@@ -1,5 +1,6 @@
 ---
 title: Come Out Ye Black and Tans
+reminder: Dm C Dm, F C Am Dm C Dm
 ---
 
 [YouTube link](https://www.youtube.com/watch?v=E1R48hHU0Ys)

@@ -1,6 +1,6 @@
 ---
 title: Fightin' Nolan
-reminder: "mostly D G D A,  'before we cross the sea----': G A D"
+reminder: 'mostly D G D A,  "before we cross the sea": G A D'
 ---
 
 [Our recording](https://www.dropbox.com/s/3dwti4g0m8eypgx/13%20Fightin%27%20Nolan.m4a?dl=0)

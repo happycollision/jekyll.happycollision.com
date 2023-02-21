@@ -1,5 +1,6 @@
 ---
 title: Big Strong Man
+reminder: D A
 ---
 
 [YouTube link](https://www.youtube.com/watch?v=lVWykMPJlu4)

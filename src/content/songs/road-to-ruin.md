@@ -1,5 +1,6 @@
 ---
 title: Road to Ruin
+reminder: G C G D... Em D
 ---
 
 [YouTube link](https://www.youtube.com/watch?v=ru3NBulbdc4)

@@ -53,6 +53,7 @@ export const shows: Show[] = [
         { slug: "scotsman", feat: "Adam" },
         { slug: "whiskey-in-the-world", feat: "WP" },
         { slug: "queen-of-argyll", feat: "WP" },
+        { slug: "parting-glass", feat: "Don" },
         { slug: "whiskey-in-the-jar", feat: "WP" },
       ],
     ],

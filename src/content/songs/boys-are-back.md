@@ -1,6 +1,6 @@
 ---
 title: The Boys Are Back
-reminder: Bb Eb, Bb Eb, Bb Eb F
+reminder: A  D , A  D , A  D  E
 ---
 
 [YouTube link](https://www.youtube.com/watch?v=A1NZcH2haIM)
@@ -10,19 +10,19 @@ reminder: Bb Eb, Bb Eb, Bb Eb F
 ```
 [Intro]
 
-Bb Eb Bb Eb Bb Eb F
-Bb Eb Bb Eb Bb Eb F
+A  D  A  D  A  D  E
+A  D  A  D  A  D  E
 
 
 [Chorus]
 
-    Bb       Eb
+    A        D
 The boys are back
-    Bb       Eb
+    A        D
 The boys are back
-    Bb       Eb
+    A        D
 The boys are back
-            F
+            E
 And they're looking for trouble
 
 
@@ -31,9 +31,9 @@ And they're looking for trouble
 
 [Verse (same chords as everything else)]
 
-Bb              Eb        Bb Eb
+A               D         A  D
 Standing on the highway on 93
-    Bb         Eb             F
+    A          D              E
 I'm missing my home, and it's killing me
 Down the ramp passed the jail, I'm feeling alright
 Bought roses for my ladies from a corner delight
@@ -43,9 +43,9 @@ Let's go my friends, it's time to take a chance
 We're back in town, we're gonna get it done
 We got nowhere to hide, we got nowhere to run
 
-Eb                    F
+D                     E
 It's been a long time coming,
-Eb                    F
+D                     E
 It's been a long time coming,
 
 
@@ -54,7 +54,7 @@ It's been a long time coming,
 
 [Interlude]
 
-Bb Eb Bb Eb Bb Eb F
+A  D  A  D  A  D  E
 
 
 [Verse 2]
@@ -64,18 +64,18 @@ You'd be just another nobody, you'd disappear
 Your days are numbered, we're back around
 We're coming for you and you're going down
 
-Eb                    F
+D                     E
 It's been a long time coming,
-Eb                    F
+D                     E
 It's been a long time coming,
 
 
 [Chorus 2 times]
 
 
-Eb                   F
+D                    E
 And we're coming for you
-Eb                   F
+D                    E
 And we're coming for you
 
 
@@ -84,9 +84,9 @@ And we're coming for you
 
 [Outro]
 
-    Bb Eb Bb Eb Bb Eb F
+    A  D  A  D  A  D  E
 For you
 
-Bb Eb Bb Eb Bb Eb F
+A  D  A  D  A  D  E
 
 ```

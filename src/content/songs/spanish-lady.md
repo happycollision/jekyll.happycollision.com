@@ -3,6 +3,10 @@ title: The Spanish Lady
 reminder: G Em C G C D
 ---
 
+[St. Patrick's Close](https://commons.wikimedia.org/wiki/File:Saint_Patrick%27s_Close,_Dublin_.PNG)
+
+[Recording](/trigger/spanish-lady.mp3)
+
 ```
    G                   Em
 As I came down through Dublin City
@@ -44,12 +48,27 @@ A maid so sweet about the sole
 --Chorus--
 
 I’ve wandered North, and I have wonder South
-Through Stoney Barter and Patricks Close
+Through Stoney Barter and Patrick's Close
 Up and around, by the Gloucester Diamond
-And back by Napper Tandys' house
+And back by Napper Tandy's house
+
+[instantly slow, recitative]
+
 Auld age has laid her hands on me
 Cold as a fire of ashy coals....
 But, where is the love of me Spanish Lady, a maid so sweet
 about the soul
---Chorus----Chorus--
+
+[still slow, quick speed up at final D chord]
+--Chorus--
+
+[original tempo]
+--Chorus--
+
+[original tempo, modified last line]
+Whack for the toora loora laddy
+Whack for the toora loora lay
+Whack for the toora loora laddy
+C/            G/       D/ G_________
+Whack for the toora loora lay
 ```

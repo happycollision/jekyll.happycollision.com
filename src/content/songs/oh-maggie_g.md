@@ -33,13 +33,13 @@ D            Em              C    G     D
 Walking down broadway in the blinding   light
             Em            G
 The city is ringing in my ears
-D         Em             C          D           C
+D         Em             C   G      D           C
 Trying to work out how a few months turned into years
-D               Em                C   D
+D               Em                C  G  D
 She cradles the young ones by the fireside
            Em           G
 Smoldering embers among tears
-D              Em                 C          D          C
+D              Em                 C   G      D          C
 Collects a few bar bites and each fortnight, I'm in her ears.
         D
 And she fears, and I say.

@@ -5,6 +5,8 @@ altTitle: Key of G (capo 2 for A)
 
 [YouTube link](https://www.youtube.com/watch?v=erFTFTjNtDD)
 
+[Vocal parts recording](/trigger/maggie-intro.mp3)
+
 Transcription from
 [this source online](https://tabs.ultimate-guitar.com/tab/the-high-kings/oh-maggie-chords-2649372)
 

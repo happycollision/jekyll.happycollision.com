@@ -7,6 +7,9 @@ altTitle: Key of G, (capo 2 for A)
 
 [Our recording (in D)](https://www.dropbox.com/s/35enbl2i0giyijm/14%20Caledonia.m4a?dl=0)
 
+[Recording of suggestion transition](/trigger/caledonia-transition.mp3)
+
+[Entire ending explanation and transition](/trigger/caledonia-ending.mp3)
 ```
 G               D
 I don't know if you can see,
@@ -56,6 +59,9 @@ Somewhere in the wind
 
 --Chorus--
 
+[Instrumental - half a verse]
+G D Em C
+G D Em C
 
 Now I'm sitting here before the fire
 The empty room, the forest choir
@@ -68,4 +74,8 @@ Then I will disappear
 
 
 --Chorus--
+--Chorus (last line 3 times)--
+
+[humming]
+G D Em C, G
 ```

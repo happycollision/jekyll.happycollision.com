@@ -10,6 +10,8 @@ reminder: A E F#m D
 
 [Recording of suggestion transition](/trigger/caledonia-transition.mp3)
 
+[Entire ending explanation and transition](/trigger/caledonia-ending.mp3)
+
 ```
 A               E
 I don't know if you can see,
@@ -59,6 +61,9 @@ Somewhere in the wind
 
 --Chorus--
 
+[Instrumental - half a verse]
+A E F#m D
+A E F#m D
 
 Now I'm sitting here before the fire
 The empty room, the forest choir
@@ -71,4 +76,8 @@ Then I will disappear
 
 
 --Chorus--
+--Chorus (last line 3 times)--
+
+[humming]
+A E F#m D, A
 ```

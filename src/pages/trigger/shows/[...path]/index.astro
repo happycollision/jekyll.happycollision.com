@@ -1,5 +1,6 @@
 ---
 import { getCollection } from "astro:content"
+import { urlsMatch } from "$lib/urls"
 import Layout from "$layouts/Layout.astro"
 
 import { shows } from "../shows"
@@ -195,7 +196,7 @@ const { Content } = (await songDetails?.render()) ?? { Content: undefined }
                   <ul class="border border-blue-400 inline-flex rounded">
                     {altVersions.map((alt, i, arr) => {
                       const isLast = arr.length === i + 1
-                      const isActive = Astro.url.pathname === alt.path
+                      const isActive = urlsMatch(Astro.url.pathname, alt.path)
                       return (
                         <li class="flex">
                           <a
@@ -229,7 +230,10 @@ const { Content } = (await songDetails?.render()) ?? { Content: undefined }
               <ol class="list-decimal text-xl">
                 {set.map((song) => {
                   const isActive =
-                    Astro.url.pathname === `${showUrl}/${song.songNo}` ||
+                    urlsMatch(
+                      Astro.url.pathname,
+                      `${showUrl}/${song.songNo}`,
+                    ) ||
                     Astro.url.pathname.startsWith(
                       `${showUrl}/${song.songNo}/alt`,
                     )

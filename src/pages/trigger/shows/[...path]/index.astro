@@ -1,6 +1,6 @@
 ---
 import { getCollection } from "astro:content"
-import { urlsMatch } from "$lib/urls"
+import { urlsMatch, slasher as s } from "$lib/urls"
 import Layout from "$layouts/Layout.astro"
 
 import { shows } from "../shows"
@@ -17,11 +17,11 @@ export async function getStaticPaths() {
     const sets = show.sets.map((songs) =>
       songs.map((song) => {
         const [slug, ...altSlugs] = ensureArray(song.slug)
-        const found = songList.find((s) => s.slug === slug)
+        const found = songList.find((x) => x.slug === slug)
         if (!found) throw new Error(`Couldn't find song ${slug}`)
 
         const altsFound = altSlugs.map((alt) => {
-          const altFound = songList.find((s) => s.slug === alt)
+          const altFound = songList.find((x) => x.slug === alt)
           if (!altFound)
             throw new Error(`Couldn't find alternative song ${alt}`)
           return altFound
@@ -43,7 +43,7 @@ export async function getStaticPaths() {
     const baseProps = {
       showName: show.name,
       sets,
-      showUrl: `${baseUrl}/${show.slug}`,
+      showUrl: s`${baseUrl}/${show.slug}`,
     }
 
     const allSongs = sets.flat()
@@ -67,17 +67,17 @@ export async function getStaticPaths() {
 
     return [
       baseRoute,
-      ...allSongs.flatMap((s, i, arr): (typeof baseRoute)[] => {
-        const { altVersions, ...details } = s
+      ...allSongs.flatMap((x, i, arr): (typeof baseRoute)[] => {
+        const { altVersions, ...details } = x
 
         const altProps = altVersions.length
           ? [
               {
-                path: `${baseProps.showUrl}/${s.songNo}`,
-                title: s.data.altTitle,
+                path: s`${baseProps.showUrl}/${x.songNo}`,
+                title: x.data.altTitle,
               },
               ...altVersions.map((alt) => ({
-                path: `${baseProps.showUrl}/${s.songNo}/alt/${
+                path: s`${baseProps.showUrl}/${x.songNo}/alt/${
                   alt.slug.split("_")[1]
                 }`,
                 title: alt.data.altTitle,
@@ -87,38 +87,39 @@ export async function getStaticPaths() {
 
         const altsInfo = altVersions.map((alt) => ({
           params: {
-            path: `${show.slug}/${s.songNo}/alt/${alt.slug.split("_")[1]}`,
+            path: `${show.slug}/${x.songNo}/alt/${alt.slug.split("_")[1]}`,
           },
 
           props: {
             ...baseProps,
             songDetails: alt,
-            thisUrl: `${baseProps.showUrl}/${s.songNo}/alt/${
+            thisUrl: s`${baseProps.showUrl}/${x.songNo}/alt/${
               alt.slug.split("_")[1]
             }`,
             nextUrl:
               i < arr.length - 1
-                ? `${baseProps.showUrl}/${s.songNo + 1}`
+                ? s`${baseProps.showUrl}/${x.songNo + 1}`
                 : undefined,
-            prevUrl: i > 0 ? `${baseProps.showUrl}/${s.songNo - 1}` : undefined,
+            prevUrl:
+              i > 0 ? s`${baseProps.showUrl}/${x.songNo - 1}` : undefined,
             altVersions: altProps,
           },
         }))
 
         return [
           {
-            params: { path: `${show.slug}/${s.songNo}` },
+            params: { path: `${show.slug}/${x.songNo}` },
 
             props: {
               ...baseProps,
               songDetails: details,
-              thisUrl: `${baseProps.showUrl}/${s.songNo}`,
+              thisUrl: s`${baseProps.showUrl}/${x.songNo}`,
               nextUrl:
                 i < arr.length - 1
-                  ? `${baseProps.showUrl}/${s.songNo + 1}`
+                  ? s`${baseProps.showUrl}/${x.songNo + 1}`
                   : undefined,
               prevUrl:
-                i > 0 ? `${baseProps.showUrl}/${s.songNo - 1}` : undefined,
+                i > 0 ? s`${baseProps.showUrl}/${x.songNo - 1}` : undefined,
               altVersions: altProps,
             },
           },
@@ -235,7 +236,7 @@ const { Content } = (await songDetails?.render()) ?? { Content: undefined }
                       `${showUrl}/${song.songNo}`,
                     ) ||
                     Astro.url.pathname.startsWith(
-                      `${showUrl}/${song.songNo}/alt`,
+                      `${showUrl}/${song.songNo}/alt/`,
                     )
 
                   return (
@@ -245,7 +246,7 @@ const { Content } = (await songDetails?.render()) ?? { Content: undefined }
                         "block " +
                         (isActive ? "bg-neutral-200" : "hover:bg-blue-200")
                       }
-                      href={`${showUrl}/${song.songNo}`}
+                      href={s`${showUrl}/${song.songNo}`}
                     >
                       <li class="py-4 ml-12 pl-0">
                         <div>

@@ -157,7 +157,7 @@ const { Content } = (await songDetails?.render()) ?? { Content: undefined }
           <div class="mt-4 lg:order-1 lg:grow">
             <div class="mb-4">
               <a
-                href={showUrl}
+                href={`${showUrl}#${songDetails.slug}`}
                 class="text-xl bg-blue-600 text-white rounded py-1 px-2 hover:bg-blue-500"
               >
                 Close Song
@@ -240,6 +240,7 @@ const { Content } = (await songDetails?.render()) ?? { Content: undefined }
 
                   return (
                     <a
+                      id={song.slug}
                       class={
                         "block " +
                         (isActive ? "bg-neutral-200" : "hover:bg-blue-200")

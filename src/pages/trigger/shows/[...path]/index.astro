@@ -56,6 +56,7 @@ export async function getStaticPaths() {
         songDetails: undefined as
           | Omit<(typeof allSongs)[number], "altVersions">
           | undefined,
+        safeSlug: undefined as string | undefined,
         thisUrl: baseProps.showUrl,
         nextUrl: undefined as string | undefined,
         prevUrl: undefined as string | undefined,
@@ -93,6 +94,7 @@ export async function getStaticPaths() {
           props: {
             ...baseProps,
             songDetails: alt,
+            safeSlug: x.slug,
             thisUrl: s`${baseProps.showUrl}/${x.songNo}/alt/${
               alt.slug.split("_")[1]
             }`,
@@ -113,6 +115,7 @@ export async function getStaticPaths() {
             props: {
               ...baseProps,
               songDetails: details,
+              safeSlug: x.slug,
               thisUrl: s`${baseProps.showUrl}/${x.songNo}`,
               nextUrl:
                 i < arr.length - 1
@@ -134,8 +137,16 @@ type GspProps = Awaited<ReturnType<typeof getStaticPaths>>[number]["props"]
 
 interface Props extends GspProps {}
 
-const { sets, songDetails, nextUrl, prevUrl, showUrl, showName, altVersions } =
-  Astro.props
+const {
+  sets,
+  songDetails,
+  safeSlug,
+  nextUrl,
+  prevUrl,
+  showUrl,
+  showName,
+  altVersions,
+} = Astro.props
 
 const { Content } = (await songDetails?.render()) ?? { Content: undefined }
 ---
@@ -158,7 +169,7 @@ const { Content } = (await songDetails?.render()) ?? { Content: undefined }
           <div class="mt-4 lg:order-1 lg:grow">
             <div class="mb-4">
               <a
-                href={`${showUrl}#${songDetails.slug}`}
+                href={`${showUrl}#${safeSlug}`}
                 class="text-xl bg-blue-600 text-white rounded py-1 px-2 hover:bg-blue-500"
               >
                 Close Song

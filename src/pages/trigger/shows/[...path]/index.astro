@@ -153,55 +153,59 @@ const { Content } = (await songDetails?.render()) ?? { Content: undefined }
 
 <Layout
   title={songDetails ? `${songDetails.data.title} | ${showName}` : showName}
-  compact
+  noHeader
   unconstrained
 >
-  <div class="p-4 pt-0">
-    <h1 class="text-2xl text-center border-b border-neutral-400 pb-4">
-      <a href={showUrl} class="link">
-        {showName}
-      </a>
-    </h1>
+  <div class="p-2 pt-0">
+    <div class="flex flex-wrap gap-4 items-baseline text-2xl py-2">
+      <h1 class="lg:w-96 shrink-0 border-b border-neutral-400">
+        <a href={showUrl} class="link !no-underline">
+          {showName}
+        </a>
+      </h1>
+
+      <div>Set 2, Song 4 of 14</div>
+    </div>
 
     <div class="flex flex-col lg:flex-row gap-4">
       {
         songDetails && Content && (
           <div class="mt-4 lg:order-1 lg:grow">
-            <div class="mb-4">
-              <a
-                href={`${showUrl}#${safeSlug}`}
-                class="text-xl bg-blue-600 text-white rounded py-1 px-2 hover:bg-blue-500"
-              >
-                Close Song
-              </a>
-            </div>
-            <div class="overflow-y-auto">
-              <div class="flex flex-wrap w-full justify-between">
+            <div class="flex gap-4">
+              <div class="mb-4">
+                <a
+                  href={`${showUrl}#${safeSlug}`}
+                  class="text-xl bg-blue-600 text-white rounded py-1 px-2 hover:bg-blue-500"
+                >
+                  Close Song
+                </a>
+              </div>
+              <div class="flex grow justify-between">
                 <div>
                   {prevUrl ? (
                     <a href={prevUrl} class="link">
-                      ← Previous Song
+                      ← Previous
                     </a>
                   ) : (
                     <span class="opacity-20">← Previous Song</span>
                   )}
                 </div>
-
-                <div class="w-full order-1 lg:order-none lg:w-auto">
-                  <h2 class="text-3xl">{songDetails.data.title}</h2>
-                  <h3 class="text-xl">lead vocals: {songDetails.feat}</h3>
-                </div>
-
                 <div>
                   {nextUrl ? (
                     <a href={nextUrl} class="link">
-                      Next Song →
+                      Next →
                     </a>
                   ) : (
                     <span class="opacity-20">Next Song →</span>
                   )}
                 </div>
               </div>
+            </div>
+            <div class="w-full lg:w-auto">
+              <h2 class="text-3xl">{songDetails.data.title}</h2>
+              <h3 class="text-xl">lead vocals: {songDetails.feat}</h3>
+
+              <div class="mt-4 text-xl">{songDetails.data.reminder}</div>
 
               {altVersions && (
                 <div class="text-center mt-2">

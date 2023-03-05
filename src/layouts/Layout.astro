@@ -4,6 +4,7 @@ import * as site from "$data/site"
 export interface Props {
   title: string
   compact?: boolean | undefined
+  noHeader?: boolean | undefined
   unconstrained?: boolean | undefined
 }
 const rootMdPages = await Astro.glob<{ title: string; mainNav?: boolean }>(
@@ -23,7 +24,7 @@ const pages = rootPages
     title: x.frontmatter.title,
   }))
 
-const { title, compact, unconstrained } = Astro.props
+const { title, compact, unconstrained, noHeader } = Astro.props
 ---
 
 <!DOCTYPE html>
@@ -57,7 +58,7 @@ const { title, compact, unconstrained } = Astro.props
     {pwaInfo && <Fragment set:html={pwaInfo.webManifest.linkTag} />}
   </head>
   <body>
-    <header class="site-header">
+    <header class={`site-header ${noHeader ? "hidden" : ""}`}>
       {
         !compact && (
           <>
@@ -121,10 +122,8 @@ const { title, compact, unconstrained } = Astro.props
       </div>
     </header>
 
-    <div class="page-content">
-      <div class={unconstrained ? "" : "wrapper"}>
-        <slot />
-      </div>
+    <div class={unconstrained ? "" : "wrapper"}>
+      <slot />
     </div>
 
     <footer class="site-footer">

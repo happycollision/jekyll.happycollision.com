@@ -268,11 +268,11 @@ const thisSongStats = sets
           </span>
         </div>
         {
-          sets.map((set, i) => (
-            <div class="mt-4">
+          sets.map((songs, i) => (
+            <div class="mt-4 ">
               <h2 class="text-2xl mb-4">Set {++i}</h2>
               <ol class="list-decimal text-xl">
-                {set.map((song) => {
+                {songs.map((song) => {
                   const isActive =
                     urlsMatch(
                       Astro.url.pathname,

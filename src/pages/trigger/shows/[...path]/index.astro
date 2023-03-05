@@ -43,6 +43,7 @@ export async function getStaticPaths() {
     const baseProps = {
       showName: show.name,
       sets,
+      showsUrl: s`${baseUrl}`,
       showUrl: s`${baseUrl}/${show.slug}`,
     }
 
@@ -144,11 +145,22 @@ const {
   nextUrl,
   prevUrl,
   showUrl,
+  showsUrl,
   showName,
   altVersions,
 } = Astro.props
 
 const { Content } = (await songDetails?.render()) ?? { Content: undefined }
+
+const thisSongStats = sets
+  .flatMap((songs, iSet) =>
+    songs.map(
+      (song, iSong, allSongs) =>
+        [iSet + 1, iSong + 1, allSongs.length, song] as const,
+    ),
+  )
+  .filter(([_setNum, _songNum, _total, song]) => song.slug === safeSlug)
+  .map(([set, songNum, totalSongs]) => ({ set, songNum, totalSongs }))
 ---
 
 <Layout
@@ -157,21 +169,16 @@ const { Content } = (await songDetails?.render()) ?? { Content: undefined }
   unconstrained
 >
   <div class="p-2 pt-0">
-    <div class="flex flex-wrap gap-4 items-baseline text-2xl py-2">
-      <h1 class="lg:w-96 shrink-0 border-b border-neutral-400">
-        <a href={showUrl} class="link !no-underline">
-          {showName}
-        </a>
-      </h1>
-
-      <div>Set 2, Song 4 of 14</div>
-    </div>
-
     <div class="flex flex-col lg:flex-row gap-4">
       {
         songDetails && Content && (
-          <div class="mt-4 lg:order-1 lg:grow">
-            <div class="flex gap-4">
+          <div class="lg:order-1 lg:grow">
+            {thisSongStats.map((x) => (
+              <div class="text-2xl sm:hidden">
+                Set {x.set}, Song {x.songNum} of {x.totalSongs}
+              </div>
+            ))}
+            <div class="flex gap-4 mt-2 items-baseline">
               <div class="mb-4">
                 <a
                   href={`${showUrl}#${safeSlug}`}
@@ -180,55 +187,66 @@ const { Content } = (await songDetails?.render()) ?? { Content: undefined }
                   Close Song
                 </a>
               </div>
-              <div class="flex grow justify-between">
+              <div class="flex grow justify-between items-baseline">
                 <div>
                   {prevUrl ? (
                     <a href={prevUrl} class="link">
                       ← Previous
                     </a>
                   ) : (
-                    <span class="opacity-20">← Previous Song</span>
+                    <span class="opacity-20">← Previous</span>
                   )}
                 </div>
+                {thisSongStats.map((x) => (
+                  <div class="hidden sm:block text-xl">
+                    Set {x.set}: Song {x.songNum} of {x.totalSongs}
+                  </div>
+                ))}
                 <div>
                   {nextUrl ? (
                     <a href={nextUrl} class="link">
                       Next →
                     </a>
                   ) : (
-                    <span class="opacity-20">Next Song →</span>
+                    <span class="opacity-20">Next →</span>
                   )}
                 </div>
               </div>
             </div>
             <div class="w-full lg:w-auto">
-              <h2 class="text-3xl">{songDetails.data.title}</h2>
-              <h3 class="text-xl">lead vocals: {songDetails.feat}</h3>
+              <div class="flex flex-wrap items-center justify-between">
+                <div class="shrink-0">
+                  <h2 class="text-3xl">{songDetails.data.title}</h2>
+                  <h3 class="text-xl">lead vocals: {songDetails.feat}</h3>
+                </div>
+
+                {altVersions && (
+                  <div class="grow text-center">
+                    <ul class="border border-blue-400 inline-flex rounded">
+                      {altVersions.map((alt, i, arr) => {
+                        const isLast = arr.length === i + 1
+                        const isActive = urlsMatch(Astro.url.pathname, alt.path)
+                        return (
+                          <li class="flex">
+                            <a
+                              href={alt.path}
+                              class={`px-2 py-1 ${
+                                isLast ? "" : "border-r"
+                              } border-blue-400 ${
+                                isActive ? "bg-blue-400" : ""
+                              }`}
+                            >
+                              {alt.title}
+                            </a>
+                          </li>
+                        )
+                      })}
+                    </ul>
+                  </div>
+                )}
+              </div>
 
               <div class="mt-4 text-xl">{songDetails.data.reminder}</div>
-
-              {altVersions && (
-                <div class="text-center mt-2">
-                  <ul class="border border-blue-400 inline-flex rounded">
-                    {altVersions.map((alt, i, arr) => {
-                      const isLast = arr.length === i + 1
-                      const isActive = urlsMatch(Astro.url.pathname, alt.path)
-                      return (
-                        <li class="flex">
-                          <a
-                            href={alt.path}
-                            class={`px-2 py-1 ${
-                              isLast ? "" : "border-r"
-                            } border-blue-400 ${isActive ? "bg-blue-400" : ""}`}
-                          >
-                            {alt.title}
-                          </a>
-                        </li>
-                      )
-                    })}
-                  </ul>
-                </div>
-              )}
 
               <div class="markdown text-xl mt-4 [&>pre]:whitespace-pre-wrap">
                 <Content />
@@ -239,6 +257,16 @@ const { Content } = (await songDetails?.render()) ?? { Content: undefined }
       }
 
       <div class="lg:w-96 shrink-0">
+        <div class="text-2xl border-b border-neutral-400 flex items-baseline">
+          <h1 class="inline mr-4">
+            <a href={showUrl} class="link !no-underline">
+              {showName}
+            </a>
+          </h1>
+          <span class="text-base">
+            (<a href={showsUrl} class="link !no-underline">all shows ↩︎</a>)
+          </span>
+        </div>
         {
           sets.map((set, i) => (
             <div class="mt-4">

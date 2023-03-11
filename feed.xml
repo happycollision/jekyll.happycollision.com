@@ -1,0 +1,761 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Happy Collision</title><description>The mostly technical musings of Don Denton.</description><link>https://happycollision.com/</link><item><title>The Shoemaker&apos;s Children Go Barefoot</title><link>https://happycollision.com/2014/01/12/the-shoemakers-children-go-barefoot/</link><guid>https://happycollision.com/2014/01/12/the-shoemakers-children-go-barefoot/</guid><pubDate>Sun, 12 Jan 2014 00:00:00 GMT</pubDate><content:encoded>&lt;p&gt;I believe that is how the saying goes. Rather than wait to start posting the
+content I have had in mind, I think now is the best time to do it.&lt;/p&gt;
+&lt;p&gt;I have had a “Ready, set, go” mindset—as many of us do—for the better part of my
+adult life. Unfortunately, that mindset tends to lead to procrastination. Maybe
+not for all of us, but for many. Certainly for me. Time to switch to “Go, set,
+ready” instead.&lt;/p&gt;
+&lt;p&gt;This site is an example of that very switch. It is a place for me to connect to
+the world of technology and software development. Web development work is one of
+the things that I do, though you might not know it from the look of this site.
+At the time of this writing, happycollision.com is using the Twenty Thirteen
+theme right out of the box from WordPress. No need for me to spend time creating
+some special theme or entire CMS for this site. I have other things to do and
+other clients to satisfy. But for the first time, I am not going to let my lack
+of readiness stop me from creating content.&lt;/p&gt;
+&lt;p&gt;And when you get down to it, Content is King, right?&lt;/p&gt;
+&lt;p&gt;Happy 2014.&lt;/p&gt;</content:encoded></item><item><title>Vagrantfile that creates and populates MySQL database</title><link>https://happycollision.com/2014/01/17/vagrantfile-that-creates-and-populates-MYSQL-database/</link><guid>https://happycollision.com/2014/01/17/vagrantfile-that-creates-and-populates-MYSQL-database/</guid><pubDate>Fri, 17 Jan 2014 00:00:00 GMT</pubDate><content:encoded>&lt;p&gt;A few months ago, I started poking around a &lt;a href=&quot;http://discourse.org&quot;&gt;Discourse&lt;/a&gt; install. I was a bit
+hesitant to start learning a whole new language (Ruby) on the chance that I
+could find a good use for Discourse in my work. I found a one, but it will be a
+while before I’ll actually implement it.&lt;/p&gt;
+&lt;p&gt;As I was fumbling around the installation guide, it slowly dawned on me that
+this &lt;a href=&quot;http://vagrantup.com&quot;&gt;Vagrant&lt;/a&gt; thing I was using via their instruction is amazing.&lt;/p&gt;
+&lt;p&gt;If you don’t know, Vagrant is a fantastic piece of software that allows you
+“create and configure lightweight, reproducible, and portable development
+environments.” Basically, you can spin up a server with one command and have all
+your dev files sitting in a folder that is already mounted to the VM.&lt;/p&gt;
+&lt;p&gt;This actually solves a little problem I’ve had. Tons of my older work depends on
+MySQL databases to run at all, so when I need to test something or work on a new
+feature, I tend toward &lt;a href=&quot;http://www.bnj.com/blog/cowboy-coding-pink-sombrero/&quot;&gt;cowboy coding&lt;/a&gt;. It’s bitten me a couple times, but
+the &lt;em&gt;thought&lt;/em&gt; of installing MAMP (or installing MySQL on my Mac) and configuring
+MySQL just because I need a running database to work on a little bit of php…&lt;/p&gt;
+&lt;p&gt;But now I am using Vagrant, so it’s a little easier. But the big relief comes
+with the little script I wrote that I embed in the Vagrantfile. It looks for a
+file with the extension &lt;code&gt;.sql&lt;/code&gt; and creates a database and user in MySQL with the
+name of the file. So if your file is &lt;code&gt;webapp.sql&lt;/code&gt; then the script creates a
+database called &lt;code&gt;webapp&lt;/code&gt; and a user by the same name with “pass” as their
+password. Then, it &lt;em&gt;loads the sql into the database&lt;/em&gt;. Done.&lt;/p&gt;
+&lt;p&gt;Now whenever I need to whip up a quick little feature for an old project, I put
+this Vagrantfile in the root directory of the application along with the last
+MySQL backup file I made, type &lt;code&gt;vagrant up&lt;/code&gt; in the terminal, grab a drink and
+start working. &lt;a href=&quot;https://gist.github.com/happycollision/8469423&quot;&gt;Here’s the script&lt;/a&gt;. I hope it is useful for you as well.&lt;/p&gt;</content:encoded></item><item><title>//The Importance of Comments</title><link>https://happycollision.com/2014/03/22/the-importance-of-comments/</link><guid>https://happycollision.com/2014/03/22/the-importance-of-comments/</guid><pubDate>Sat, 22 Mar 2014 00:00:00 GMT</pubDate><content:encoded>&lt;p&gt;Much of my coding time these days is spent working on projects that are not
+completely mine. This is a change from years past when all my code was
+controlled by me. I would create websites and tools to manage those sites—mostly
+right on top of Wordpress.&lt;/p&gt;
+&lt;p&gt;Now that I have a day job that also involves a heavy amount of coding, most of
+my time is spent on code that has &lt;em&gt;nothing&lt;/em&gt; to do with my personal or contract
+work.&lt;/p&gt;
+&lt;p&gt;Now that my head is full of things like Ember.js and Grunt (with a touch of
+ASP), I find that my original work for myself and my personal clients is looking
+very foreign.&lt;/p&gt;
+&lt;p&gt;So my newest goal is not to go over all the old stuff and comment the heck out
+of it, but to &lt;em&gt;always&lt;/em&gt; comment as I go.&lt;/p&gt;
+&lt;p&gt;Feel free to welcome me from the depths (well, maybe not the &lt;em&gt;depths&lt;/em&gt;) of
+arrogance and stupidity to the world where normal people live.&lt;/p&gt;</content:encoded></item><item><title>Heartbleed: your passwords are public now</title><link>https://happycollision.com/2014/04/09/heartbleed-your-passwords-are-public-now/</link><guid>https://happycollision.com/2014/04/09/heartbleed-your-passwords-are-public-now/</guid><pubDate>Wed, 09 Apr 2014 00:00:00 GMT</pubDate><content:encoded>&lt;p&gt;I am not going to waste your time here. If you want to know &lt;em&gt;exactly&lt;/em&gt; what
+Heartbleed is, there are &lt;a href=&quot;https://www.google.com/search?q=what%20is%20heartbleed&quot;&gt;plenty of sites&lt;/a&gt; that will give you that. This will
+all be in layman’s terms and will be far from precise, but will be accurate
+enough for normal people.&lt;/p&gt;
+&lt;h2&gt;What is Heartbleed?&lt;/h2&gt;
+&lt;p&gt;Heartbleed, made public on April 7, is the nickname for a problem with some of
+the code that keeps the internet safe. It actually made sites that were supposed
+to be super secure &lt;em&gt;worse&lt;/em&gt; than sites that were unsecured.&lt;/p&gt;
+&lt;p&gt;There has never been a vulnerability that affected this much of the internet
+before.&lt;/p&gt;
+&lt;p&gt;Heartbleed has nothing to do with your computer. It has to do with websites &lt;em&gt;and
+services&lt;/em&gt; you use. The number of people who use the internet and have &lt;em&gt;not&lt;/em&gt; been
+affected by Heartbleed is, essentially, zero. Don’t brush this off: you are not
+insulated from this, I promise.&lt;/p&gt;
+&lt;p&gt;From &lt;a href=&quot;http://heartbleed.com&quot;&gt;Heartbleed.com&lt;/a&gt;, emphasis mine:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;We have tested some of our own services from attacker’s perspective. We
+attacked ourselves from outside, without leaving a trace. &lt;strong&gt;Without using any
+privileged information or credentials&lt;/strong&gt; we were able steal from ourselves the
+secret keys used for our X.509 certificates, &lt;strong&gt;user names&lt;/strong&gt; and &lt;strong&gt;passwords&lt;/strong&gt;,
+instant messages, &lt;strong&gt;emails&lt;/strong&gt; and business critical documents and
+communication.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2&gt;What do I have to do?&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;No matter who you are&lt;/strong&gt;, you need to get ready to change your passwords.
+Period. If you are the type of person who uses the same password for multiple
+websites or services (Gmail, Yahoo Mail, etc.), you are &lt;em&gt;especially&lt;/em&gt; vulnerable.
+I’m sorry, but it’s true.&lt;/p&gt;
+&lt;p&gt;Here’s the tricky part: &lt;strong&gt;You have to wait until the websites you use are no
+longer vulnerable&lt;/strong&gt;. The sites affected need fix the problem on their end before
+you can do anything on your end.&lt;/p&gt;
+&lt;p&gt;The easiest thing you can do now is wait until the weekend and then change all
+your passwords. Any service that is worth their salt will have patched the leak
+by then. Not the safest route, but doable for people who don’t have time to be
+concerned. UNIQUE PASSWORDS, please. This is a great time to make sure you don’t
+use the same password for your bank account as you use anywhere else.&lt;/p&gt;
+&lt;p&gt;If you want to be safe, check the sites you have passwords on with &lt;a href=&quot;http://filippo.io/Heartbleed/&quot;&gt;this
+tool&lt;/a&gt;. If they pass the test, go ahead and change your password there. I
+cannot stress enough how important it is to make the password unique.&lt;/p&gt;
+&lt;h2&gt;How am I supposed to remember unique passwords for all my sites?&lt;/h2&gt;
+&lt;p&gt;It is worth your while to find a system that works. However you need to do it.&lt;/p&gt;
+&lt;p&gt;I’d recommend either &lt;a href=&quot;http://lastpass.com&quot;&gt;LastPass&lt;/a&gt; or &lt;a href=&quot;https://agilebits.com/onepassword&quot;&gt;1Password&lt;/a&gt;. I use the latter. LastPass
+was, technically, compromised but they claim that the compromise didn’t allow
+attackers to get any data. 1Password was only compromised if you use a specific
+part of their service, which I do not.&lt;/p&gt;
+&lt;p&gt;Both these services are helpful when changing passwords as well.&lt;/p&gt;
+&lt;h2&gt;This seems like kind of a pain in the rear&lt;/h2&gt;
+&lt;p&gt;Yep. But to paraphrase Zig Ziglar, “You only have to floss the teeth you want to
+keep.”&lt;/p&gt;
+&lt;p&gt;Be safe out there, folks.&lt;/p&gt;
+&lt;hr /&gt;
+&lt;p&gt;If you think I have gotten something wrong, please &lt;a href=&quot;http://happycollision.com/contact&quot;&gt;let me know&lt;/a&gt;, and I will
+be happy to correct.&lt;/p&gt;</content:encoded></item><item><title>Why I am letting go of my trademark</title><link>https://happycollision.com/2021/11/21/letting-go-of-my-trademark/</link><guid>https://happycollision.com/2021/11/21/letting-go-of-my-trademark/</guid><pubDate>Sun, 21 Nov 2021 00:00:00 GMT</pubDate><content:encoded>&lt;p&gt;For years now, I have maintained &lt;a href=&quot;https://tsdr.uspto.gov/#caseNumber=85583560&amp;amp;caseSearchType=US_APPLICATION&amp;amp;caseType=SERIAL_NO&amp;amp;searchType=statusSearch&quot;&gt;a trademark for the name Happy Collision
+®&lt;/a&gt;. This was done not out of an actual need or &lt;a href=&quot;https://www.likelihoodofconfusion.com/why-i-let-my-trademark-registration-lapse/&quot;&gt;out of
+vanity&lt;/a&gt;, but out of fear that this name would somehow be
+stolen out from underneath me. At this point, it sure does not seem like a good
+use of my money, time, and attention. (I sure wish I had realized that back then
+that I wouldn’t need the registration: paying the fees to the government and the
+lawyer I hired was no small thing.)&lt;/p&gt;
+&lt;p&gt;I doubt that I’ll have any cause to fight with someone over the use of the name,
+despite allowing the registration with the USPTO to lapse. We shall see.&lt;/p&gt;
+&lt;p&gt;In the meantime, any clients I attain or currently work with will continue to
+communicate with me via my @happycollision email address and will continue to
+see the Happy Collision name and logo on any invoices they might require.&lt;/p&gt;</content:encoded></item><item><title>Client Side App Variants</title><link>https://happycollision.com/2023/01/05/app-variants/</link><guid>https://happycollision.com/2023/01/05/app-variants/</guid><pubDate>Thu, 05 Jan 2023 00:00:00 GMT</pubDate><content:encoded>&lt;p&gt;&lt;/p&gt;
+&lt;p&gt;The split between front-end and back-end has been a double-edged sword ever
+since the first developer chiseled JSX onto the wall of the tribal networking
+cave. What had the curiosity of this ancient heretic wrought? Along with the
+numerous advantages of client-rendered websites came numerous new challenges.
+Web developers started specializing to overcome these new challenges and explore
+this new way of building for the web. Today, common practice is to develop using
+separate teams of front-end developers and back-end developers as opposed to
+full stack developers.&lt;/p&gt;
+&lt;p&gt;For better and worse, this is the timeline we are in, and escape is futile.&lt;/p&gt;
+&lt;p&gt;One casualty of the front-end/back-end divide is the dedicated feature branch
+build, the place where your work-in-progress code can be deployed care-free as
+you build so that you and your teammates can see a fully integrated version of
+your changes. Today, with teams, repositories, and deployments split along
+technological lines, it can be difficult and time-consuming to find a way to
+make feature branch builds work. And what if you serve your static front-end
+assets via a simple, static file server?&lt;/p&gt;
+&lt;p&gt;At the possible expense of becoming another front-end heretic, I’ll tell you
+that you can trade &lt;em&gt;one more round trip to the server&lt;/em&gt; for completely isolated
+front-end builds that are dynamically loaded without the need for special
+back-end logic.&lt;/p&gt;
+&lt;h2&gt;Variants&lt;/h2&gt;
+&lt;p&gt;Trying to achieve isolated feature branch builds solely through static,
+front-end code led me to something even more versatile. This slight
+architectural change allows you to deploy multiple builds of your application to
+a single
+&lt;a href=&quot;https://developer.mozilla.org/en-US/docs/Learn/Common_questions/What_is_a_URL#authority&quot;&gt;authority (sub-domain + domain + port)&lt;/a&gt;,
+with each build separated and loaded dynamically via a simple query parameter in
+the URL.&lt;/p&gt;
+&lt;p&gt;The system allows you to dynamically load:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Feature branch builds:&lt;/strong&gt; Our original goal. Deploy work-in-progress builds
+of your app as you develop a new feature.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Snapshots of previous versions of your application:&lt;/strong&gt; Perhaps you are
+working on rapidly changing data structures, and you’ll need to support the
+legacy versions of those structures for a time.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Builds for different environments:&lt;/strong&gt; Do some of your users need to connect
+to a different API?&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Builds for different personas:&lt;/strong&gt; Maybe the marketing people at your company
+need to grab images of your new feature without any of the typical affordances
+rendered on screen.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Builds for different tasks:&lt;/strong&gt; Debugging in production can be easier when you
+are using the non-minified build and you’ve attached all your custom
+introspection UI tools.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;All of these and more can coexist together on your file server, perfectly
+separated and preserved. Since this system is more than just “versions” or
+“feature branches,” we’ve settled on a new name: Variants.&lt;/p&gt;
+&lt;h2&gt;The architectural shift&lt;/h2&gt;
+&lt;p&gt;This entire article assumes you are working with a statically generated,
+SPA-like application. If you have more control over the server hosting your
+static front end assets, perhaps another solution is possible, though this one
+might still be better suited to your needs.&lt;/p&gt;
+&lt;p&gt;Additionally, if your deployment pipeline does not allow you to retain previous
+build artifacts in production, you won’t be able to use this approach.&lt;/p&gt;
+&lt;h3&gt;Typical static application loading&lt;/h3&gt;
+&lt;p&gt;In a typical SPA-like website, your app is totally coupled to the &lt;code&gt;index.html&lt;/code&gt;
+file served at the root (and all other routes) of your site. It is responsible
+for pulling in all the CSS and JS assets needed for the initial render of your
+application. Your browser asks for the HTML file at some location on your site,
+and the same exact file is always loaded, containing links to the same exact
+assets every time. Once the site renders, perhaps your application recognizes
+other assets that are required for your particular location and downloads those
+as well, but by then your app is already running.&lt;/p&gt;
+&lt;p&gt;Every change to your application requires a brand-new build of &lt;code&gt;index.html&lt;/code&gt; to
+reference multiple new CSS and JS files.&lt;/p&gt;
+
+
+
+
+
+
+
+
+
+
+
+&lt;table&gt;&lt;thead&gt;&lt;tr&gt;&lt;th&gt;&lt;/th&gt;&lt;/tr&gt;&lt;/thead&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td&gt;(Diagrams created at &lt;a href=&quot;https://play.d2lang.com&quot;&gt;https://play.d2lang.com&lt;/a&gt;)&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;
+&lt;h3&gt;Variant loading&lt;/h3&gt;
+&lt;p&gt;But what if the &lt;code&gt;index.html&lt;/code&gt; file didn’t contain references to any of the assets
+needed to run your application? What if it loaded your application assets
+dynamically, based on the variant of the application you request?&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;&lt;span&gt;&lt;span&gt;# Loads the default variant&lt;/span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;span&gt;https://example.com&lt;/span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;span&gt;# Loads the `my_new_feature` variant&lt;/span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;span&gt;https://example.com?variant=my_new_feature&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Instead of baking our application’s static dependencies into the &lt;code&gt;index.html&lt;/code&gt;
+file, we can encapsulate the knowledge of those assets into a single JSON file
+and give that file an arbitrary (variant) name. Since we are now pushing the
+knowledge of our assets into a file that must be loaded separately from the
+index file, we have the opportunity to run a tiny bit of JavaScript in the
+browser &lt;em&gt;before loading any application assets&lt;/em&gt;. That tiny bit of JavaScript can
+either load the default variant JSON of our application, or it can load any
+arbitrary variant JSON file we request by name via a query parameter. Once that
+JSON file is loaded, we can use it to gather our actual application
+dependencies.&lt;/p&gt;
+
+
+
+
+
+
+
+
+
+
+
+&lt;table&gt;&lt;thead&gt;&lt;tr&gt;&lt;th&gt;&lt;/th&gt;&lt;/tr&gt;&lt;/thead&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td&gt;The only change from the “typical SPA loading sequence” is the added round trip in step 1.&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;
+&lt;p&gt;If your files are all properly fingerprinted —the name of the file contains a
+hash that forces it to be unique based on its exact contents —then you can keep
+all your old assets on your server and let your variant JSON files load
+whichever assets are required. Since every single build of your app can live
+side by side with each other, you can load whichever variant you want if you
+know the name of a JSON file that points to the proper dependencies.&lt;/p&gt;
+&lt;h3&gt;Trade-offs&lt;/h3&gt;
+&lt;p&gt;There are some downsides to this approach.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Your users will be waiting for one more round trip to the file server before
+your app begins to boot.&lt;/li&gt;
+&lt;li&gt;There is a fair amount of customization you’ll add to your Webpack config. (I
+won’t be showing how to achieve this same result with other build tools,
+though it can be done.)&lt;/li&gt;
+&lt;li&gt;Typical turn-key static site hosts (Netlify, etc.) will prune your old build
+files each time you deploy, and that is completely antithetical to this
+approach.&lt;/li&gt;
+&lt;li&gt;The different variants of your app may start battling each other for
+multiversal dominance.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;Benefits&lt;/h3&gt;
+&lt;p&gt;If you find yourself in a situation where you can accept the tradeoffs above,
+there are plenty of situations in which loading &lt;em&gt;any&lt;/em&gt; variant of your app via
+the same exact &lt;code&gt;index.html&lt;/code&gt; at the same location can be immensely useful. Using
+variant deployment, you can&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Make a feature available to a select few people for testing;&lt;/li&gt;
+&lt;li&gt;Revert to a previous build quickly if you discover a bug;&lt;/li&gt;
+&lt;li&gt;Solve CORS problems exactly one time: not for production &lt;em&gt;and&lt;/em&gt; feature
+branches;&lt;/li&gt;
+&lt;li&gt;Load debugging tools directly into your bundle or load the non-production
+build against the production environment to track down a problem;&lt;/li&gt;
+&lt;li&gt;Make snapshots of your application available in perpetuity for compatibility
+reasons;&lt;/li&gt;
+&lt;li&gt;Serve a &lt;em&gt;completely different&lt;/em&gt; application for each variant.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;Our variant system at Trilliant Health&lt;/h2&gt;
+&lt;p&gt;There are any number of ways you can build your application to use variants, but
+I’ll walk you through some of the concrete decisions we’ve made so you can get
+an idea of how you might want to do this yourself. Before we dig into some real
+code, let’s consider a few other ideas to layer on top of our current
+understanding of the variant system.&lt;/p&gt;
+&lt;h3&gt;Problems with query parameters&lt;/h3&gt;
+&lt;p&gt;You’ll note that I’ve described variant loading as being driven by a query
+parameter called &lt;code&gt;variant&lt;/code&gt;. But storing this kind of information in a query
+parameter has some drawbacks.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;It kind of stinks that the whole application must be aware of this
+constantly-present query parameter. Any individual pages that need to
+manipulate the query parameters would need some defensive code to avoid
+dropping this parameter.&lt;/li&gt;
+&lt;li&gt;And what if one of our internal users shares a URL from their browser that
+happens to contain a variant name that is not supposed to be used widely?&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;We should probably remove the query parameter from the page as soon as the app
+is loaded, since the only time we need the variant name is when we fetch our
+initial assets.&lt;/p&gt;
+&lt;p&gt;But then, what if the user refreshes their browser? Well, the variant name is
+gone, and they’ll load the default variant of the app. Plus, the web
+applications we build at Trilliant Health use Auth0 for authentication and so
+must redirect to and from Auth0. On the way back, we’d have to include the
+&lt;code&gt;variant&lt;/code&gt; query parameter again, anyway.&lt;/p&gt;
+&lt;p&gt;We could solve these problems with Local Storage. Once the index page loads and
+knows what variant to fetch, we can store the name of the variant in Local
+Storage. On subsequent reloads, we can check for that Local Storage value and
+use it if no &lt;code&gt;variant&lt;/code&gt; exists in the query parameters. That solves our two
+problems above and also keeps things working for Auth0, but it creates two more
+problems:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Users would not be able to load multiple variants of the app at once in
+multiple tabs unless they were very careful not to refresh the page.&lt;/li&gt;
+&lt;li&gt;We’d have no good way to get our users back on the default variant when they
+are done with the variant they were using. They might get unwittingly stuck on
+a variant that isn’t getting updates.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Placing this kind of burden on our users is a no-go. Our apps should just work
+without the need for them know the intimate details of how our variant system
+behaves. So Local Storage is out. But Local Storage has a sibling called Session
+Storage with the same API that basically solves all the problems above. Session
+Storage behaves exactly like Local Storage except it is handled on a per-tab
+basis. When your tab is closed, all the Session Storage &lt;em&gt;for that tab&lt;/em&gt; is
+cleared.&lt;/p&gt;
+&lt;p&gt;So, on page load, we store the variant in Session Storage, drop the query
+parameter, load the app, and let the entire application remain blissfully
+unaware of the entire variant system.&lt;/p&gt;
+&lt;h3&gt;Variant-level config&lt;/h3&gt;
+&lt;p&gt;In order to take full advantage of the variant system — with builds that are
+always current but have useful variations in behavior —we will probably want to
+store some configuration information inside the variants themselves. For
+example, the actual URL for your API server should probably be configured
+instead of discovered at runtime.&lt;/p&gt;
+&lt;p&gt;Since our Webpack config will already need to be generally aware of variants, we
+also house some other values inside a variant config that we can replace using
+the &lt;code&gt;WebpackDefinePlugin&lt;/code&gt;. So in our applications, calls to our API server
+resemble this:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;&lt;span&gt;&lt;span&gt;fetch&lt;/span&gt;&lt;span&gt;(&lt;/span&gt;&lt;span&gt;`${&lt;/span&gt;&lt;span&gt;API_BASE_URL&lt;/span&gt;&lt;span&gt;}/some-endpoint`&lt;/span&gt;&lt;span&gt;)&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;And we let Webpack do the work of replacing &lt;code&gt;API_BASE_URL&lt;/code&gt; with
+&lt;code&gt;&quot;https://api.example.com&quot;&lt;/code&gt; or &lt;code&gt;&quot;https://dev-api.example.com&quot;&lt;/code&gt; or whatever other
+URL makes sense for the given variant. We don’t need to maintain some kind of
+runtime cross-reference for which variants talk to which server. It all goes
+into the variant config itself and is resolved at build time.&lt;/p&gt;
+&lt;h2&gt;“Give me the code”&lt;/h2&gt;
+&lt;p&gt;Not everything you need will be included below, because this is some deeply
+custom code. But you should be able to merge these examples with your code and
+get things running.&lt;/p&gt;
+&lt;p&gt;We also are not going to tackle the actual deployment step in this article. At
+Trilliant Health, we use Azure Blob Storage (ABS) to serve our apps. Our final
+step in deployment is to upload all our files to ABS. Since our asset filenames
+contain a unique hash, we just let it upload and overwrite files with
+conflicting names. The result is that our &lt;em&gt;new&lt;/em&gt; assets get uploaded with no
+conflict, &lt;em&gt;old&lt;/em&gt; assets are rewritten with the same content, and
+&lt;code&gt;{variantName}.json&lt;/code&gt; files get updated to point to new build assets.&lt;/p&gt;
+&lt;h3&gt;index.html&lt;/h3&gt;
+&lt;p&gt;This is a slightly simplified version of the &lt;code&gt;index.html&lt;/code&gt; file we use for all
+our SPAs at Trilliant Health.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;&lt;span&gt;&lt;span&gt;&amp;lt;!&lt;/span&gt;&lt;span&gt;DOCTYPE&lt;/span&gt;&lt;span&gt; &lt;/span&gt;&lt;span&gt;html&lt;/span&gt;&lt;span&gt;&amp;gt;&lt;/span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;span&gt;&amp;lt;&lt;/span&gt;&lt;span&gt;html&lt;/span&gt;&lt;span&gt;&amp;gt;&lt;/span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;span&gt;  &amp;lt;&lt;/span&gt;&lt;span&gt;head&lt;/span&gt;&lt;span&gt;&amp;gt;&lt;/span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;span&gt;    &amp;lt;&lt;/span&gt;&lt;span&gt;title&lt;/span&gt;&lt;span&gt;&amp;gt;Your title here&amp;lt;/&lt;/span&gt;&lt;span&gt;title&lt;/span&gt;&lt;span&gt;&amp;gt;&lt;/span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;span&gt;  &amp;lt;/&lt;/span&gt;&lt;span&gt;head&lt;/span&gt;&lt;span&gt;&amp;gt;&lt;/span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;span&gt;  &amp;lt;&lt;/span&gt;&lt;span&gt;body&lt;/span&gt;&lt;span&gt;&amp;gt;&lt;/span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;span&gt;    &amp;lt;&lt;/span&gt;&lt;span&gt;div&lt;/span&gt;&lt;span&gt; &lt;/span&gt;&lt;span&gt;id&lt;/span&gt;&lt;span&gt;=&lt;/span&gt;&lt;span&gt;&quot;app&quot;&lt;/span&gt;&lt;span&gt;&amp;gt;&amp;lt;/&lt;/span&gt;&lt;span&gt;div&lt;/span&gt;&lt;span&gt;&amp;gt;&lt;/span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;span&gt;    &amp;lt;&lt;/span&gt;&lt;span&gt;script&lt;/span&gt;&lt;span&gt; &lt;/span&gt;&lt;span&gt;type&lt;/span&gt;&lt;span&gt;=&lt;/span&gt;&lt;span&gt;&quot;text/javascript&quot;&lt;/span&gt;&lt;span&gt;&amp;gt;&lt;/span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;span&gt;      &lt;/span&gt;&lt;span&gt;// We use this IIFE to prevent global namespace pollution.&lt;/span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;span&gt;      ;(&lt;/span&gt;&lt;span&gt;function&lt;/span&gt;&lt;span&gt; () {&lt;/span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;span&gt;        &lt;/span&gt;&lt;span&gt;var&lt;/span&gt;&lt;span&gt; defaultVariantName &lt;/span&gt;&lt;span&gt;=&lt;/span&gt;&lt;span&gt; &lt;/span&gt;&lt;span&gt;&quot;public&quot;&lt;/span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;span&gt;        &lt;/span&gt;&lt;span&gt;/**&lt;/span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;span&gt;         * &lt;/span&gt;&lt;span&gt;@returns&lt;/span&gt;&lt;span&gt; &lt;/span&gt;&lt;span&gt;{string | null}&lt;/span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;span&gt;         */&lt;/span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;span&gt;        &lt;/span&gt;&lt;span&gt;function&lt;/span&gt;&lt;span&gt; &lt;/span&gt;&lt;span&gt;getStoredVariant&lt;/span&gt;&lt;span&gt;() {&lt;/span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;span&gt;          &lt;/span&gt;&lt;span&gt;return&lt;/span&gt;&lt;span&gt; window.sessionStorage.&lt;/span&gt;&lt;span&gt;getItem&lt;/span&gt;&lt;span&gt;(&lt;/span&gt;&lt;span&gt;&quot;variant&quot;&lt;/span&gt;&lt;span&gt;)&lt;/span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;span&gt;        }&lt;/span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;span&gt;        &lt;/span&gt;&lt;span&gt;/**&lt;/span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;span&gt;         * Changes the variant name in Session Storage. If we are&lt;/span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;span&gt;         * changing to the default variant name, it removes the item&lt;/span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;span&gt;         * from Session Storage entirely.&lt;/span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;span&gt;         *&lt;/span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;span&gt;         * &lt;/span&gt;&lt;span&gt;@param&lt;/span&gt;&lt;span&gt; &lt;/span&gt;&lt;span&gt;{string}&lt;/span&gt;&lt;span&gt; &lt;/span&gt;&lt;span&gt;variantName&lt;/span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;span&gt;         */&lt;/span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;span&gt;        &lt;/span&gt;&lt;span&gt;function&lt;/span&gt;&lt;span&gt; &lt;/span&gt;&lt;span&gt;updateStoredVariant&lt;/span&gt;&lt;span&gt;(&lt;/span&gt;&lt;span&gt;variantName&lt;/span&gt;&lt;span&gt;) {&lt;/span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;span&gt;          variantName &lt;/span&gt;&lt;span&gt;===&lt;/span&gt;&lt;span&gt; defaultVariantName&lt;/span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;span&gt;            &lt;/span&gt;&lt;span&gt;?&lt;/span&gt;&lt;span&gt; window.sessionStorage.&lt;/span&gt;&lt;span&gt;removeItem&lt;/span&gt;&lt;span&gt;(&lt;/span&gt;&lt;span&gt;&quot;variant&quot;&lt;/span&gt;&lt;span&gt;)&lt;/span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;span&gt;            &lt;/span&gt;&lt;span&gt;:&lt;/span&gt;&lt;span&gt; window.sessionStorage.&lt;/span&gt;&lt;span&gt;setItem&lt;/span&gt;&lt;span&gt;(&lt;/span&gt;&lt;span&gt;&quot;variant&quot;&lt;/span&gt;&lt;span&gt;, variantName)&lt;/span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;span&gt;        }&lt;/span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;span&gt;        &lt;/span&gt;&lt;span&gt;/**&lt;/span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;span&gt;         * If the `variant` query param is available, this returns it.&lt;/span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;span&gt;         *&lt;/span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;span&gt;         * &lt;/span&gt;&lt;span&gt;@returns&lt;/span&gt;&lt;span&gt; &lt;/span&gt;&lt;span&gt;{string | null}&lt;/span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;span&gt;         */&lt;/span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;span&gt;        &lt;/span&gt;&lt;span&gt;function&lt;/span&gt;&lt;span&gt; &lt;/span&gt;&lt;span&gt;getRequestedVariantViaSearchParam&lt;/span&gt;&lt;span&gt;() {&lt;/span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;span&gt;          &lt;/span&gt;&lt;span&gt;return&lt;/span&gt;&lt;span&gt; &lt;/span&gt;&lt;span&gt;new&lt;/span&gt;&lt;span&gt; &lt;/span&gt;&lt;span&gt;URLSearchParams&lt;/span&gt;&lt;span&gt;(document.location.search).&lt;/span&gt;&lt;span&gt;get&lt;/span&gt;&lt;span&gt;(&lt;/span&gt;&lt;span&gt;&quot;variant&quot;&lt;/span&gt;&lt;span&gt;)&lt;/span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;span&gt;        }&lt;/span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;span&gt;        &lt;/span&gt;&lt;span&gt;/**&lt;/span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;span&gt;         * Returns the URL for the JSON file that houses all the variant&lt;/span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;span&gt;         * assets.&lt;/span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;span&gt;         *&lt;/span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;span&gt;         * &lt;/span&gt;&lt;span&gt;@param&lt;/span&gt;&lt;span&gt; &lt;/span&gt;&lt;span&gt;{string}&lt;/span&gt;&lt;span&gt; &lt;/span&gt;&lt;span&gt;variantName&lt;/span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;span&gt;         */&lt;/span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;span&gt;        &lt;/span&gt;&lt;span&gt;function&lt;/span&gt;&lt;span&gt; &lt;/span&gt;&lt;span&gt;getUrlForVariant&lt;/span&gt;&lt;span&gt;(&lt;/span&gt;&lt;span&gt;variantName&lt;/span&gt;&lt;span&gt;) {&lt;/span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;span&gt;          &lt;/span&gt;&lt;span&gt;// Date.now() ensures there is no browser caching. The named&lt;/span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;span&gt;          &lt;/span&gt;&lt;span&gt;// JSON file&apos;s contents can and will change often.&lt;/span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;span&gt;          &lt;/span&gt;&lt;span&gt;return&lt;/span&gt;&lt;span&gt; &lt;/span&gt;&lt;span&gt;&quot;/variants/&quot;&lt;/span&gt;&lt;span&gt; &lt;/span&gt;&lt;span&gt;+&lt;/span&gt;&lt;span&gt; variantName &lt;/span&gt;&lt;span&gt;+&lt;/span&gt;&lt;span&gt; &lt;/span&gt;&lt;span&gt;&quot;.json?t=&quot;&lt;/span&gt;&lt;span&gt; &lt;/span&gt;&lt;span&gt;+&lt;/span&gt;&lt;span&gt; Date.&lt;/span&gt;&lt;span&gt;now&lt;/span&gt;&lt;span&gt;()&lt;/span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;span&gt;        }&lt;/span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;span&gt;        &lt;/span&gt;&lt;span&gt;/**&lt;/span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;span&gt;         * When the requested variant is missing, we render a message on&lt;/span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;span&gt;         * screen to the user to let them know that the variant they&lt;/span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;span&gt;         * requested does not exist and we render a link which will&lt;/span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;span&gt;         * reset the variant to the default.&lt;/span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;span&gt;         *&lt;/span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;span&gt;         * &lt;/span&gt;&lt;span&gt;@param&lt;/span&gt;&lt;span&gt; &lt;/span&gt;&lt;span&gt;{string}&lt;/span&gt;&lt;span&gt; &lt;/span&gt;&lt;span&gt;variantName&lt;/span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;span&gt;         */&lt;/span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;span&gt;        &lt;/span&gt;&lt;span&gt;function&lt;/span&gt;&lt;span&gt; &lt;/span&gt;&lt;span&gt;updateViewExplainingMissingVariant&lt;/span&gt;&lt;span&gt;(&lt;/span&gt;&lt;span&gt;variantName&lt;/span&gt;&lt;span&gt;) {&lt;/span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;span&gt;          &lt;/span&gt;&lt;span&gt;var&lt;/span&gt;&lt;span&gt; root &lt;/span&gt;&lt;span&gt;=&lt;/span&gt;&lt;span&gt; document.&lt;/span&gt;&lt;span&gt;querySelector&lt;/span&gt;&lt;span&gt;(&lt;/span&gt;&lt;span&gt;&quot;#root&quot;&lt;/span&gt;&lt;span&gt;)&lt;/span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;span&gt;          &lt;/span&gt;&lt;span&gt;var&lt;/span&gt;&lt;span&gt; p &lt;/span&gt;&lt;span&gt;=&lt;/span&gt;&lt;span&gt; document.&lt;/span&gt;&lt;span&gt;createElement&lt;/span&gt;&lt;span&gt;(&lt;/span&gt;&lt;span&gt;&quot;p&quot;&lt;/span&gt;&lt;span&gt;)&lt;/span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;span&gt;          p.textContent &lt;/span&gt;&lt;span&gt;=&lt;/span&gt;&lt;span&gt; &lt;/span&gt;&lt;span&gt;&quot;App failed to load the &quot;&lt;/span&gt;&lt;span&gt; &lt;/span&gt;&lt;span&gt;+&lt;/span&gt;&lt;span&gt; variantName &lt;/span&gt;&lt;span&gt;+&lt;/span&gt;&lt;span&gt; &lt;/span&gt;&lt;span&gt;&quot; variant.&quot;&lt;/span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;span&gt;          &lt;/span&gt;&lt;span&gt;var&lt;/span&gt;&lt;span&gt; link &lt;/span&gt;&lt;span&gt;=&lt;/span&gt;&lt;span&gt; document.&lt;/span&gt;&lt;span&gt;createElement&lt;/span&gt;&lt;span&gt;(&lt;/span&gt;&lt;span&gt;&quot;a&quot;&lt;/span&gt;&lt;span&gt;)&lt;/span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;span&gt;          link.href &lt;/span&gt;&lt;span&gt;=&lt;/span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;span&gt;            &lt;/span&gt;&lt;span&gt;// Drop all query params and just use the default variant.&lt;/span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;span&gt;            &lt;/span&gt;&lt;span&gt;// (You could do this differently and try to preserve all&lt;/span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;span&gt;            &lt;/span&gt;&lt;span&gt;// other query params aside from &quot;variant&quot; if you prefer.)&lt;/span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;span&gt;            document.location.href.&lt;/span&gt;&lt;span&gt;replace&lt;/span&gt;&lt;span&gt;(&lt;/span&gt;&lt;span&gt;/&lt;/span&gt;&lt;span&gt;\?&lt;/span&gt;&lt;span&gt;.&lt;/span&gt;&lt;span&gt;*&lt;/span&gt;&lt;span&gt;/&lt;/span&gt;&lt;span&gt;, &lt;/span&gt;&lt;span&gt;&quot;&quot;&lt;/span&gt;&lt;span&gt;) &lt;/span&gt;&lt;span&gt;+&lt;/span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;span&gt;            &lt;/span&gt;&lt;span&gt;&quot;?variant=&quot;&lt;/span&gt;&lt;span&gt; &lt;/span&gt;&lt;span&gt;+&lt;/span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;span&gt;            defaultVariantName&lt;/span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;span&gt;          link.textContent &lt;/span&gt;&lt;span&gt;=&lt;/span&gt;&lt;span&gt; &lt;/span&gt;&lt;span&gt;&quot;Reload the default version.&quot;&lt;/span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;span&gt;          root.&lt;/span&gt;&lt;span&gt;append&lt;/span&gt;&lt;span&gt;(p)&lt;/span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;span&gt;          root.&lt;/span&gt;&lt;span&gt;append&lt;/span&gt;&lt;span&gt;(link)&lt;/span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;span&gt;        }&lt;/span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;span&gt;        &lt;/span&gt;&lt;span&gt;/**&lt;/span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;span&gt;         * Appends all the variant&apos;s `&amp;lt;script&amp;gt;` and `&amp;lt;link&amp;gt;` elements to&lt;/span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;span&gt;         * the DOM&lt;/span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;span&gt;         *&lt;/span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;span&gt;         * &lt;/span&gt;&lt;span&gt;@param&lt;/span&gt;&lt;span&gt; &lt;/span&gt;&lt;span&gt;{{ css: string[], scripts: string[] }}&lt;/span&gt;&lt;span&gt; &lt;/span&gt;&lt;span&gt;data&lt;/span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;span&gt;         */&lt;/span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;span&gt;        &lt;/span&gt;&lt;span&gt;function&lt;/span&gt;&lt;span&gt; &lt;/span&gt;&lt;span&gt;addAssetsToDom&lt;/span&gt;&lt;span&gt;(&lt;/span&gt;&lt;span&gt;data&lt;/span&gt;&lt;span&gt;) {&lt;/span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;span&gt;          data.scripts.&lt;/span&gt;&lt;span&gt;forEach&lt;/span&gt;&lt;span&gt;(&lt;/span&gt;&lt;span&gt;function&lt;/span&gt;&lt;span&gt; (&lt;/span&gt;&lt;span&gt;src&lt;/span&gt;&lt;span&gt;) {&lt;/span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;span&gt;            &lt;/span&gt;&lt;span&gt;var&lt;/span&gt;&lt;span&gt; tag &lt;/span&gt;&lt;span&gt;=&lt;/span&gt;&lt;span&gt; document.&lt;/span&gt;&lt;span&gt;createElement&lt;/span&gt;&lt;span&gt;(&lt;/span&gt;&lt;span&gt;&quot;script&quot;&lt;/span&gt;&lt;span&gt;)&lt;/span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;span&gt;            tag.src &lt;/span&gt;&lt;span&gt;=&lt;/span&gt;&lt;span&gt; src&lt;/span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;span&gt;            tag.type &lt;/span&gt;&lt;span&gt;=&lt;/span&gt;&lt;span&gt; &lt;/span&gt;&lt;span&gt;&quot;text/javascript&quot;&lt;/span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;span&gt;            document.body.&lt;/span&gt;&lt;span&gt;append&lt;/span&gt;&lt;span&gt;(tag)&lt;/span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;span&gt;          })&lt;/span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;span&gt;          data.css.&lt;/span&gt;&lt;span&gt;forEach&lt;/span&gt;&lt;span&gt;(&lt;/span&gt;&lt;span&gt;function&lt;/span&gt;&lt;span&gt; (&lt;/span&gt;&lt;span&gt;src&lt;/span&gt;&lt;span&gt;) {&lt;/span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;span&gt;            &lt;/span&gt;&lt;span&gt;var&lt;/span&gt;&lt;span&gt; tag &lt;/span&gt;&lt;span&gt;=&lt;/span&gt;&lt;span&gt; document.&lt;/span&gt;&lt;span&gt;createElement&lt;/span&gt;&lt;span&gt;(&lt;/span&gt;&lt;span&gt;&quot;link&quot;&lt;/span&gt;&lt;span&gt;)&lt;/span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;span&gt;            tag.rel &lt;/span&gt;&lt;span&gt;=&lt;/span&gt;&lt;span&gt; &lt;/span&gt;&lt;span&gt;&quot;stylesheet&quot;&lt;/span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;span&gt;            tag.type &lt;/span&gt;&lt;span&gt;=&lt;/span&gt;&lt;span&gt; &lt;/span&gt;&lt;span&gt;&quot;text/css&quot;&lt;/span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;span&gt;            tag.href &lt;/span&gt;&lt;span&gt;=&lt;/span&gt;&lt;span&gt; src&lt;/span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;span&gt;            document.head.&lt;/span&gt;&lt;span&gt;append&lt;/span&gt;&lt;span&gt;(tag)&lt;/span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;span&gt;          })&lt;/span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;span&gt;        }&lt;/span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;span&gt;        &lt;/span&gt;&lt;span&gt;// Definitions are done. Time for the action to begin. The&lt;/span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;span&gt;        &lt;/span&gt;&lt;span&gt;// variant query param overrides any stored variant. Then we&lt;/span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;span&gt;        &lt;/span&gt;&lt;span&gt;// check for a stored variant if that doesn&apos;t exist. Finally, we&lt;/span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;span&gt;        &lt;/span&gt;&lt;span&gt;// use the default if the other two functions return null.&lt;/span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;span&gt;        &lt;/span&gt;&lt;span&gt;var&lt;/span&gt;&lt;span&gt; variantName &lt;/span&gt;&lt;span&gt;=&lt;/span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;span&gt;          &lt;/span&gt;&lt;span&gt;getRequestedVariantViaSearchParam&lt;/span&gt;&lt;span&gt;() &lt;/span&gt;&lt;span&gt;||&lt;/span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;span&gt;          &lt;/span&gt;&lt;span&gt;getStoredVariant&lt;/span&gt;&lt;span&gt;() &lt;/span&gt;&lt;span&gt;||&lt;/span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;span&gt;          defaultVariantName&lt;/span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;span&gt;        &lt;/span&gt;&lt;span&gt;updateStoredVariant&lt;/span&gt;&lt;span&gt;(variantName)&lt;/span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;span&gt;        window&lt;/span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;span&gt;          .&lt;/span&gt;&lt;span&gt;fetch&lt;/span&gt;&lt;span&gt;(&lt;/span&gt;&lt;span&gt;getUrlForVariant&lt;/span&gt;&lt;span&gt;(variantName))&lt;/span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;span&gt;          .&lt;/span&gt;&lt;span&gt;then&lt;/span&gt;&lt;span&gt;(&lt;/span&gt;&lt;span&gt;function&lt;/span&gt;&lt;span&gt; (&lt;/span&gt;&lt;span&gt;resp&lt;/span&gt;&lt;span&gt;) {&lt;/span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;span&gt;            &lt;/span&gt;&lt;span&gt;if&lt;/span&gt;&lt;span&gt; (resp.status &lt;/span&gt;&lt;span&gt;&amp;gt;=&lt;/span&gt;&lt;span&gt; &lt;/span&gt;&lt;span&gt;300&lt;/span&gt;&lt;span&gt;) {&lt;/span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;span&gt;              &lt;/span&gt;&lt;span&gt;updateViewExplainingMissingVariant&lt;/span&gt;&lt;span&gt;(variantName)&lt;/span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;span&gt;              &lt;/span&gt;&lt;span&gt;throw&lt;/span&gt;&lt;span&gt; &lt;/span&gt;&lt;span&gt;new&lt;/span&gt;&lt;span&gt; &lt;/span&gt;&lt;span&gt;Error&lt;/span&gt;&lt;span&gt;(&lt;/span&gt;&lt;span&gt;&quot;Could not load requested variant.&quot;&lt;/span&gt;&lt;span&gt;)&lt;/span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;span&gt;            }&lt;/span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;span&gt;            &lt;/span&gt;&lt;span&gt;return&lt;/span&gt;&lt;span&gt; resp.&lt;/span&gt;&lt;span&gt;json&lt;/span&gt;&lt;span&gt;()&lt;/span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;span&gt;          })&lt;/span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;span&gt;          .&lt;/span&gt;&lt;span&gt;then&lt;/span&gt;&lt;span&gt;(addAssetsToDom)&lt;/span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;span&gt;      })()&lt;/span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;span&gt;    &amp;lt;/&lt;/span&gt;&lt;span&gt;script&lt;/span&gt;&lt;span&gt;&amp;gt;&lt;/span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;span&gt;  &amp;lt;/&lt;/span&gt;&lt;span&gt;body&lt;/span&gt;&lt;span&gt;&amp;gt;&lt;/span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;span&gt;&amp;lt;/&lt;/span&gt;&lt;span&gt;html&lt;/span&gt;&lt;span&gt;&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;You’ll note that we decided to inform the user of the missing variant in case it
+is unavailable, instead of just reloading on their behalf. Depending on the
+kinds of differences between variants, just loading the default variant might be
+too subtle for the user to realize something didn’t work. So, we display a very
+simple message.&lt;/p&gt;
+&lt;p&gt;&lt;/p&gt;
+&lt;p&gt;The structure above expects the server to house all the variant information in
+the &lt;code&gt;/variants/&lt;/code&gt; directory. That directory might look like this:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;&lt;span&gt;&lt;span&gt;variants&lt;/span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;span&gt;├── mock.json&lt;/span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;span&gt;├── my_new_feature.json&lt;/span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;span&gt;└── public.json&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;But how do we build those files? This is where we need to customize our Webpack
+configuration.&lt;/p&gt;
+&lt;h3&gt;webpack.config.ts&lt;/h3&gt;
+&lt;p&gt;The code below will not work in your project unless you add loader rules to your
+Webpack config. Additionally, you may not have things set up to use TypeScript
+in your Webpack config, but the TypeScript in this code example is limited and
+easily removed.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;&lt;span&gt;&lt;span&gt;import&lt;/span&gt;&lt;span&gt; path &lt;/span&gt;&lt;span&gt;from&lt;/span&gt;&lt;span&gt; &lt;/span&gt;&lt;span&gt;&quot;path&quot;&lt;/span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;span&gt;import&lt;/span&gt;&lt;span&gt; { DefinePlugin } &lt;/span&gt;&lt;span&gt;from&lt;/span&gt;&lt;span&gt; &lt;/span&gt;&lt;span&gt;&quot;webpack&quot;&lt;/span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;span&gt;import&lt;/span&gt;&lt;span&gt; MiniCssExtractPlugin &lt;/span&gt;&lt;span&gt;from&lt;/span&gt;&lt;span&gt; &lt;/span&gt;&lt;span&gt;&quot;mini-css-extract-plugin&quot;&lt;/span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;span&gt;import&lt;/span&gt;&lt;span&gt; HtmlWebpackPlugin &lt;/span&gt;&lt;span&gt;from&lt;/span&gt;&lt;span&gt; &lt;/span&gt;&lt;span&gt;&quot;html-webpack-plugin&quot;&lt;/span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;span&gt;type&lt;/span&gt;&lt;span&gt; &lt;/span&gt;&lt;span&gt;WebpackEnv&lt;/span&gt;&lt;span&gt; &lt;/span&gt;&lt;span&gt;=&lt;/span&gt;&lt;span&gt; {&lt;/span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;span&gt;  &lt;/span&gt;&lt;span&gt;/** Webpack adds this boolean when running the dev server */&lt;/span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;span&gt;  &lt;/span&gt;&lt;span&gt;WEBPACK_SERVE&lt;/span&gt;&lt;span&gt;?:&lt;/span&gt;&lt;span&gt; &lt;/span&gt;&lt;span&gt;boolean&lt;/span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;span&gt;  &lt;/span&gt;&lt;span&gt;/** This is the webpack env var that we&apos;re requiring from the CLI */&lt;/span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;span&gt;  &lt;/span&gt;&lt;span&gt;variantName&lt;/span&gt;&lt;span&gt;:&lt;/span&gt;&lt;span&gt; &lt;/span&gt;&lt;span&gt;string&lt;/span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;span&gt;}&lt;/span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;span&gt;const&lt;/span&gt;&lt;span&gt; &lt;/span&gt;&lt;span&gt;defaultVariantName&lt;/span&gt;&lt;span&gt; &lt;/span&gt;&lt;span&gt;=&lt;/span&gt;&lt;span&gt; &lt;/span&gt;&lt;span&gt;&quot;public&quot;&lt;/span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;span&gt;const&lt;/span&gt;&lt;span&gt; &lt;/span&gt;&lt;span&gt;dir&lt;/span&gt;&lt;span&gt; &lt;/span&gt;&lt;span&gt;=&lt;/span&gt;&lt;span&gt; path.&lt;/span&gt;&lt;span&gt;resolve&lt;/span&gt;&lt;span&gt;(__dirname)&lt;/span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;span&gt;/**&lt;/span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;span&gt; * This function can be replaced with anything that loads a particular&lt;/span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;span&gt; * config based on a variant name. In our codebase, we load some fairly&lt;/span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;span&gt; * intricate configuration files written in JavaScript. For simplicity&lt;/span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;span&gt; * though, I&apos;ve hard-coded some values directly.&lt;/span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;span&gt; *&lt;/span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;span&gt; * The comments inside each variant help explain the imaginary state I&lt;/span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;span&gt; * am setting up, which is somewhat similar to what we use at Trilliant&lt;/span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;span&gt; * Health. As I said, though, this part is completely up to you. You can&lt;/span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;span&gt; * expose anything you want to your app via some kind of variant&lt;/span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;span&gt; * configuration, coupled with--in the case of Webpack--the&lt;/span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;span&gt; * `WebpackDefinePlugin`.&lt;/span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;span&gt; */&lt;/span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;span&gt;function&lt;/span&gt;&lt;span&gt; &lt;/span&gt;&lt;span&gt;getVariantConfig&lt;/span&gt;&lt;span&gt;(&lt;/span&gt;&lt;span&gt;variantName&lt;/span&gt;&lt;span&gt;:&lt;/span&gt;&lt;span&gt; &lt;/span&gt;&lt;span&gt;string&lt;/span&gt;&lt;span&gt;) {&lt;/span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;span&gt;  &lt;/span&gt;&lt;span&gt;const&lt;/span&gt;&lt;span&gt; &lt;/span&gt;&lt;span&gt;variants&lt;/span&gt;&lt;span&gt; &lt;/span&gt;&lt;span&gt;=&lt;/span&gt;&lt;span&gt; [&lt;/span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;span&gt;    {&lt;/span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;span&gt;      &lt;/span&gt;&lt;span&gt;// This is what I&apos;d consider the &quot;production&quot; version of the app.&lt;/span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;span&gt;      &lt;/span&gt;&lt;span&gt;// I call it public here because I don&apos;t want to confuse it with&lt;/span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;span&gt;      &lt;/span&gt;&lt;span&gt;// the Node environment name.&lt;/span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;span&gt;      name: &lt;/span&gt;&lt;span&gt;&quot;public&quot;&lt;/span&gt;&lt;span&gt;,&lt;/span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;span&gt;      buildConfig: {&lt;/span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;span&gt;        apiBaseUrl: &lt;/span&gt;&lt;span&gt;&quot;https://api.example.com&quot;&lt;/span&gt;&lt;span&gt;,&lt;/span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;span&gt;        auth0Audience: &lt;/span&gt;&lt;span&gt;&quot;http://stable-example.com/api&quot;&lt;/span&gt;&lt;span&gt;,&lt;/span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;span&gt;        auth0ClientId: &lt;/span&gt;&lt;span&gt;&quot;A92H...&quot;&lt;/span&gt;&lt;span&gt;,&lt;/span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;span&gt;        auth0Domain: &lt;/span&gt;&lt;span&gt;&quot;your-account.us.auth0.com&quot;&lt;/span&gt;&lt;span&gt;,&lt;/span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;span&gt;        mockServer: &lt;/span&gt;&lt;span&gt;false&lt;/span&gt;&lt;span&gt;,&lt;/span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;span&gt;      },&lt;/span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;span&gt;    },&lt;/span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;span&gt;    {&lt;/span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;span&gt;      &lt;/span&gt;&lt;span&gt;// In this imaginary scenario, the mock server handles everything,&lt;/span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;span&gt;      &lt;/span&gt;&lt;span&gt;// so we don&apos;t need to provide a real server URL&lt;/span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;span&gt;      name: &lt;/span&gt;&lt;span&gt;&quot;mock&quot;&lt;/span&gt;&lt;span&gt;,&lt;/span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;span&gt;      buildConfig: {&lt;/span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;span&gt;        apiBaseUrl: &lt;/span&gt;&lt;span&gt;&quot;https://api-does-not-exist.example.com&quot;&lt;/span&gt;&lt;span&gt;,&lt;/span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;span&gt;        auth0Audience: &lt;/span&gt;&lt;span&gt;&quot;http://stable-example.com/api&quot;&lt;/span&gt;&lt;span&gt;,&lt;/span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;span&gt;        auth0ClientId: &lt;/span&gt;&lt;span&gt;&quot;A92H...&quot;&lt;/span&gt;&lt;span&gt;,&lt;/span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;span&gt;        auth0Domain: &lt;/span&gt;&lt;span&gt;&quot;your-account.us.auth0.com&quot;&lt;/span&gt;&lt;span&gt;,&lt;/span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;span&gt;        mockServer: &lt;/span&gt;&lt;span&gt;true&lt;/span&gt;&lt;span&gt;,&lt;/span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;span&gt;      },&lt;/span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;span&gt;    },&lt;/span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;span&gt;    {&lt;/span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;span&gt;      &lt;/span&gt;&lt;span&gt;// Let&apos;s say that local development for the new feature is faster&lt;/span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;span&gt;      &lt;/span&gt;&lt;span&gt;// with a mock server. So for this variant, we are working on some&lt;/span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;span&gt;      &lt;/span&gt;&lt;span&gt;// new feature, but using our mock server to do so.&lt;/span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;span&gt;      name: &lt;/span&gt;&lt;span&gt;&quot;my_new_feature_local&quot;&lt;/span&gt;&lt;span&gt;,&lt;/span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;span&gt;      buildConfig: {&lt;/span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;span&gt;        apiBaseUrl: &lt;/span&gt;&lt;span&gt;&quot;https://api-feature-branch.example.com&quot;&lt;/span&gt;&lt;span&gt;,&lt;/span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;span&gt;        auth0Audience: &lt;/span&gt;&lt;span&gt;&quot;http://experimental-example.com/api&quot;&lt;/span&gt;&lt;span&gt;,&lt;/span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;span&gt;        auth0ClientId: &lt;/span&gt;&lt;span&gt;&quot;B93I...&quot;&lt;/span&gt;&lt;span&gt;,&lt;/span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;span&gt;        auth0Domain: &lt;/span&gt;&lt;span&gt;&quot;your-feature-account.us.auth0.com&quot;&lt;/span&gt;&lt;span&gt;,&lt;/span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;span&gt;        mockServer: &lt;/span&gt;&lt;span&gt;true&lt;/span&gt;&lt;span&gt;,&lt;/span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;span&gt;      },&lt;/span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;span&gt;    },&lt;/span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;span&gt;    {&lt;/span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;span&gt;      &lt;/span&gt;&lt;span&gt;// This variant is fully integrated end-to-end, so we&lt;/span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;span&gt;      &lt;/span&gt;&lt;span&gt;// don&apos;t use the mock server. We can push this version up to the&lt;/span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;span&gt;      &lt;/span&gt;&lt;span&gt;// server to let our teammates see how work is progressing and how&lt;/span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;span&gt;      &lt;/span&gt;&lt;span&gt;// the actual new server endpoints are working.&lt;/span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;span&gt;      name: &lt;/span&gt;&lt;span&gt;&quot;my_new_feature&quot;&lt;/span&gt;&lt;span&gt;,&lt;/span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;span&gt;      buildConfig: {&lt;/span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;span&gt;        apiBaseUrl: &lt;/span&gt;&lt;span&gt;&quot;https://api-feature-branch.example.com&quot;&lt;/span&gt;&lt;span&gt;,&lt;/span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;span&gt;        auth0Audience: &lt;/span&gt;&lt;span&gt;&quot;http://experimental-example.com/api&quot;&lt;/span&gt;&lt;span&gt;,&lt;/span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;span&gt;        auth0ClientId: &lt;/span&gt;&lt;span&gt;&quot;B93I...&quot;&lt;/span&gt;&lt;span&gt;,&lt;/span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;span&gt;        auth0Domain: &lt;/span&gt;&lt;span&gt;&quot;your-feature-account.us.auth0.com&quot;&lt;/span&gt;&lt;span&gt;,&lt;/span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;span&gt;        mockServer: &lt;/span&gt;&lt;span&gt;false&lt;/span&gt;&lt;span&gt;,&lt;/span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;span&gt;      },&lt;/span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;span&gt;    },&lt;/span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;span&gt;  ]&lt;/span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;span&gt;  &lt;/span&gt;&lt;span&gt;const&lt;/span&gt;&lt;span&gt; &lt;/span&gt;&lt;span&gt;variant&lt;/span&gt;&lt;span&gt; &lt;/span&gt;&lt;span&gt;=&lt;/span&gt;&lt;span&gt; variants.&lt;/span&gt;&lt;span&gt;find&lt;/span&gt;&lt;span&gt;((&lt;/span&gt;&lt;span&gt;x&lt;/span&gt;&lt;span&gt;) &lt;/span&gt;&lt;span&gt;=&amp;gt;&lt;/span&gt;&lt;span&gt; x.name &lt;/span&gt;&lt;span&gt;===&lt;/span&gt;&lt;span&gt; variantName)&lt;/span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;span&gt;  &lt;/span&gt;&lt;span&gt;if&lt;/span&gt;&lt;span&gt; (&lt;/span&gt;&lt;span&gt;!&lt;/span&gt;&lt;span&gt;variant) &lt;/span&gt;&lt;span&gt;throw&lt;/span&gt;&lt;span&gt; &lt;/span&gt;&lt;span&gt;new&lt;/span&gt;&lt;span&gt; &lt;/span&gt;&lt;span&gt;Error&lt;/span&gt;&lt;span&gt;(&lt;/span&gt;&lt;span&gt;&quot;No variant found called &quot;&lt;/span&gt;&lt;span&gt; &lt;/span&gt;&lt;span&gt;+&lt;/span&gt;&lt;span&gt; variantName)&lt;/span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;span&gt;  &lt;/span&gt;&lt;span&gt;return&lt;/span&gt;&lt;span&gt; variant&lt;/span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;span&gt;}&lt;/span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;span&gt;/**&lt;/span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;span&gt; * The Webpack config. Don&apos;t forget to specify a variant when you call&lt;/span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;span&gt; * it from the CLI:&lt;/span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;span&gt; *&lt;/span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;span&gt; *   webpack --env variantName=public&lt;/span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;span&gt; *&lt;/span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;span&gt; */&lt;/span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;span&gt;export&lt;/span&gt;&lt;span&gt; &lt;/span&gt;&lt;span&gt;default&lt;/span&gt;&lt;span&gt; &lt;/span&gt;&lt;span&gt;async&lt;/span&gt;&lt;span&gt; (webpackEnv&lt;/span&gt;&lt;span&gt;:&lt;/span&gt;&lt;span&gt; WebpackEnv) &lt;/span&gt;&lt;span&gt;=&amp;gt;&lt;/span&gt;&lt;span&gt; &lt;/span&gt;&lt;span&gt;{&lt;/span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;span&gt;  &lt;/span&gt;&lt;span&gt;if&lt;/span&gt;&lt;span&gt; (&lt;/span&gt;&lt;span&gt;!&lt;/span&gt;&lt;span&gt;webpackEnv.variantName)&lt;/span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;span&gt;    &lt;/span&gt;&lt;span&gt;throw&lt;/span&gt;&lt;span&gt; &lt;/span&gt;&lt;span&gt;new&lt;/span&gt;&lt;span&gt; &lt;/span&gt;&lt;span&gt;Error&lt;/span&gt;&lt;span&gt;(&lt;/span&gt;&lt;span&gt;&quot;You must specify a `variantName`.&quot;&lt;/span&gt;&lt;span&gt;)&lt;/span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;span&gt;  &lt;/span&gt;&lt;span&gt;const&lt;/span&gt;&lt;span&gt; &lt;/span&gt;&lt;span&gt;variant&lt;/span&gt;&lt;span&gt; &lt;/span&gt;&lt;span&gt;=&lt;/span&gt;&lt;span&gt; &lt;/span&gt;&lt;span&gt;getVariantConfig&lt;/span&gt;&lt;span&gt;(webpackEnv.variantName)&lt;/span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;span&gt;  &lt;/span&gt;&lt;span&gt;const&lt;/span&gt;&lt;span&gt; &lt;/span&gt;&lt;span&gt;entry&lt;/span&gt;&lt;span&gt; &lt;/span&gt;&lt;span&gt;=&lt;/span&gt;&lt;span&gt; [&lt;/span&gt;&lt;span&gt;`${&lt;/span&gt;&lt;span&gt;dir&lt;/span&gt;&lt;span&gt;}/src/index.ts`&lt;/span&gt;&lt;span&gt;]&lt;/span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;span&gt;  &lt;/span&gt;&lt;span&gt;return&lt;/span&gt;&lt;span&gt; {&lt;/span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;span&gt;    &lt;/span&gt;&lt;span&gt;// An example of how a variant&apos;s config can be used to add a mock&lt;/span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;span&gt;    &lt;/span&gt;&lt;span&gt;// server.&lt;/span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;span&gt;    entry: variant.buildConfig.mockServer&lt;/span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;span&gt;      &lt;/span&gt;&lt;span&gt;?&lt;/span&gt;&lt;span&gt; [&lt;/span&gt;&lt;span&gt;`${&lt;/span&gt;&lt;span&gt;dir&lt;/span&gt;&lt;span&gt;}/src/mockServer.ts`&lt;/span&gt;&lt;span&gt;, &lt;/span&gt;&lt;span&gt;...&lt;/span&gt;&lt;span&gt;entry]&lt;/span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;span&gt;      &lt;/span&gt;&lt;span&gt;:&lt;/span&gt;&lt;span&gt; entry,&lt;/span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;span&gt;    output: {&lt;/span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;span&gt;      &lt;/span&gt;&lt;span&gt;// Fingerprint the image files&lt;/span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;span&gt;      assetModuleFilename: &lt;/span&gt;&lt;span&gt;&quot;assets/images/[contenthash][ext]&quot;&lt;/span&gt;&lt;span&gt;,&lt;/span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;span&gt;      &lt;/span&gt;&lt;span&gt;// Fingerprint the JS files&lt;/span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;span&gt;      filename: &lt;/span&gt;&lt;span&gt;&quot;assets/js/[name].[contenthash].js&quot;&lt;/span&gt;&lt;span&gt;,&lt;/span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;span&gt;      path: &lt;/span&gt;&lt;span&gt;&quot;build&quot;&lt;/span&gt;&lt;span&gt;,&lt;/span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;span&gt;      publicPath: &lt;/span&gt;&lt;span&gt;&quot;/&quot;&lt;/span&gt;&lt;span&gt;,&lt;/span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;span&gt;    },&lt;/span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;span&gt;    &lt;/span&gt;&lt;span&gt;//&lt;/span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;span&gt;    &lt;/span&gt;&lt;span&gt;//&lt;/span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;span&gt;    &lt;/span&gt;&lt;span&gt;// NOTE: I have left out all the usual loader and file type&lt;/span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;span&gt;    &lt;/span&gt;&lt;span&gt;// configuration. It&apos;s up to you to merge the examples here with&lt;/span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;span&gt;    &lt;/span&gt;&lt;span&gt;// your actual Webpack configuration.&lt;/span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;span&gt;    &lt;/span&gt;&lt;span&gt;//&lt;/span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;span&gt;    &lt;/span&gt;&lt;span&gt;//&lt;/span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;span&gt;    plugins: [&lt;/span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;span&gt;      &lt;/span&gt;&lt;span&gt;new&lt;/span&gt;&lt;span&gt; &lt;/span&gt;&lt;span&gt;MiniCssExtractPlugin&lt;/span&gt;&lt;span&gt;({&lt;/span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;span&gt;        &lt;/span&gt;&lt;span&gt;// We want to fingerprint the CSS files, just like the JS files&lt;/span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;span&gt;        filename: &lt;/span&gt;&lt;span&gt;&quot;assets/css/[name].[contenthash].css&quot;&lt;/span&gt;&lt;span&gt;,&lt;/span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;span&gt;      }),&lt;/span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;span&gt;      &lt;/span&gt;&lt;span&gt;// Examples of using the variant config to change constants inside&lt;/span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;span&gt;      &lt;/span&gt;&lt;span&gt;// the app&lt;/span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;span&gt;      &lt;/span&gt;&lt;span&gt;new&lt;/span&gt;&lt;span&gt; &lt;/span&gt;&lt;span&gt;DefinePlugin&lt;/span&gt;&lt;span&gt;({&lt;/span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;span&gt;        AUTH_0_AUDIENCE: &lt;/span&gt;&lt;span&gt;JSON&lt;/span&gt;&lt;span&gt;.&lt;/span&gt;&lt;span&gt;stringify&lt;/span&gt;&lt;span&gt;(variant.buildConfig.auth0Audience),&lt;/span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;span&gt;        AUTH_0_CLIENT_ID: &lt;/span&gt;&lt;span&gt;JSON&lt;/span&gt;&lt;span&gt;.&lt;/span&gt;&lt;span&gt;stringify&lt;/span&gt;&lt;span&gt;(variant.buildConfig.auth0ClientId),&lt;/span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;span&gt;        AUTH_0_DOMAIN: &lt;/span&gt;&lt;span&gt;JSON&lt;/span&gt;&lt;span&gt;.&lt;/span&gt;&lt;span&gt;stringify&lt;/span&gt;&lt;span&gt;(variant.buildConfig.auth0Domain),&lt;/span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;span&gt;        API_BASE_URL: &lt;/span&gt;&lt;span&gt;JSON&lt;/span&gt;&lt;span&gt;.&lt;/span&gt;&lt;span&gt;stringify&lt;/span&gt;&lt;span&gt;(variant.buildConfig.apiBaseUrl),&lt;/span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;span&gt;      }),&lt;/span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;span&gt;      &lt;/span&gt;&lt;span&gt;// Creates the variant dependencies JSON file:&lt;/span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;span&gt;      &lt;/span&gt;&lt;span&gt;// variants/{variantName}.json.&lt;/span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;span&gt;      &lt;/span&gt;&lt;span&gt;//&lt;/span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;span&gt;      &lt;/span&gt;&lt;span&gt;// The HtmlWebpackPlugin is really not meant for creating JSON&lt;/span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;span&gt;      &lt;/span&gt;&lt;span&gt;// files, but it is situated perfectly in the build process for&lt;/span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;span&gt;      &lt;/span&gt;&lt;span&gt;// this exact task. If you think about it, we are just replacing&lt;/span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;span&gt;      &lt;/span&gt;&lt;span&gt;// the use of `HtmlWebpackPlugin` as a way to inject our&lt;/span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;span&gt;      &lt;/span&gt;&lt;span&gt;// dependencies into &quot;index.html&quot; with the exact same files&lt;/span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;span&gt;      &lt;/span&gt;&lt;span&gt;// enumerated in a JSON file.&lt;/span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;span&gt;      &lt;/span&gt;&lt;span&gt;new&lt;/span&gt;&lt;span&gt; &lt;/span&gt;&lt;span&gt;HtmlWebpackPlugin&lt;/span&gt;&lt;span&gt;({&lt;/span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;span&gt;        inject: &lt;/span&gt;&lt;span&gt;false&lt;/span&gt;&lt;span&gt;,&lt;/span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;span&gt;        minify: &lt;/span&gt;&lt;span&gt;false&lt;/span&gt;&lt;span&gt;,&lt;/span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;span&gt;        &lt;/span&gt;&lt;span&gt;templateParameters&lt;/span&gt;&lt;span&gt;: (&lt;/span&gt;&lt;span&gt;_compilation&lt;/span&gt;&lt;span&gt;, &lt;/span&gt;&lt;span&gt;assets&lt;/span&gt;&lt;span&gt;, &lt;/span&gt;&lt;span&gt;_tags&lt;/span&gt;&lt;span&gt;, &lt;/span&gt;&lt;span&gt;_opts&lt;/span&gt;&lt;span&gt;) &lt;/span&gt;&lt;span&gt;=&amp;gt;&lt;/span&gt;&lt;span&gt; ({&lt;/span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;span&gt;          assets,&lt;/span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;span&gt;        }),&lt;/span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;span&gt;        templateContent: &lt;/span&gt;&lt;span&gt;`{&lt;/span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;span&gt;          &quot;css&quot;: &amp;lt;%= JSON.stringify(assets.css) %&amp;gt;,&lt;/span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;span&gt;          &quot;scripts&quot;: &amp;lt;%= JSON.stringify(assets.js) %&amp;gt;,&lt;/span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;span&gt;        }`&lt;/span&gt;&lt;span&gt;,&lt;/span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;span&gt;        &lt;/span&gt;&lt;span&gt;// When running locally for development, we just use the default&lt;/span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;span&gt;        &lt;/span&gt;&lt;span&gt;// variant name as the name of the JSON file. The specified&lt;/span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;span&gt;        &lt;/span&gt;&lt;span&gt;// variant&apos;s settings will still be loaded, but you won&apos;t have&lt;/span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;span&gt;        &lt;/span&gt;&lt;span&gt;// to include a variant in your query params just for local&lt;/span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;span&gt;        &lt;/span&gt;&lt;span&gt;// development. (Remember, no variant is the same as loading the&lt;/span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;span&gt;        &lt;/span&gt;&lt;span&gt;// default variant. See the JavaScript in the index.html file)&lt;/span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;span&gt;        filename: &lt;/span&gt;&lt;span&gt;`variants/${&lt;/span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;span&gt;          &lt;/span&gt;&lt;span&gt;webpackEnv&lt;/span&gt;&lt;span&gt;.&lt;/span&gt;&lt;span&gt;WEBPACK_SERVE&lt;/span&gt;&lt;span&gt; &lt;/span&gt;&lt;span&gt;?&lt;/span&gt;&lt;span&gt; &lt;/span&gt;&lt;span&gt;defaultVariantName&lt;/span&gt;&lt;span&gt; &lt;/span&gt;&lt;span&gt;:&lt;/span&gt;&lt;span&gt; &lt;/span&gt;&lt;span&gt;variant&lt;/span&gt;&lt;span&gt;.&lt;/span&gt;&lt;span&gt;name&lt;/span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;span&gt;        &lt;/span&gt;&lt;span&gt;}.json`&lt;/span&gt;&lt;span&gt;,&lt;/span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;span&gt;      }),&lt;/span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;span&gt;    ],&lt;/span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;span&gt;  }&lt;/span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;span&gt;}&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;This configuration will build our app into the &lt;code&gt;build&lt;/code&gt; folder or serve it up via
+the dev server when running locally. Assuming you fill in the missing loaders
+and such to fit your needs, the config above will allow you to start a dev
+server or build via the following command.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;&lt;span&gt;&lt;span&gt;# compile and start the dev server for the my_new_feature variant&lt;/span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;span&gt;webpack serve --env variantName=my_new_feature&lt;/span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;span&gt;# build the public variant&lt;/span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;span&gt;webpack --env variantName=public&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;When you build, you’ll get something approximating the following folder output.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;&lt;span&gt;&lt;span&gt;build&lt;/span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;span&gt;├── assets&lt;/span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;span&gt;│   ├── css&lt;/span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;span&gt;│   │   ├── main.2a70d927cdc35881336a.css&lt;/span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;span&gt;│   │   └── main.2a70d927cdc35881336a.css.map&lt;/span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;span&gt;│   ├── images&lt;/span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;span&gt;│   │   └── 71124d3ac27ba0a97f64.png&lt;/span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;span&gt;│   └── js&lt;/span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;span&gt;│       ├── main.dac8c08c71723ee316dc.js&lt;/span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;span&gt;│       └── main.dac8c08c71723ee316dc.js.map&lt;/span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;span&gt;├── index.html&lt;/span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;span&gt;└── variants&lt;/span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;span&gt;    └── public.json&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;If you make a change and build again, you’ll get the exact same &lt;code&gt;index.html&lt;/code&gt;,
+but a different version of &lt;code&gt;public.json&lt;/code&gt; and different asset files. The magic
+happens when you push these files to your server and build a &lt;em&gt;different&lt;/em&gt;
+variant.&lt;/p&gt;
+&lt;p&gt;If we were to build the “mock” variant, the resulting build is similar.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;&lt;span&gt;&lt;span&gt;webpack --env variantName=mock&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;&lt;span&gt;&lt;span&gt;build&lt;/span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;span&gt;├── assets&lt;/span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;span&gt;│   ├── css&lt;/span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;span&gt;│   │   ├── main.2a70d927cdc35881336a.css&lt;/span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;span&gt;│   │   └── main.2a70d927cdc35881336a.css.map&lt;/span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;span&gt;│   ├── images&lt;/span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;span&gt;│   │   └── 71124d3ac27ba0a97f64.png&lt;/span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;span&gt;│   └── js&lt;/span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;span&gt;│       ├── main.486ca92fcb722bcd7339.js&lt;/span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;span&gt;│       └── main.486ca92fcb722bcd7339.js.map&lt;/span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;span&gt;├── index.html&lt;/span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;span&gt;└── variants&lt;/span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;span&gt;    └── mock.json&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;You’ll see that the CSS and images are the same, but the JavaScript files are
+different and we have a different variant JSON file named &lt;code&gt;mock.json&lt;/code&gt;. If you
+upload these files to your server alongside your previous uploaded files, you’ll
+get something like the following.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;&lt;span&gt;&lt;span&gt;(server)&lt;/span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;span&gt;├── assets&lt;/span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;span&gt;│   ├── css&lt;/span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;span&gt;│   │   ├── main.2a70d927cdc35881336a.css&lt;/span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;span&gt;│   │   └── main.2a70d927cdc35881336a.css.map&lt;/span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;span&gt;│   ├── images&lt;/span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;span&gt;│   │   └── 71124d3ac27ba0a97f64.png&lt;/span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;span&gt;│   └── js&lt;/span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;span&gt;│       ├── main.486ca92fcb722bcd7339.js&lt;/span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;span&gt;│       ├── main.486ca92fcb722bcd7339.js.map&lt;/span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;span&gt;│       ├── main.dac8c08c71723ee316dc.js&lt;/span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;span&gt;│       └── main.dac8c08c71723ee316dc.js.map&lt;/span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;span&gt;├── index.html&lt;/span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;span&gt;└── variants&lt;/span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;span&gt;    ├── mock.json&lt;/span&gt;&lt;/span&gt;
+&lt;span&gt;&lt;span&gt;    └── public.json&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Now, visiting your site at &lt;code&gt;example.com&lt;/code&gt; will serve up the &lt;code&gt;public&lt;/code&gt; variant
+using &lt;code&gt;main.dac8c[...].js&lt;/code&gt; while visiting &lt;code&gt;example.com/?variant=mock&lt;/code&gt; will serve
+up the &lt;code&gt;mock&lt;/code&gt; variant using &lt;code&gt;main.486ca[...].js&lt;/code&gt;.&lt;/p&gt;
+&lt;h2&gt;Diverging even farther&lt;/h2&gt;
+&lt;p&gt;&lt;/p&gt;
+&lt;p&gt;I mentioned a few times above that the code here is similar to what we use at
+Trilliant Health. There are tons of little features we’ve layered on top of our
+variant system. We’ve layered in a CLI that builds and deploys multiple variants
+at once, so that you can have several variants all based on the latest changes
+in your main branch. We’ve added a way to cut and freeze versions of our
+application to allow internal users to work with older versions of a tool that
+depends highly on a rapidly changing data structure. We’ve deployed variants
+that allowed our marketing department personnel to capture images of
+&lt;a href=&quot;https://datalab.trillianthealth.com&quot;&gt;our Similarity Index™ tools&lt;/a&gt; unencumbered
+by explanatory text. We’ve added descriptions to the internal variants and UI
+elements in the actual app that can read and understand which variants are
+available to give users a way to switch as needed.&lt;/p&gt;
+
+
+
+
+
+
+
+
+
+
+
+&lt;table&gt;&lt;thead&gt;&lt;tr&gt;&lt;th&gt;&lt;/th&gt;&lt;/tr&gt;&lt;/thead&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td&gt;Had I just finished watching Marvel’s Loki series when I created this system? Maybe. Does our internal UI lean into that origin? Maybe. Icon available at &lt;a href=&quot;https://slackmojis.com&quot;&gt;Slackmojis.com&lt;/a&gt;.&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;
+&lt;p&gt;The possibilities are vast and the latitude you can gain from using a system
+like this is very freeing. (You know what else is freeing? &lt;em&gt;Not&lt;/em&gt; doing automatic
+deployments when your PRs get merged to main. 😱 But that is a heretical rant
+for another time.)&lt;/p&gt;
+&lt;h2&gt;App Variants in a Nutshell&lt;/h2&gt;
+&lt;p&gt;Everything in the code above is just a single implementation of the idea of “app
+variants”. And “app variants” is just a name I slapped onto a simple idea: By
+moving the dependencies needed to boot your app into a file external to the
+&lt;code&gt;index.html&lt;/code&gt;, you can have multiple dependency definitions for multiple apps,
+and you can write a bit of JavaScript to decide which app to load altogether.&lt;/p&gt;
+&lt;p&gt;Have you ever seen anyone else use this technique before? I’d love to know.&lt;/p&gt;
+&lt;p&gt;In any case, if these ideas are useful to you, please run with them! Let me know
+what works for you and what you needed to change.&lt;/p&gt;</content:encoded></item></channel></rss>

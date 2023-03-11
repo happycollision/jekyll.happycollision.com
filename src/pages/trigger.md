@@ -3,5 +3,7 @@ layout: $layouts/MarkdownPage.astro
 title: FoTT
 ---
 
-This list doesn't really work anymore.
-[I made a new one instead.](/trigger/shows/2023-03)
+I've moved all the songs to a slightly new location. That will make it easier to
+access offline, too.
+
+[https://trigger.happycollision.com](https://trigger.happycollision.com)

@@ -1,19 +1,9 @@
 ---
 import Layout from "$layouts/Layout.astro"
-import { shows } from "./shows"
 ---
 
-<Layout title="Finger on the Trigger" compact>
-  <h1>Setlists</h1>
-  <ul>
-    {
-      shows.map((show) => (
-        <li>
-          <a class="link" href={`/trigger/shows/${show.slug}/`}>
-            {show.name}
-          </a>
-        </li>
-      ))
-    }
-  </ul>
+<Layout title="Finger on the Trigger" compact noHeader unconstrained>
+  <script is:inline>
+    window.location.replace("/trigger/")
+  </script>
 </Layout>

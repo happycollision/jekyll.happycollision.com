@@ -1,6 +1,5 @@
 ---
 import { getCollection } from "astro:content"
-import { urlsMatch, slasher as s } from "$lib/urls"
 import Layout from "$layouts/Layout.astro"
 
 import { shows } from "../shows"
@@ -9,7 +8,6 @@ export async function getStaticPaths() {
   function ensureArray<T>(x: T | T[]): T[] {
     return Array.isArray(x) ? x : [x]
   }
-  const baseUrl = "/trigger/shows"
   const songList = await getCollection("songs")
 
   return shows.flatMap((show) => {
@@ -28,290 +26,44 @@ export async function getStaticPaths() {
         })
 
         return {
-          ...song,
-          ...found,
           songNo: ++songNo,
-          altVersions: altsFound.map((alt) => ({
-            ...song,
-            ...alt,
+          altVersions: altsFound.map(({ slug }) => ({
+            slug,
             songNo,
           })),
         }
       }),
     )
 
-    const baseProps = {
-      showName: show.name,
-      sets,
-      showsUrl: s`${baseUrl}`,
-      showUrl: s`${baseUrl}/${show.slug}`,
-    }
-
     const allSongs = sets.flat()
 
     const baseRoute = {
       params: { path: show.slug },
-
-      props: {
-        ...baseProps,
-        songDetails: undefined as
-          | Omit<(typeof allSongs)[number], "altVersions">
-          | undefined,
-        safeSlug: undefined as string | undefined,
-        thisUrl: baseProps.showUrl,
-        nextUrl: undefined as string | undefined,
-        prevUrl: undefined as string | undefined,
-        altVersions: undefined as
-          | { path: string; title: string | undefined }[]
-          | undefined,
-      },
     }
 
     return [
       baseRoute,
-      ...allSongs.flatMap((x, i, arr): (typeof baseRoute)[] => {
-        const { altVersions, ...details } = x
-
-        const altProps = altVersions.length
-          ? [
-              {
-                path: s`${baseProps.showUrl}/${x.songNo}`,
-                title: x.data.altTitle,
-              },
-              ...altVersions.map((alt) => ({
-                path: s`${baseProps.showUrl}/${x.songNo}/alt/${
-                  alt.slug.split("_")[1]
-                }`,
-                title: alt.data.altTitle,
-              })),
-            ]
-          : undefined
-
-        const altsInfo = altVersions.map((alt) => ({
-          params: {
-            path: `${show.slug}/${x.songNo}/alt/${alt.slug.split("_")[1]}`,
-          },
-
-          props: {
-            ...baseProps,
-            songDetails: alt,
-            safeSlug: x.slug,
-            thisUrl: s`${baseProps.showUrl}/${x.songNo}/alt/${
-              alt.slug.split("_")[1]
-            }`,
-            nextUrl:
-              i < arr.length - 1
-                ? s`${baseProps.showUrl}/${x.songNo + 1}`
-                : undefined,
-            prevUrl:
-              i > 0 ? s`${baseProps.showUrl}/${x.songNo - 1}` : undefined,
-            altVersions: altProps,
-          },
-        }))
+      ...allSongs.flatMap((x): (typeof baseRoute)[] => {
+        const { altVersions } = x
 
         return [
           {
             params: { path: `${show.slug}/${x.songNo}` },
-
-            props: {
-              ...baseProps,
-              songDetails: details,
-              safeSlug: x.slug,
-              thisUrl: s`${baseProps.showUrl}/${x.songNo}`,
-              nextUrl:
-                i < arr.length - 1
-                  ? s`${baseProps.showUrl}/${x.songNo + 1}`
-                  : undefined,
-              prevUrl:
-                i > 0 ? s`${baseProps.showUrl}/${x.songNo - 1}` : undefined,
-              altVersions: altProps,
-            },
           },
-          ...altsInfo,
+          ...altVersions.map((alt) => ({
+            params: {
+              path: `${show.slug}/${x.songNo}/alt/${alt.slug.split("_")[1]}`,
+            },
+          })),
         ]
       }),
     ]
   })
 }
-
-type GspProps = Awaited<ReturnType<typeof getStaticPaths>>[number]["props"]
-
-interface Props extends GspProps {}
-
-const {
-  sets,
-  songDetails,
-  safeSlug,
-  nextUrl,
-  prevUrl,
-  showUrl,
-  showsUrl,
-  showName,
-  altVersions,
-} = Astro.props
-
-const { Content } = (await songDetails?.render()) ?? { Content: undefined }
-
-const thisSongStats = sets
-  .flatMap((songs, iSet) =>
-    songs.map(
-      (song, iSong, allSongs) =>
-        [iSet + 1, iSong + 1, allSongs.length, song] as const,
-    ),
-  )
-  .filter(([_setNum, _songNum, _total, song]) => song.slug === safeSlug)
-  .map(([set, songNum, totalSongs]) => ({ set, songNum, totalSongs }))
 ---
 
-<Layout
-  title={songDetails ? `${songDetails.data.title} | ${showName}` : showName}
-  noHeader
-  unconstrained
->
-  <div class="p-2 pt-0">
-    <div class="flex flex-col lg:flex-row gap-4">
-      {
-        songDetails && Content && (
-          <div class="lg:order-1 lg:grow">
-            {thisSongStats.map((x) => (
-              <div class="text-2xl sm:hidden">
-                Set {x.set}, Song {x.songNum} of {x.totalSongs}
-              </div>
-            ))}
-            <div class="flex gap-4 mt-2 items-baseline">
-              <div class="mb-4">
-                <a
-                  href={`${showUrl}#${safeSlug}`}
-                  class="text-xl bg-blue-600 text-white rounded py-1 px-2 hover:bg-blue-500"
-                >
-                  Close Song
-                </a>
-              </div>
-              <div class="flex grow justify-between items-baseline">
-                <div>
-                  {prevUrl ? (
-                    <a href={prevUrl} class="link">
-                      ← Previous
-                    </a>
-                  ) : (
-                    <span class="opacity-20">← Previous</span>
-                  )}
-                </div>
-                {thisSongStats.map((x) => (
-                  <div class="hidden sm:block text-xl">
-                    Set {x.set}: Song {x.songNum} of {x.totalSongs}
-                  </div>
-                ))}
-                <div>
-                  {nextUrl ? (
-                    <a href={nextUrl} class="link">
-                      Next →
-                    </a>
-                  ) : (
-                    <span class="opacity-20">Next →</span>
-                  )}
-                </div>
-              </div>
-            </div>
-            <div class="w-full lg:w-auto">
-              <div class="flex flex-wrap items-center justify-between">
-                <div class="shrink-0">
-                  <h2 class="text-3xl">{songDetails.data.title}</h2>
-                  <h3 class="text-xl">lead vocals: {songDetails.feat}</h3>
-                </div>
-
-                {altVersions && (
-                  <div class="grow text-center">
-                    <ul class="border border-blue-400 inline-flex rounded">
-                      {altVersions.map((alt, i, arr) => {
-                        const isLast = arr.length === i + 1
-                        const isActive = urlsMatch(Astro.url.pathname, alt.path)
-                        return (
-                          <li class="flex">
-                            <a
-                              href={alt.path}
-                              class={`px-2 py-1 ${
-                                isLast ? "" : "border-r"
-                              } border-blue-400 ${
-                                isActive ? "bg-blue-400" : ""
-                              }`}
-                            >
-                              {alt.title}
-                            </a>
-                          </li>
-                        )
-                      })}
-                    </ul>
-                  </div>
-                )}
-              </div>
-
-              <div class="mt-4 text-xl">{songDetails.data.reminder}</div>
-
-              <div class="markdown text-xl mt-4 [&>pre]:whitespace-pre-wrap">
-                <Content />
-              </div>
-            </div>
-          </div>
-        )
-      }
-
-      <div class="lg:w-96 shrink-0">
-        <div class="text-2xl border-b border-neutral-400 flex items-baseline">
-          <h1 class="inline mr-4">
-            <a href={showUrl} class="link !no-underline">
-              {showName}
-            </a>
-          </h1>
-          <span class="text-base">
-            (<a href={showsUrl} class="link !no-underline">all shows ↩︎</a>)
-          </span>
-        </div>
-        {
-          sets.map((songs, i) => (
-            <div class="mt-4 ">
-              <h2 class="text-2xl mb-4">Set {++i}</h2>
-              <ol class="list-decimal text-xl">
-                {songs.map((song) => {
-                  const isActive =
-                    urlsMatch(
-                      Astro.url.pathname,
-                      `${showUrl}/${song.songNo}`,
-                    ) ||
-                    Astro.url.pathname.startsWith(
-                      `${showUrl}/${song.songNo}/alt/`,
-                    )
-
-                  return (
-                    <a
-                      id={song.slug}
-                      class={
-                        "block " +
-                        (isActive ? "bg-neutral-200" : "hover:bg-blue-200")
-                      }
-                      href={s`${showUrl}/${song.songNo}`}
-                    >
-                      <li class="py-4 ml-12 pl-0">
-                        <div>
-                          <strong class="min-w-[4rem] inline-block">
-                            {song.feat}
-                          </strong>
-                          <span class="link !no-underline">
-                            {song.data.title}
-                          </span>
-                        </div>
-                        {song.data.reminder && (
-                          <div class="mt-2">{song.data.reminder}</div>
-                        )}
-                      </li>
-                    </a>
-                  )
-                })}
-              </ol>
-            </div>
-          ))
-        }
-      </div>
-    </div>
-  </div>
+<Layout title="Finger on the Trigger" compact noHeader unconstrained>
+  <script is:inline>
+    window.location.replace("/trigger/")
+  </script>
 </Layout>

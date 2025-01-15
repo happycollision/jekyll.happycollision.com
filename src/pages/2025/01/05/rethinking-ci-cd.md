@@ -1,7 +1,7 @@
 ---
 title: "Rethinking CI/CD"
 subtitle: "Does yours stop bugs or block development?"
-date: 2023-01-05
+date: 2025-01-20
 layout: $layouts/Page.astro
 ---
 

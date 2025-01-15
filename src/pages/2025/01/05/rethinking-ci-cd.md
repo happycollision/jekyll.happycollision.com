@@ -18,10 +18,11 @@ slightly different meanings depending on who you ask. For this article, let's
 assume we mean "automatic testing and deployment based on codebase version
 control state."
 
-Anecdotally, I've noticed more and more companies and projects move to CI/CD in
-the past 10 to 15 years, probably because the tools we use to set up these
-deployment pipelines have become cheaper and easier to manage. But just like any
-hammer, you have to make sure you are using it on actual nails.
+Anecdotally, I've noticed more and more companies and projects move away from
+"manual" deployments to CI/CD in the past 10 to 15 years, probably because the
+tools we use to set up these deployment pipelines have become cheaper and easier
+to manage. But just like any hammer, you have to make sure you are using it on
+actual nails.
 
 CI/CD is good for consistent, pre-tested, leisurely deployments. CI/CD is often
 configured very poorly for speed and emergency scenarios. But you don't always
@@ -36,14 +37,15 @@ tktk: these steps should be a state graph
 2. Once merged, run all tests again. If any fail, do not deploy.
 3. Once tests on `main` all pass, run the deploy.
 
-Quibble about running all the tests again after merge if you like—we will look
-at that later. But the main thing to notice here is how much you will sweat when
-you are trying to fix a serious bug in production. How long do these tests take?
-How much time are we wasting after a single line change, or worse, reverting to
-a known good state that needs no tests at all?
+The main thing to notice here is how much you will sweat when you are trying to
+fix a serious bug in production. How long do these tests take? How much time are
+we wasting after a single line change, or worse, reverting to a known good state
+that needs no tests at all?
 
-This is why I am going to argue that the best CI/CD actually leaves the
-"Deployment" part out.
+This is why I am going to argue that the best CI/CD leaves the "Deployment" part
+out entirely.
+
+Always automated, never automatic
 
 For 4 years, the frontend engineers at Trilliant Health have been running every
 single deployment from our local computers. There is nothing automatic about
@@ -52,14 +54,13 @@ time, we have certainly shipped a few bugs. Perhaps 2 were showstoppers. Each of
 those two showstoppers were reverted within about 5 minutes of being discovered,
 because we didn't have to create a branch, push to GitHub, open a Pull Request,
 wait for a review, wait for tests to pass in CI, click merge, wait for more
-tests and then for an underpowered runner to build and deploy our application.
+tests, and then wait for an underpowered runner to build and deploy our
+application.
 
 All we had to do was check out our previously-deployed commit and run the deploy
 script locally. Since we do this all the time, there was no worry about "doing
 it wrong" or for the deployment procedure or our personal credentials to be out
 of date.
-
-Always automated, never automatic
 
 Our CI is simple:
 
@@ -92,7 +93,7 @@ to check that our changes are good. We just don't program them to block a
 deployment. We either run them locally, or wait for CI tests to pass before we
 run a deployment from our computers.
 
-"If developers can deploy whatever they want, won't they be tempted to?"
+"If developers can deploy _whatever they want_, won't they be tempted to?"
 
 I cannot speak to your company's hiring practices.
 
@@ -101,5 +102,4 @@ still reasonably test your code, is deployment sufficently intentional, and do
 you trust your developers?
 
 As long as your system or process accounts for these things, then there is no
-need for your deployments to be held up by a CI/CD pipeline when you need to
-ship something fast!
+need for your deployments to be held up by a CI/CD pipeline!

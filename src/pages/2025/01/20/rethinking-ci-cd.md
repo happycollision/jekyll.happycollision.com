@@ -7,11 +7,11 @@ layout: $layouts/Page.astro
 
 > Manager: The sign up form is down!
 >
-> Engineer: Yeah, I know why. Gimme ten seconds to fix it.
+> Engineer: Yeah, I know why. Gimme 10 seconds to fix it.
 >
-> Manager: I'll tell everyone that the form will be back up in a minute.
+> Manager: Whew! I'll tell everyone it'll be back in a minute.
 >
-> Engineer: Tell them more like 40.
+> Engineer: More like 40 minutes.
 
 The concept of "Continuous Integration and Continuous Deployment" (CI/CD) has
 slightly different meanings depending on who you ask. For this article, let's
@@ -74,10 +74,6 @@ Conceptually, our CI is simple:
 > tip of the `main` branch. That means that there is zero diff between the PR
 > and `main` immediately after the code merges.
 
-With these two things in place, we know that code which was merged to `main` was
-tested in its current state. We don't have to run tests again on `main` becuase
-there is no different between the Pull Request code and what exists after merge.
-
 tktk picture here to clarify the above
 
 Since all code at the tip of the `main` branch is tested, developers are free to
@@ -95,22 +91,22 @@ If any bizarre local state causes a bad deployment, literally all our other
 developers could be tapped to run a quick deploy from their machine if needs be.
 (We've never needed to do this.)
 
+> "If developers can deploy _whatever they want_, won't they be tempted to?"
+
+I cannot speak to your company's hiring practices.
+
+That's it. All other concerns basically boil down to these two things. Is
+deployment simple and sufficiently intentional, and do you trust your
+developers? As long as your system or process accounts for these things, then
+there is no need for your deployments to be held up by slow tests on a server
+somewhere in the cloud. The CI/CD pipeline can be used as a tool to enhance your
+process without hampering your freedom to do what you need to do.
+
+# things
+
 > "Don't you ship more bugs?"
 
 No. We still have tests and staging deployments ([but better](variantArticle))
 to check that our changes are good. We just don't program them to block a
 deployment. We either run them locally, or wait for CI tests to pass before we
 run a deployment from our computers.
-
-> "If developers can deploy _whatever they want_, won't they be tempted to?"
-
-I cannot speak to your company's hiring practices.
-
-That's it. All other concerns basically boil down to these three things. Do you
-still reasonably test your code, is deployment sufficently intentional, and do
-you trust your developers?
-
-As long as your system or process accounts for these things, then there is no
-need for your deployments to be held up by slow tests on a server somewhere in
-the cloud. The CI/CD pipeline can be used as a tool to enhance your process
-without hampering your freedom to do what you need to do.

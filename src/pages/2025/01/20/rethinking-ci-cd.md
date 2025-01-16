@@ -16,8 +16,8 @@ layout: $layouts/Page.astro
 The concept of "Continuous Integration and Continuous Deployment" (CI/CD) has
 slightly different meanings depending on who you ask. For this article, let's
 assume we only mean "automatic testing and deployment based on state." For many,
-that automatic testing and deployment is done through GitHub Actions and that
-state is what code has been pushed to the `main` branch.
+that "automatic testing and deployment" is done through GitHub Actions and that
+"state" is what code has been pushed to the `main` branch.
 
 A typical CI/CD pipeline looks like this:
 

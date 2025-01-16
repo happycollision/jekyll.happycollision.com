@@ -145,10 +145,16 @@ graduates to a problem that needs its own software solution. Not dissimilar to
 how you might ensure that your CI/CD is aware of other deployments which are
 still running, and how to solve that.
 
-> "It seems arduous to do deployment manually, when you've already merged the
-> code."
+> "It seems arduous to trigger deployment manually, when you've already merged
+> the code."
 
 This depends on what running a deployment actually looks like for you. For us,
 it takes a couple minutes, and an individual developer does it less than once a
 day on average. If we needed to deploy on every commit, that'd be more
-cumbersome and, like the question above, might graduate to a software solution.
+cumbersome.
+
+In that case, I'd suggest creating a solution that is good enough to trigger
+locally, but is _also_ triggered in CI/CD, with a very easy way to turn
+automatic deployments off and on. You will miss out on the benefit of your
+developers having more confidence triggering things themselves, but you could
+still easily deploy changes on demand whenever necessary.

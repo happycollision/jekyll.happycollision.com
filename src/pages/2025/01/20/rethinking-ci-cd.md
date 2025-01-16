@@ -86,11 +86,10 @@ All we had to do was check out our previously-deployed commit and run the deploy
 script locally. Since we do this all the time, there is no added stress around
 "doing something wrong" and further breaking production.
 
-## something
+## First order questions
 
-# objections
-
-This might raise some questions in your mind.
+There are a couple key differences between CI/CD and CI with on demand
+deployments which raise some questions.
 
 > "Are you worried about bad local state or accidental deployments?"
 
@@ -113,7 +112,26 @@ deployments to be held up by slow tests on a server somewhere in the cloud. The
 CI/CD pipeline can be used as a tool to enhance your process without hampering
 your freedom to do what you need to do.
 
-# things
+# Second order questions
+
+There are other thoughts and questions that come up frequently when I discuss
+this idea with people (specifically in our case that developers deploy from
+their local machines) that don't stem from the actual decoupling of CI/CD but
+more from the things you have to accomplish in other ways.
+
+tktk better intro above please
+
+> "This would never work for us."
+
+Ok.
+
+> "It seems arduous to to deployment manually, when you've already merged the
+> code."
+
+This depends on what running a deployment actually looks like for you. For us,
+it takes a couple minutes, and an individual developer does it less than once a
+day on average. If we needed to deploy on every commit, that'd be more
+cumbersome.
 
 > "Don't you ship more bugs?"
 
@@ -121,3 +139,5 @@ No. We still have tests and staging deployments ([but better](variantArticle))
 to check that our changes are good. We just don't program them to block a
 deployment. We either run them locally, or wait for CI tests to pass before we
 run a deployment from our computers.
+
+>

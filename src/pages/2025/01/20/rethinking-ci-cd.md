@@ -38,7 +38,29 @@ known good state that needs no tests at all?
 This is why I am going to argue that the best CI/CD leaves the "Deployment" part
 out entirely.
 
-## Always automated, never automatic
+## CI: Where checks are automatic
+
+Conceptually, CI should be simple:
+
+1. On Pull Request, ensure all checks pass before allowing a merge
+2. (There is no step 2.)
+
+Part of what allows our CI to be simple, and to only run tests on the PR and not
+again on main is that we use GitHub's branch protection and enforcement that a
+PR must be based off the tip of the `main` branch. So when something hits
+`main`, that means it came from a PR that passed all checks. And if it was in a
+PR that passed all checks, that PR was guaranteed to be based off the tip of the
+`main` branch. That means that there is zero diff between the PR and `main`
+immediately after the code merges.
+
+tktk picture here to clarify the above
+
+Since all code at the tip of the `main` branch is tested, we know that `main` is
+safe to deploy. But we don't do automatic deployment via CI/CD.
+
+## Deployments: Always automated, never automatic
+
+tktk general comments here
 
 For 4 years, the frontend engineers at Trilliant Health have been running every
 single deployment from our development computers. There is nothing automatic
@@ -60,25 +82,9 @@ All we had to do was check out our previously-deployed commit and run the deploy
 script locally. Since we do this all the time, there is no added stress around
 "doing something wrong" and further breaking production.
 
-Conceptually, our CI is simple:
+## something
 
-1. On Pull Request, ensure all checks pass before allowing a merge
-2. (There is no step 2.)
-
-> Note:  
-> Part of what allows our CI to be simple, and to only run tests on the PR and
-> not again on main is that we use GitHub's branch protection and enforcement
-> that a PR must be based off the tip of the `main` branch. So when something
-> hits `main`, that means it came from a PR that passed all checks. And if it
-> was in a PR that passed all checks, that PR was guaranteed to be based off the
-> tip of the `main` branch. That means that there is zero diff between the PR
-> and `main` immediately after the code merges.
-
-tktk picture here to clarify the above
-
-Since all code at the tip of the `main` branch is tested, developers are free to
-deploy from `main` whenever they want. So once things are merged, whoever merged
-will (often immediately) run the deploy script from their own machine.
+# objections
 
 This might raise some questions in your mind.
 

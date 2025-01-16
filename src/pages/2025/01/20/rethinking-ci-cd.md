@@ -1,6 +1,6 @@
 ---
-title: "Rethinking CI/CD"
-subtitle: "Does yours stop bugs or block development?"
+title: "On-Demand Deployment"
+subtitle: "Does CI/CD stop bugs or block development?"
 date: 2025-01-20
 layout: $layouts/Page.astro
 ---
@@ -101,12 +101,13 @@ developers could be tapped to run a quick deploy from their machine if needs be.
 
 I cannot speak to your company's hiring practices.
 
-That's it. All other concerns basically boil down to these two things. Is
-deployment simple and sufficiently intentional, and do you trust your
-developers? As long as your system or process accounts for these things, then
-there is no need for your deployments to be held up by slow tests on a server
-somewhere in the cloud. The CI/CD pipeline can be used as a tool to enhance your
-process without hampering your freedom to do what you need to do.
+That's it. All other concerns that separate on demand deployment vs automatic
+deployment basically boil down to these two things. Is deployment simple and
+sufficiently intentional, and do you trust your developers? As long as your
+system or process accounts for these things, then there is no need for your
+deployments to be held up by slow tests on a server somewhere in the cloud. The
+CI/CD pipeline can be used as a tool to enhance your process without hampering
+your freedom to do what you need to do.
 
 # things
 

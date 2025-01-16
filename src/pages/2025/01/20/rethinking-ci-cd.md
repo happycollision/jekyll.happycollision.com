@@ -125,19 +125,29 @@ tktk better intro above please
 
 Ok.
 
-> "It seems arduous to to deployment manually, when you've already merged the
+> "This would never work for a full stack app. You are talking about a SPA."
+
+It could work for a full stack app, it would just be different. The main goal is
+to remove the barrier to running a deployment. So even if everything is still
+built on a server somewhere, then find a way to trigger that build and also
+specify what source to use for that build that doesn't live purely at the end of
+a long CI testing process.
+
+> "How do you know if your deployment is about to overwrite someone else's?"
+
+This is a process problem. Our solution is that when we are about to run a
+deployment, we send a chat message where all the developers who run deployments
+can see it.
+
+If you have a LOT of developers who are often merging code, perhaps this
+graduates to a problem that needs its own software solution. Not dissimilar to
+how you might ensure that your CI/CD is aware of other deployments which are
+still running, and how to solve that.
+
+> "It seems arduous to do deployment manually, when you've already merged the
 > code."
 
 This depends on what running a deployment actually looks like for you. For us,
 it takes a couple minutes, and an individual developer does it less than once a
 day on average. If we needed to deploy on every commit, that'd be more
-cumbersome.
-
-> "Don't you ship more bugs?"
-
-No. We still have tests and staging deployments ([but better](variantArticle))
-to check that our changes are good. We just don't program them to block a
-deployment. We either run them locally, or wait for CI tests to pass before we
-run a deployment from our computers.
-
->
+cumbersome and, like the question above, might graduate to a software solution.

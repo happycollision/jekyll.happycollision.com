@@ -21,12 +21,12 @@ that "automatic testing and deployment" is done through GitHub Actions and that
 
 A typical CI/CD pipeline looks like this:
 
-tktk: these steps should be a state graph
-
 1. When a new Pull Request is opened, run all tests on the branch. If any fail,
    merging is blocked.
 2. Once merged, run all tests again. If any fail, do not deploy.
 3. Once tests on `main` all pass, run the deploy.
+
+tktk: these steps should be a state graph
 
 This kind of CI/CD setup is good for consistent, pre-tested, leisurely
 deployments. However, it is configured very poorly for speed and emergency

@@ -57,18 +57,18 @@ wait for an underpowered runner to install all the dependencies from scratch,
 build, and finally deploy our application.
 
 All we had to do was check out our previously-deployed commit and run the deploy
-script locally. Since we do this all the time, there was no worry about "doing
-it wrong" or for the deployment procedure or our personal credentials to be out
-of date.
+script locally. Since we do this all the time, there is no added stress around
+"doing something wrong" and further breaking production.
 
 Our CI is simple:
 
-0. Using GH settings, force all PRs to be rebased off the tip of `main`
+0. Using GH settings, we protect the `main` branch and force all PRs to be
+   rebased off the tip of `main`
 1. On Pull Request, ensure all tests pass before allowing a merge
 
-With these two things in place, we know that all code on `main` was tested. No
-failing tests get into `main` because of tests running on an older version of
-`main`, then getting merged into the latest version of `main`.
+With these two things in place, we know that code which was merged to `main` was
+tested in its current state. We don't have to run tests again on `main` becuase
+there is no different between the Pull Request code and what exists after merge.
 
 tktk picture here to clarify the above
 

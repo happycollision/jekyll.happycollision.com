@@ -41,14 +41,14 @@ out entirely.
 ## Always automated, never automatic
 
 For 4 years, the frontend engineers at Trilliant Health have been running every
-single deployment from our local computers. There is nothing automatic about
-deployments. (They are auto<i>mated</i>, just not auto<i>matic</i>.) During this
-time, we have certainly shipped a few bugs. Perhaps 2 were showstoppers. Each of
-those two showstoppers were reverted within about 5 minutes of being discovered,
-because we didn't have to create a branch, push to GitHub, open a Pull Request,
-wait for a review, wait for tests to pass in CI, click merge, wait for more
-tests, and then wait for an underpowered runner to build and deploy our
-application.
+single deployment from our development computers. There is nothing automatic
+about deployments. (They are auto<i>mated</i>, just not auto<i>matic</i>.)
+During this time, we have certainly shipped a few bugs. Perhaps 2 were
+showstoppers. Each of those two showstoppers were reverted within about 5
+minutes of being discovered, because we didn't have to create a branch, push to
+GitHub, open a Pull Request, wait for a review, wait for tests to pass in CI,
+click merge, wait for more tests, and then wait for an underpowered runner to
+build and deploy our application.
 
 All we had to do was check out our previously-deployed commit and run the deploy
 script locally. Since we do this all the time, there was no worry about "doing

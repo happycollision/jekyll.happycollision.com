@@ -9,9 +9,9 @@ layout: $layouts/Page.astro
 >
 > Engineer: Yeah, I know why. Gimme ten seconds to fix it.
 >
-> Manager: Ok, so I can tell everyone that the form will be back up in a minute?
+> Manager: I'll tell everyone that the form will be back up in a minute.
 >
-> Engineer: More like 40.
+> Engineer: Tell them more like 40.
 
 The concept of "Continuous Integration and Continuous Deployment" (CI/CD) has
 slightly different meanings depending on who you ask. For this article, let's

@@ -68,25 +68,25 @@ tktk picture here to clarify the above
 
 This means that all code on `main` is safe to deploy, aside from untested bugs
 which happen in "stricter" CI/CD pipelines as well. So once things are merged,
-whoever merged will then (usually immediately) run the deploy script from their
+whoever merged will (often immediately) run the deploy script from their
 machine.
 
-This all might raise a couple questions in your mind.
+This might raise some questions in your mind.
 
-"Are you worried about bad local state or accidental deployments?"
+> "Are you worried about bad local state or accidental deployments?"
 
 The script we use for deployment does a few simple "dummy checks" to make sure
 we aren't deploying from a weird state, and it also pauses a couple times for
 the developer to double check that this is what they intend to do.
 
-"Don't you ship more bugs?"
+> "Don't you ship more bugs?"
 
 No. We still have tests and staging deployments ([but better](variantArticle))
 to check that our changes are good. We just don't program them to block a
 deployment. We either run them locally, or wait for CI tests to pass before we
 run a deployment from our computers.
 
-"If developers can deploy _whatever they want_, won't they be tempted to?"
+> "If developers can deploy _whatever they want_, won't they be tempted to?"
 
 I cannot speak to your company's hiring practices.
 
@@ -95,4 +95,6 @@ still reasonably test your code, is deployment sufficently intentional, and do
 you trust your developers?
 
 As long as your system or process accounts for these things, then there is no
-need for your deployments to be held up by a CI/CD pipeline!
+need for your deployments to be held up by slow tests on a server somewhere in
+the cloud. The CI/CD pipeline can be used as a tool to enhance your process
+without hampering your freedom to do what you need to do.

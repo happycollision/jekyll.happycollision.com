@@ -15,18 +15,9 @@ layout: $layouts/Page.astro
 
 The concept of "Continuous Integration and Continuous Deployment" (CI/CD) has
 slightly different meanings depending on who you ask. For this article, let's
-assume we mean "automatic testing and deployment based on codebase version
-control state."
-
-Anecdotally, I've noticed more and more companies and projects move away from
-"manual" deployments to CI/CD in the past 10 to 15 years, probably because the
-tools we use to set up these deployment pipelines have become cheaper and easier
-to manage. But just like any hammer, you have to make sure you are using it on
-actual nails.
-
-CI/CD is good for consistent, pre-tested, leisurely deployments. CI/CD is often
-configured very poorly for speed and emergency scenarios. But you don't always
-have to trade one for the other.
+assume we mean "automatic testing and deployment based on state." For many, that
+automatic testing and deployment is done through GitHub Actions and that state
+is what code has been pushed to the `main` branch.
 
 A typical CI/CD pipeline looks like this:
 
@@ -37,15 +28,17 @@ tktk: these steps should be a state graph
 2. Once merged, run all tests again. If any fail, do not deploy.
 3. Once tests on `main` all pass, run the deploy.
 
-The main thing to notice here is how much you will sweat when you are trying to
-fix a serious bug in production. How long do these tests take? How much time are
-we wasting after a single line change, or worse, reverting to a known good state
-that needs no tests at all?
+This kind of CI/CD setup is good for consistent, pre-tested, leisurely
+deployments. However, it is configured very poorly for speed and emergency
+scenarios. The main thing to notice here is how much you will sweat when you are
+trying to fix a serious bug in production. How long do these tests take? How
+much time are we wasting after a single line change, or worse, reverting to a
+known good state that needs no tests at all?
 
 This is why I am going to argue that the best CI/CD leaves the "Deployment" part
 out entirely.
 
-Always automated, never automatic
+## Always automated, never automatic
 
 For 4 years, the frontend engineers at Trilliant Health have been running every
 single deployment from our local computers. There is nothing automatic about
@@ -65,7 +58,7 @@ of date.
 Our CI is simple:
 
 0. Using GH settings, force all PRs to be rebased off the tip of `main`
-1. On PR, ensure all tests pass before merge
+1. On Pull Request, ensure all tests pass before allowing a merge
 
 With these two things in place, we know that all code on `main` was tested. No
 failing tests get into `main` because of tests running on an older version of

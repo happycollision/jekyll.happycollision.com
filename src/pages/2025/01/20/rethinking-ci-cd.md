@@ -54,7 +54,7 @@ minutes of being discovered, because we didn't have to create a branch, push to
 GitHub, open a Pull Request, wait for a review (or encourage a quick rubber
 stamp), wait for tests to pass in CI, click merge, wait for more tests, and then
 wait for an underpowered runner to install all the dependencies from scratch,
-build, and finally deploy our application.
+build and---finally---deploy our application.
 
 All we had to do was check out our previously-deployed commit and run the deploy
 script locally. Since we do this all the time, there is no added stress around
@@ -72,18 +72,20 @@ there is no different between the Pull Request code and what exists after merge.
 
 tktk picture here to clarify the above
 
-This means that all code on `main` is safe to deploy, aside from untested bugs
-which happen in "stricter" CI/CD pipelines as well. So once things are merged,
-whoever merged will (often immediately) run the deploy script from their
-machine.
+Since all code at the tip of the `main` branch is tested, developers are free to
+deploy from `main` whenever they want. So once things are merged, whoever merged
+will (often immediately) run the deploy script from their own machine.
 
 This might raise some questions in your mind.
 
 > "Are you worried about bad local state or accidental deployments?"
 
-The script we use for deployment does a few simple "dummy checks" to make sure
-we aren't deploying from a weird state, and it also pauses a couple times for
-the developer to double check that this is what they intend to do.
+The script we use for deployment does a few simple "dummy checks," and it also
+pauses a couple times for the developer to confirm their intent.
+
+If any bizarre local state causes a bad deployment, literally all our other
+developers could be tapped to run a quick deploy from their machine if needs be.
+(We've never needed to do this.)
 
 > "Don't you ship more bugs?"
 

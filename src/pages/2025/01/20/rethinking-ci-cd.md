@@ -51,9 +51,10 @@ auto<i>mated</i>, just not auto<i>matic</i>.
 During these 4 years, we have certainly shipped a few bugs. Perhaps 2 were
 showstoppers. Each of those two showstoppers were reverted within about 5
 minutes of being discovered, because we didn't have to create a branch, push to
-GitHub, open a Pull Request, wait for a review, wait for tests to pass in CI,
-click merge, wait for more tests, and then wait for an underpowered runner to
-build and deploy our application.
+GitHub, open a Pull Request, wait for a review (or encourage a quick rubber
+stamp), wait for tests to pass in CI, click merge, wait for more tests, and then
+wait for an underpowered runner to install all the dependencies from scratch,
+build, and finally deploy our application.
 
 All we had to do was check out our previously-deployed commit and run the deploy
 script locally. Since we do this all the time, there was no worry about "doing

@@ -60,11 +60,19 @@ All we had to do was check out our previously-deployed commit and run the deploy
 script locally. Since we do this all the time, there is no added stress around
 "doing something wrong" and further breaking production.
 
-Our CI is simple:
+Conceptually, our CI is simple:
 
-0. Using GH settings, we protect the `main` branch and force all PRs to be
-   rebased off the tip of `main`
-1. On Pull Request, ensure all tests pass before allowing a merge
+1. On Pull Request, ensure all checks pass before allowing a merge
+2. (There is no step 2.)
+
+> Note:  
+> Part of what allows our CI to be simple, and to only run tests on the PR and
+> not again on main is that we use GitHub's branch protection and enforcement
+> that a PR must be based off the tip of the `main` branch. So when something
+> hits `main`, that means it came from a PR that passed all checks. And if it
+> was in a PR that passed all checks, that PR was guaranteed to be based off the
+> tip of the `main` branch. That means that there is zero diff between the PR
+> and `main` immediately after the code merges.
 
 With these two things in place, we know that code which was merged to `main` was
 tested in its current state. We don't have to run tests again on `main` becuase

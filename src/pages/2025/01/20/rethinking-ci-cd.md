@@ -62,8 +62,8 @@ safe to deploy. But we don't do automatic deployment via CI/CD.
 
 tktk general comments here
 
-For 4 years, the frontend engineers at Trilliant Health have been running every
-single deployment from our development computers. There is nothing automatic
+For 4 years, the engineers at Trilliant Health have been running every single
+deployment of our SPA from our development computers. There is nothing automatic
 about deployments. Instead of spending engineering effort on creating a
 deployment process that can run inside a GitHub Action, we spent that effort
 crafting a tiny CLI tool that our developers use whenever they want to deploy

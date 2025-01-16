@@ -60,7 +60,11 @@ safe to deploy. But we don't do automatic deployment via CI/CD.
 
 ## Deployments: Always automated, never automatic
 
-tktk general comments here
+If your deployments are decoupled from the rest of your CI process, and you can
+deploy to production from any branch (if necessary) at any time, you open up a
+world of possibilities for dealing with unforeseen problems. As long as the
+process is automated, getting developers to "push the button" to deploy directly
+is not all that different from having CI/CD push the button for you.
 
 For 4 years, the engineers at Trilliant Health have been running every single
 deployment of our SPA from our development computers. There is nothing automatic

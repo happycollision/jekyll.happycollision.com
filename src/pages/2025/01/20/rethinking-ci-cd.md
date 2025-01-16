@@ -87,10 +87,10 @@ All we had to do was check out our previously-deployed commit and run the deploy
 script locally. Since we do this all the time, there is no added stress around
 "doing something wrong" and further breaking production.
 
-## First order questions
+## Critical questions
 
-There are a couple key differences between CI/CD and CI with on demand
-deployments which raise some questions.
+Many of the questions or concerns about this kind of deployment system are
+rephrasings of these two big questions.
 
 > "Are you worried about bad local state or accidental deployments?"
 
@@ -113,14 +113,12 @@ deployments to be held up by slow tests on a server somewhere in the cloud. The
 CI/CD pipeline can be used as a tool to enhance your process without hampering
 your freedom to do what you need to do.
 
-# Second order questions
+## Post script: additional questions
 
-There are other thoughts and questions that come up frequently when I discuss
-this idea with people (specifically in our case that developers deploy from
-their local machines) that don't stem from the actual decoupling of CI/CD but
-more from the things you have to accomplish in other ways.
-
-tktk: better intro above please
+All the major points I wanted to share are above. But there are other questions
+that people ask when I horrify them by explaining that our developers push to
+production from their development machines. So I will answer those as well, but
+this is all bonus reading.
 
 > "This would never work for us."
 

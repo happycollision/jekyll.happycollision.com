@@ -119,7 +119,7 @@ this idea with people (specifically in our case that developers deploy from
 their local machines) that don't stem from the actual decoupling of CI/CD but
 more from the things you have to accomplish in other ways.
 
-tktk better intro above please
+tktk: better intro above please
 
 > "This would never work for us."
 

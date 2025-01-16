@@ -42,8 +42,13 @@ out entirely.
 
 For 4 years, the frontend engineers at Trilliant Health have been running every
 single deployment from our development computers. There is nothing automatic
-about deployments. (They are auto<i>mated</i>, just not auto<i>matic</i>.)
-During this time, we have certainly shipped a few bugs. Perhaps 2 were
+about deployments. Instead of spending engineering effort on creating a
+deployment process that can run inside a GitHub Action, we spent that effort
+crafting a tiny CLI tool that our developers use whenever they want to deploy
+something to production or some other environment. So all our deployments are
+auto<i>mated</i>, just not auto<i>matic</i>.
+
+During these 4 years, we have certainly shipped a few bugs. Perhaps 2 were
 showstoppers. Each of those two showstoppers were reverted within about 5
 minutes of being discovered, because we didn't have to create a branch, push to
 GitHub, open a Pull Request, wait for a review, wait for tests to pass in CI,

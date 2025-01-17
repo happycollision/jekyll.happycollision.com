@@ -63,9 +63,9 @@ safe to deploy. But we don't do automatic deployment via CI/CD.
 If your deployments are decoupled from the rest of your CI process, and you can
 deploy to production from any branch (if necessary) at any time, you open up a
 world of possibilities for dealing with unforeseen problems. (Have you ever had
-to kick a re-deployment off with an empty commit?) As long as the process is
-automated, getting developers to "push the button" to deploy directly is not all
-that different from having CI/CD push the button for you.
+to kick a re-deployment off with an empty commit?) If the process is automated,
+getting developers to "push the button" to deploy directly is not particularly
+different from having CI/CD push the button for you.
 
 For 4 years, the engineers at Trilliant Health have been running every single
 deployment of our SPA from our development computers. There is nothing automatic
@@ -90,7 +90,7 @@ script locally. Since we do this all the time, there is no added stress around
 ## Critical questions
 
 Many of the questions or concerns about this kind of deployment system are
-rephrasings of these two big questions.
+rephrasing these two big questions.
 
 > "Are you worried about bad local state or accidental deployments?"
 
@@ -128,9 +128,8 @@ Ok.
 
 It could work for a full stack app, it would just be different. The main goal is
 to remove the barrier to running a deployment. So even if everything is still
-built on a server somewhere, then find a way to trigger that build and also
-specify what source to use for that build that doesn't live purely at the end of
-a long CI testing process.
+built on a server somewhere, then find a way to trigger that build that doesn't
+live purely at the end of a long CI testing process.
 
 > "How do you know if your deployment is about to overwrite someone else's?"
 
